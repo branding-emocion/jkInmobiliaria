@@ -1,5 +1,6 @@
 import Title from "@/app/Title";
 import DataBlogs from "@/utils/DataBlogs";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -30,10 +31,14 @@ const ItemBlog = ({ params: { id } }) => {
                 (blog, index) => (
                   <Link key={blog.id} href={`/Blogs/${blog.id}`}>
                     <div className="rounded mx-auto max-w-sm sm:w-full flex flex-col md:flex-row mb-10">
-                      <img
-                        src={blog.imagen}
-                        className="block md:hidden lg:block rounded-md  w-[167px] h-28 m-4 md:m-0 object-contain"
-                      />
+                      <section className="block md:hidden lg:block rounded-md  m-4 md:m-0 object-contain">
+                        <Image
+                          src={blog.imagen}
+                          width={168}
+                          height={112}
+                          alt={index}
+                        />
+                      </section>
                       <div className="bg-white rounded pl-3">
                         <div className=" text-gray-p00 font-semibold text-base mb-2">
                           {blog.titulo}

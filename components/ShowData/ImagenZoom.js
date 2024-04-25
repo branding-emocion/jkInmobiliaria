@@ -37,6 +37,7 @@ function ImagenZoom({ src, Info }) {
         alt="Producto con zoom"
         className=" max-w-[441px] max-h-[350px]  object-contain "
       />
+
       {showZoom && (
         <div
           style={{
