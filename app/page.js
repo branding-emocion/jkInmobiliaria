@@ -103,16 +103,15 @@ const HomePage = () => {
       )}
       <Carousel infiniteLoop autoPlay showThumbs={false} showStatus={false}>
         {ArrCarousel.map(({ id, img }) => (
-          <div key={id} className="relative w-full  sm:max-h-[450px] ">
-            <img
-              src={img}
-              className="h-full w-full object-cover overflow-hidden  "
-              alt={`${id}`}
-            />
+          <div
+            key={id}
+            className="relative w-full h-[250px] sm:h-[450px]  lg:h-[500px]"
+          >
+            <section className="h-full w-full object-cover overflow-hidden">
+              <Image src={img} alt={`${id}`} fill />
+            </section>
 
-            <div className=" absolute top-0 left-0 bg-black/60 w-full h-full text-white">
-              {/* <div className=" flex  justify-start items-center max-w-[883px] h-full pl-2 sm:text-3xl  sm:pl-20"></div> */}
-            </div>
+            <div className=" absolute top-0 left-0 bg-black/60 w-full h-full text-white"></div>
           </div>
         ))}
       </Carousel>
@@ -121,9 +120,9 @@ const HomePage = () => {
         image={"/ContactBanner.jpg"}
       />
       <div className="py-10">
-        <div className="grid px-10 w-full grid-cols-1 gap-6 sm:grid-cols-2   ">
-          <div className="relative mx-auto w-full">
-            <div className="relative inline-block w-full transform transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-md">
+        <div className="grid px-3 sm:px-10 w-full grid-cols-1 gap-6 sm:grid-cols-2  lg:grid-cols-3  ">
+          <div className="relative mx-auto w-full h-full">
+            <div className="relative inline-block w-full h-full transform transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-md">
               <div
                 onClick={() => {
                   setModalState({
@@ -176,15 +175,18 @@ const HomePage = () => {
                     ],
                   });
                 }}
-                className=" rounded-lg bg-white p-6 shadow-md"
+                className=" rounded-lg bg-white p-6 shadow-md h-full"
               >
-                <div className="relative flex h-[30rem] justify-center overflow-hidden rounded-lg">
+                <div className="relative flex h-[15rem] justify-center overflow-hidden rounded-lg">
                   <div className="w-full transform transition-transform duration-500 ease-in-out hover:scale-110">
                     <div className=" cursor-pointer  absolute inset-0 bg-black bg-opacity-80">
-                      <img
+                      <Image
                         src="/PrimeImg.png"
-                        alt="Prime"
-                        className="object-cover w-full h-full"
+                        fill
+                        alt={"Prime"}
+                        style={{
+                          objectFit: "cover",
+                        }}
                       />
                     </div>
                   </div>
@@ -223,8 +225,8 @@ const HomePage = () => {
               </div>
             </div>
           </div>
-          <div className="relative mx-auto w-full">
-            <div className="relative inline-block w-full transform transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-md">
+          <div className="relative mx-auto w-full h-full">
+            <div className="relative inline-block w-full h-full transform transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-md">
               <div
                 onClick={() => {
                   setModalState({
@@ -243,13 +245,16 @@ const HomePage = () => {
                 }}
                 className="rounded-lg bg-white p-6 shadow-md"
               >
-                <div className="relative flex h-[30rem] justify-center overflow-hidden rounded-lg">
+                <div className="relative flex h-[15rem] justify-center overflow-hidden rounded-lg">
                   <div className="w-full transform transition-transform duration-500 ease-in-out hover:scale-110">
                     <div className="cursor-pointer absolute inset-0 bg-black bg-opacity-80">
-                      <img
+                      <Image
                         src="/ViewImg.png"
+                        fill
                         alt="VIEW 684"
-                        className="object-cover w-full h-full"
+                        style={{
+                          objectFit: "cover",
+                        }}
                       />
                     </div>
                   </div>
@@ -291,8 +296,8 @@ const HomePage = () => {
               </div>
             </div>
           </div>
-          <div className="relative mx-auto w-full">
-            <div className="relative inline-block w-full transform transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-md">
+          <div className="relative mx-auto w-full h-full">
+            <div className="relative inline-block w-full h-full transform transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-md">
               <div
                 onClick={() => {
                   setModalState({
@@ -334,15 +339,18 @@ const HomePage = () => {
                     ],
                   });
                 }}
-                className="rounded-lg bg-white p-6 shadow-md"
+                className="rounded-lg bg-white p-6 shadow-md w-full h-full"
               >
-                <div className="relative flex h-[30rem] justify-center overflow-hidden rounded-lg">
+                <div className="relative flex h-[15rem] justify-center overflow-hidden rounded-lg">
                   <div className="w-full transform transition-transform duration-500 ease-in-out hover:scale-110">
                     <div className="absolute inset-0 bg-black bg-opacity-80 cursor-pointer">
-                      <img
+                      <Image
                         src="/SiennaImg.jpg"
-                        className="object-cover w-full h-full"
+                        fill
                         alt="Sienna"
+                        style={{
+                          objectFit: "cover",
+                        }}
                       />
                     </div>
                   </div>
@@ -385,7 +393,7 @@ const HomePage = () => {
 
           <h1 className="text-2xl font-semibold">¿POR QUÉ ELEGIRNOS ? </h1>
 
-          <div className=" flex flex-wrap gap-2 gap-x-4">
+          <div className=" flex flex-wrap justify-center items-center gap-2 gap-x-4">
             {PorqueElegirnos.map(({ id, img, text }) => (
               <div className="space-y-4" key={id}>
                 <div className="p-2 rounded-full bg-[#004274]">
@@ -421,10 +429,17 @@ const HomePage = () => {
                   className="w-full bg-gray-50 rounded-lg p-12 flex flex-col justify-center items-center hover:shadow-lg hover:-translate-y-2"
                 >
                   <div className="mb-8">
-                    <img
-                      className="object-center object-cover rounded-full h-36 w-36"
+                    {/* <img className="object-center object-cover rounded-full h-36 w-36" /> */}
+
+                    <Image
                       src={image}
                       alt={nombre}
+                      width={144}
+                      height={144}
+                      style={{
+                        objectFit: "cover",
+                      }}
+                      className="rounded-full "
                     />
                   </div>
                   <div className="text-center">
