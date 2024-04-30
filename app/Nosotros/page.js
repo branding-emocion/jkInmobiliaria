@@ -18,7 +18,7 @@ const Nosotros = () => {
 
       <div className=" p-2 lg:container">
         <div className="  grid grid-cols-1 lg:grid-cols-9  p-1 lg:p-10 gap-x-10">
-          <div className=" lg:col-span-6 bg-white p-10">
+          <div className=" lg:col-span-6 bg-white p-5 md:p-10">
             <div className=" flex flex-col items-center  space-y-7 ">
               <p className="text-justify">
                 Somos una empresa moderna, dotada de profesionales de primera
@@ -67,7 +67,7 @@ const Nosotros = () => {
                 <h1 className="font-bold text-2xl pb-4 text-center">
                   Nuestros Pilares
                 </h1>
-                <ul className="list-decimal grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <ul className="list-decimal pl-3 md:pl-0 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                   <li>
                     <span className="font-bold text-xl">Seguridad</span>
                     <p>Aislaciones sísmicas.</p>

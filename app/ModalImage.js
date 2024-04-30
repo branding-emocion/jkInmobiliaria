@@ -28,7 +28,9 @@ export function ModalImageSee({ setModalImage, ModalImage }) {
             Imagen {ModalImage.Nombre}
           </DialogTitle>
           <DialogDescription>
-            <img src={ModalImage.src} alt={ModalImage.Nombre} />
+            <div>
+              <img src={ModalImage.src} alt={ModalImage.Nombre} />
+            </div>
           </DialogDescription>
         </DialogHeader>
       </DialogContent>

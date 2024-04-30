@@ -25,7 +25,7 @@ const Contacto = () => {
       />
       <div className="p-2 lg:container">
         <div className="  grid grid-cols-1 lg:grid-cols-9  p-1 lg:p-10 gap-x-10">
-          <div className=" lg:col-span-6 bg-white p-10">
+          <div className=" lg:col-span-6 bg-white p-5 md:p-10">
             <div className=" flex flex-col items-center lg:items-start lg:flex-row gap-x-9">
               <div className="space-y-4   md:max-w-md ">
                 <p className="text-justify ">

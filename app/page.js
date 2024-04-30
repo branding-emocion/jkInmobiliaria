@@ -190,7 +190,9 @@ const HomePage = () => {
         <div className="flex flex-col justify-center items-center space-y-8">
           <ThumbsUp className="h-12 w-12 text-[#001a56]" />
 
-          <h1 className="text-2xl font-semibold">¿POR QUÉ ELEGIRNOS ? </h1>
+          <h1 className="text-2xl font-semibold text-center">
+            ¿POR QUÉ ELEGIRNOS ?{" "}
+          </h1>
 
           <div className=" flex flex-wrap justify-center items-center gap-2 gap-x-4">
             {PorqueElegirnos.map(({ id, img, text }) => (
