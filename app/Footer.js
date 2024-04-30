@@ -123,7 +123,7 @@ const Footer = () => {
             <div className="flex gap-3 z-10">
               <a
                 title="Facebook"
-                href="https://www.facebook.com/profile.php?id=61555600976453&mibextid=LQQJ4d"
+                href="https://www.facebook.com/JKinversionesinmobiliarias"
                 target="_blank"
                 rel="noopener noreferrer"
                 className=" hover:animate-bounce"
@@ -132,7 +132,7 @@ const Footer = () => {
               </a>
               <a
                 title="Instagram"
-                href="https://www.instagram.com/cinthiavigilaltacostura"
+                href="https://www.instagram.com/jk_inmobiliaria/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className=" hover:animate-bounce"
@@ -142,7 +142,7 @@ const Footer = () => {
 
               <a
                 title="Whatssap"
-                href="https://api.whatsapp.com/send?phone=51962710152&text=%C2%A1%20Hola%20!%20%20Me%20gustar%C3%ADa%20recibir%20mas%20informaci%C3%B3n%20acerca%20de%20"
+                href="https://api.whatsapp.com/send?phone=+51981184611&text=%C2%A1%20Hola%20!%20%20Me%20gustar%C3%ADa%20recibir%20mas%20informaci%C3%B3n%20acerca%20de%20"
                 target="_blank"
                 rel="noopener noreferrer"
                 className=" hover:animate-bounce"
