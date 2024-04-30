@@ -1,11 +1,22 @@
+"use client";
 import Title from "../Title";
 import { BsWhatsapp } from "react-icons/bs";
 import { MailIcon } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import ListProyectos from "../ListProyectos";
+import { useState } from "react";
 
 const Contacto = () => {
+  const [InputValues, setInputValues] = useState({});
+  const [Loading, setLoading] = useState(false);
+
+  const HandlerChange = (e) => {
+    setInputValues({
+      ...InputValues,
+      [e.target.name]: e.target.value,
+    });
+  };
   return (
     <div className="  bg-[#eaeaea]  ">
       <Title
@@ -26,38 +37,103 @@ const Contacto = () => {
                 </p>
                 <p>Horarios de lunes a viernes de 9:00am a 7:00pm</p>
 
-                <form className="space-y-4">
+                <form
+                  onSubmit={async (e) => {
+                    e.preventDefault();
+
+                    try {
+                      setLoading(true);
+                      const SendMail = await fetch(
+                        "/api/SendMailPageContacto",
+                        {
+                          method: "POST",
+                          headers: {
+                            "content-type": "application/json",
+                          },
+                          body: JSON.stringify({
+                            ...InputValues,
+                          }),
+                        }
+                      ).then((res) => res.json());
+                      setLoading(false);
+                      alert(SendMail.body);
+                    } catch (error) {
+                      console.log(error);
+                      alert("Error al enviar el mensaje");
+                    }
+                  }}
+                  className="space-y-4"
+                >
                   <div>
                     <label className="font-bold" htmlFor="Nombre">
                       Nombre (*)
                     </label>
-                    <Input className="border-gray-800" />
+                    <Input
+                      onChange={HandlerChange}
+                      required
+                      type="text"
+                      id="Nombre"
+                      name="Nombre"
+                      className="border-gray-800"
+                    />
                   </div>
                   <div>
                     <label className="font-bold" htmlFor="Apellidos">
                       Apellidos (*)
                     </label>
-                    <Input className="border-gray-800" />{" "}
+                    <Input
+                      onChange={HandlerChange}
+                      required
+                      type="text"
+                      id="Apellidos"
+                      name="Apellidos"
+                      className="border-gray-800"
+                    />{" "}
                   </div>
                   <div>
                     <label className="font-bold" htmlFor="Correo">
                       Correo (*)
                     </label>
-                    <Input type="email" className="border-gray-800" />{" "}
+                    <Input
+                      onChange={HandlerChange}
+                      required
+                      type="email"
+                      id="Correo"
+                      name="Correo"
+                      className="border-gray-800"
+                    />{" "}
                   </div>
                   <div>
                     <label className="font-bold" htmlFor="Telefono">
                       Telefono (*)
                     </label>
-                    <Input className="border-gray-800" />{" "}
+                    <Input
+                      onChange={HandlerChange}
+                      required
+                      type="text"
+                      id="Telefono"
+                      name="Telefono"
+                      className="border-gray-800"
+                    />{" "}
                   </div>
                   <div>
                     <label className="font-bold" htmlFor="DNI">
                       DNI (*)
                     </label>
-                    <Input className="border-gray-800" />
+                    <Input
+                      onChange={HandlerChange}
+                      required
+                      type="text"
+                      id="DNI"
+                      name="DNI"
+                      className="border-gray-800"
+                    />
                   </div>
-                  <Button className="bg-[#065e9c]" type="submit">
+                  <Button
+                    disabled={Loading}
+                    className="bg-[#065e9c]"
+                    type="submit"
+                  >
                     Enviar
                   </Button>
                 </form>
