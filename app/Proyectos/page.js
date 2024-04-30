@@ -1,12 +1,14 @@
-import React from "react";
+"use client";
 import Title from "../Title";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import Link from "next/link";
 import { DataProyectos } from "@/utils/DataProyectos";
 import Image from "next/image";
+import { useState } from "react";
 
 const Proyectos = () => {
+  const [Data, setData] = useState(DataProyectos);
   return (
     <div className="bg-[#eaeaea]">
       <Title
@@ -17,23 +19,49 @@ const Proyectos = () => {
       <Card className="container bg-[#eaeaea] mx-auto p-8 ">
         <CardContent>
           <div className="flex gap-x-3 gap-y-2">
-            <Button className="focus:bg-white focus:text-black bg-[#001a56]">
+            <Button
+              onClick={(e) => {
+                e.preventDefault();
+                setData(DataProyectos);
+              }}
+              className="focus:bg-white focus:text-black bg-[#001a56]"
+            >
               TODAS
             </Button>
-            <Button className="focus:bg-white focus:text-black bg-[#001a56]">
+            <Button
+              onClick={(e) => {
+                e.preventDefault();
+                const info = DataProyectos.filter(
+                  (proyecto) => proyecto.Status == "Disponible"
+                );
+
+                setData(info);
+              }}
+              className="focus:bg-white focus:text-black bg-[#001a56]"
+            >
               DISPONIBLE
             </Button>
-            <Button className="focus:bg-white focus:text-black bg-[#001a56]">
+            <Button
+              onClick={(e) => {
+                e.preventDefault();
+                const info = DataProyectos.filter(
+                  (proyecto) => proyecto.Status == "Vendido"
+                );
+
+                setData(info);
+              }}
+              className="focus:bg-white focus:text-black bg-[#001a56]"
+            >
               VENDIDO
             </Button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-4 ">
-            {DataProyectos.map((proyecto) => (
-              <Link href={`/Proyectos/${proyecto.Id}`} key={proyecto.Id}>
-                <div className="relative mx-auto w-full">
-                  <div className="relative inline-block w-full transform transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-md">
-                    <div className="rounded-lg bg-white p-6 shadow-md">
+          <div className="pt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-5 ">
+            {Data.map((proyecto, index) => (
+              <Link href={`/Proyectos/${index}`} key={proyecto.Id}>
+                <div className="relative mx-auto w-full h-full">
+                  <div className="relative inline-block w-full h-full transform transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-md">
+                    <div className="rounded-lg bg-white p-5 shadow-md w-full h-full">
                       <div className="relative flex  h-[240px]  justify-center overflow-hidden rounded-lg">
                         <div className="w-full transform transition-transform duration-500 ease-in-out hover:scale-110">
                           <div className="cursor-pointer absolute inset-0 bg-black bg-opacity-80">
@@ -69,7 +97,7 @@ const Proyectos = () => {
                         {proyecto.Direction && <p>{proyecto.Direction}</p>}
 
                         <h2 className="text-primary mt-2 inline-block whitespace-nowrap rounded-xl font-semibold leading-tight text-xl">
-                          FLAT, TRIPLEX
+                          {proyecto.Type}
                         </h2>
                       </div>
 
