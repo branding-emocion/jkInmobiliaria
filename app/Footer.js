@@ -9,7 +9,7 @@ const Footer = () => {
       <div className=" border-t  pt-8 relative  px-4 lg:px-0  bg-[#004274] text-white">
         <div className="pt-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 justify-center gap-x-4 items-center sm:items-start">
           <div className="sm:max-w-[300px] sm:mx-auto sm:col-span-2 lg:col-span-1  mx-auto">
-            <h6 className="font-bold mb-4 text-xl">Sobre nosotros</h6>
+            <h6 className="text-xl font-bold mb-4 ">Sobre nosotros</h6>
             <div className="space-y-8">
               <p className="text-gray-50 pb-3 text-justify">
                 Somos una empresa moderna, dotada de profesionales de primera
@@ -122,6 +122,7 @@ const Footer = () => {
             <h6 className="font-bold mb-4 text-xl">Nuestras Redes</h6>
             <div className="flex gap-3 z-10">
               <a
+                title="Facebook"
                 href="https://www.facebook.com/profile.php?id=61555600976453&mibextid=LQQJ4d"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -130,6 +131,7 @@ const Footer = () => {
                 <BsFacebook className="text-white w-8 h-8" />
               </a>
               <a
+                title="Instagram"
                 href="https://www.instagram.com/cinthiavigilaltacostura"
                 target="_blank"
                 rel="noopener noreferrer"
@@ -139,6 +141,7 @@ const Footer = () => {
               </a>
 
               <a
+                title="Whatssap"
                 href="https://api.whatsapp.com/send?phone=51962710152&text=%C2%A1%20Hola%20!%20%20Me%20gustar%C3%ADa%20recibir%20mas%20informaci%C3%B3n%20acerca%20de%20"
                 target="_blank"
                 rel="noopener noreferrer"

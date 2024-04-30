@@ -1,4 +1,8 @@
+import ListProyectos from "@/app/ListProyectos";
 import Title from "@/app/Title";
+import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const PostVenta = () => {
@@ -12,7 +16,7 @@ const PostVenta = () => {
       <div className="p-2 lg:container">
         <div className="  grid grid-cols-1 lg:grid-cols-9  p-1 lg:p-10 gap-x-10">
           <div className=" lg:col-span-6 bg-white p-10">
-            <div className="   space-y-7 ">
+            <div className="   space-y-7 h-auto ">
               <p className="text-justify">
                 Frente a cualquier inconveniente después de la entrega de su
                 departamento, <strong>JK INMOBILIARIA</strong> cuenta con
@@ -28,9 +32,9 @@ const PostVenta = () => {
               </p>
             </div>
           </div>
-          <div className="lg:col-span-3 bg-white p-8">
-            <h1 className="text-start">Proyectos</h1>
-          </div>
+          <>
+            <ListProyectos />
+          </>
         </div>
       </div>
     </div>

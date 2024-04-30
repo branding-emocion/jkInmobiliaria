@@ -1,3 +1,4 @@
+import ListProyectos from "@/app/ListProyectos";
 import Title from "@/app/Title";
 import {
   Accordion,
@@ -257,9 +258,9 @@ const PreguntasFrecuentes = () => {
               </Accordion>
             </div>
           </div>
-          <div className="lg:col-span-3 bg-white p-8">
-            <h1 className="text-start">Proyectos</h1>
-          </div>
+          <>
+            <ListProyectos />
+          </>
         </div>
       </div>
     </div>
