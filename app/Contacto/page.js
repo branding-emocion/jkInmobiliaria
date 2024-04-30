@@ -3,6 +3,7 @@ import { BsWhatsapp } from "react-icons/bs";
 import { MailIcon } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import ListProyectos from "../ListProyectos";
 
 const Contacto = () => {
   return (
@@ -118,9 +119,9 @@ const Contacto = () => {
               </div>
             </div>
           </div>
-          <div className="lg:col-span-3 bg-white p-8">
-            <h1>Proyectos</h1>
-          </div>
+          <>
+            <ListProyectos />
+          </>
         </div>
       </div>
     </div>

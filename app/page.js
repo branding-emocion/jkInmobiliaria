@@ -126,7 +126,7 @@ const HomePage = () => {
         <Building className="w-11 h-11 mx-auto text-[#000f66] mb-2" />
         <h1 className="text-center font-bold text-2xl">NUESTROS PROYECTOS</h1>
 
-        <div className="pt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-5 ">
+        <div className="container mx-auto pt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-5 ">
           {Data.map((proyecto, index) => (
             <Link href={`/Proyectos/${index}`} key={proyecto.Id}>
               <div className="relative mx-auto w-full h-full">

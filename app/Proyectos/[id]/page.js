@@ -1,4 +1,5 @@
 "use client";
+import ListProyectos from "@/app/ListProyectos";
 import { ModalImageSee } from "@/app/ModalImage";
 import Title from "@/app/Title";
 import {
@@ -216,7 +217,9 @@ const Proyecto = ({ params: { id } }) => {
               </CardContent>
             </Card>
           </div>
-          <div>p</div>
+          <>
+            <ListProyectos />
+          </>{" "}
         </div>
       </div>
     </div>

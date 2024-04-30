@@ -1,8 +1,14 @@
-import React from "react";
 import Title from "../Title";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { DataProyectos } from "@/utils/DataProyectos";
+import Image from "next/image";
+import ListProyectos from "../ListProyectos";
 
 const Nosotros = () => {
+  const Data = DataProyectos.filter((pro) => pro.Status == "Disponible");
+
   return (
     <div className="  bg-[#eaeaea]  ">
       <Title
@@ -90,9 +96,9 @@ const Nosotros = () => {
               </div>
             </div>
           </div>
-          <div className="lg:col-span-3 bg-white p-8">
-            <h1 className="text-start">Proyectos</h1>
-          </div>
+          <>
+            <ListProyectos />
+          </>
         </div>
       </div>
     </div>
