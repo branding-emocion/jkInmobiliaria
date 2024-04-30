@@ -28,7 +28,7 @@ const Nosotros = () => {
                 una institución moderna, ágil y dinámica que nos permite actuar
                 e incursionar rápidamente de manera eficiente en el mundo de los
                 negocios y poder responder con eficacia ante los imprevistos
-                naturales que se presenten para beneficio de nuestros clientes
+                naturales que se presenten para beneficio de nuestros clientes.
               </p>
 
               <Tabs defaultValue="Mision" className=" max-w-[400px] mx-auto">
