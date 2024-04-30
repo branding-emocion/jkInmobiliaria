@@ -152,7 +152,7 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className="   sm:col-span-2 lg:col-span-3 ">
+          <div className=" pt-4 sm:pt-0  sm:col-span-2 lg:col-span-3 ">
             <div className=" py-6 bg-[#00335a]">
               <div className="flex  flex-wrap items-center bg- md:justify-between justify-center">
                 <div className="w-full   px-4 mx-auto text-center">

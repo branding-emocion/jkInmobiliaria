@@ -16,9 +16,9 @@ const Proyectos = () => {
         image="https://jkinmobiliaria.com/wp-content/uploads/2019/03/2019-03-21-13_00_46-Window.png"
       />
 
-      <Card className="container bg-[#eaeaea] mx-auto p-8 ">
+      <Card className="container bg-[#eaeaea] mx-auto p-0 md:p-8 ">
         <CardContent>
-          <div className="flex gap-x-3 gap-y-2">
+          <div className="flex flex-col  md:flex-row flex-wrap gap-x-3 gap-y-2">
             <Button
               onClick={(e) => {
                 e.preventDefault();
