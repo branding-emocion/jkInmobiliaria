@@ -39,26 +39,32 @@ const Nosotros = () => {
                 </TabsList>
                 <TabsContent value="Mision">
                   <p className="max-w-[400px] text-justify">
-                    Proporcionar productos y servicios de calidad y de manera
-                    eficiente para hacer del cliente una persona que nos
-                    recomiende y nos distinga ante la sociedad.{" "}
+                    Presentar al mercado proyectos residenciales que cubran con
+                    las necesidades de las familias peruanas, ofreciéndoles una
+                    construcción de primera calidad con acabados de altos
+                    estándares y adecuándonos a las ultimas tendencias en diseño
+                    y tecnología del mercado, siempre contando con el apoyo de
+                    un equipo altamente capacitado en el sector inmobiliario.
                   </p>
                 </TabsContent>
                 <TabsContent value="Vision">
                   <p className="max-w-[400px] text-justify">
-                    Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-                    Placeat optio ab perferendis debitis labore earum, officiis
-                    quos possimus nobis quisquam quibusdam, odit, architecto
-                    impedit illo aperiam soluta quasi cum vitae?
+                    Posicionarnos como la empresa líder y de referencia a nivel
+                    nacional en el sector inmobiliario con proyectos propios
+                    logrando crear espacios ideales donde las familias peruanas
+                    puedan compartir momentos inolvidables.
                   </p>
                 </TabsContent>
                 <TabsContent value="Objetivo">
                   <p className="max-w-[400px] text-justify">
-                    Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-                    Eos ducimus, impedit, id dolorem dolorum quibusdam nobis
-                    exercitationem corrupti fuga distinctio, eaque itaque
-                    molestiae perferendis. Dolores mollitia aut recusandae quae
-                    distinctio!
+                    Consolidar nuestra presencia en el mercado inmobiliario
+                    peruano mediante el desarrollo continuo de proyectos
+                    residenciales innovadores que superen las expectativas de
+                    nuestros clientes en términos de calidad, diseño y
+                    tecnología, estableciéndonos como la opción preferida para
+                    las familias que buscan hogares de excelencia y creando
+                    comunidades vibrantes donde se construyan relaciones
+                    duraderas y se vivan experiencias memorables.
                   </p>
                 </TabsContent>
               </Tabs>
