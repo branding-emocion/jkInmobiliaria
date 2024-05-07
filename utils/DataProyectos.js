@@ -13,37 +13,37 @@ export const DataProyectos = [
         url: "https://jkinmobiliaria.viewin360.co/share/collection/7cYL2?logo=bWVkaWEvNDgxMzA5LzY1ZGQtMGJkOC1iZmFjLWU4MjIucG5n&card=1&info=1&logosize=190&fs=1&vr=1&initload=0&autorotate=-0.51&autop=10&thumbs=1&inst=es",
       },
       {
-        id: 1,
+        id: 2,
         dpto: "DEP.102 (TIPO B)",
         url: "https://jkinmobiliaria.viewin360.co/share/collection/7cPDZ?logo=bWVkaWEvNDgxMzA5LzY1ZGQtMGJkOC1iZmFjLWU4MjIucG5n&card=1&info=0&logosize=190&fs=1&vr=1&zoom=1&initload=0&autorotate=-0.51&autop=10&thumbs=1&inst=es",
       },
       {
-        id: 1,
+        id: 3,
         dpto: "DEP.201 AL 501 (TIPO C)",
         url: "https://jkinmobiliaria.viewin360.co/share/collection/7cfr2?logo=bWVkaWEvNDgxMzA5LzY1ZGQtMGJkOC1iZmFjLWU4MjIucG5n&card=1&info=0&logosize=159&fs=1&vr=1&zoom=1&initload=0&autorotate=-0.51&autop=10&thumbs=1&inst=es",
       },
       {
-        id: 1,
+        id: 4,
         dpto: "EP.202 AL 502 (TIPO D) ",
         url: "https://jkinmobiliaria.viewin360.co/share/collection/7cGl0?logo=bWVkaWEvNDgxMzA5LzY1ZGQtMGJkOC1iZmFjLWU4MjIucG5n&card=1&info=0&logosize=159&fs=1&vr=1&zoom=1&initload=0&autorotate=-0.51&autop=10&thumbs=1&inst=es",
       },
       {
-        id: 1,
+        id: 5,
         dpto: " DEP.203 AL 603 (TIPO E)",
         url: " https://jkinmobiliaria.viewin360.co/share/collection/7clb8?logo=bWVkaWEvNDgxMzA5LzY1ZGQtMGJkOC1iZmFjLWU4MjIucG5n&card=1&info=0&logosize=159&fs=1&vr=1&zoom=1&initload=0&autorotate=-0.51&autop=10&thumbs=1&inst=es",
       },
       {
-        id: 1,
+        id: 6,
         dpto: "DUPLEX 601 (TIPO F)",
         url: " https://jkinmobiliaria.viewin360.co/share/collection/7ckpV?logo=bWVkaWEvNDgxMzA5LzY1ZGQtMGJkOC1iZmFjLWU4MjIucG5n&card=1&info=0&logosize=159&fs=1&vr=1&zoom=1&initload=0&autorotate=-0.51&autop=10&thumbs=1&inst=es",
       },
       {
-        id: 1,
+        id: 7,
         dpto: "DUPLEX 602 (TIPO G)",
         url: "https://jkinmobiliaria.viewin360.co/share/collection/7ckqd?logo=bWVkaWEvNDgxMzA5LzY1ZGQtMGJkOC1iZmFjLWU4MjIucG5n&card=1&info=0&logosize=159&fs=1&vr=1&zoom=1&initload=0&autorotate=-0.51&autop=10&thumbs=1&inst=es",
       },
       {
-        id: 1,
+        id: 8,
         dpto: "DUPLEX 604 (TIPO H)",
         url: "https://jkinmobiliaria.viewin360.co/share/collection/7cYVc?logo=bWVkaWEvNDgxMzA5LzY1ZGQtMGJkOC1iZmFjLWU4MjIucG5n&card=1&info=0&logosize=159&fs=1&vr=1&zoom=1&initload=0&autorotate=-0.51&autop=10&thumbs=1&inst=es",
       },
@@ -221,6 +221,9 @@ export const DataProyectos = [
     Name: "SIENNA",
     Status: "Disponible",
     Imagen: "/SiennaImg.jpg",
+    Brochure: "/brochure/SIENNA.pdf",
+    Direction: "Magdalena del Mar, Lima, Lima Metropolitana, Lima, 15076, Perú",
+    Description: `<ul><li>Tableros de cuarzo</li><li>Cocina equipada</li><li>Closets completos</li><li>Enchapes en tendencia</li><li>Ascensor</li><li>Cristales enmarcados</li></ul>`,
     RecorridosVirtuales: [
       {
         id: 1,
@@ -253,6 +256,406 @@ export const DataProyectos = [
         url: "https://jkinmobiliaria.viewin360.co/share/collection/7cFls?logo=bWVkaWEvNDgxMzA5LzY1ZjEtZjNiNi0xMzZlLTIxNzQuanBn&card=1&info=0&logosize=159&fs=1&vr=1&zoom=1&initload=0&autorotate=-0.51&autop=10&thumbs=1&inst=es",
       },
     ],
-    Direction: "",
+    Direction: "Jirón General Clovis 627 - 631 Urb. El Carmen, Pueblo Libre",
+    Plantas: [
+      {
+        id: 3,
+        name: " Flat 101 ",
+        size: 56,
+        image: "/Planta/Sienna/flat101.jpg",
+      },
+      {
+        id: 4,
+        name: " Flat 102 ",
+        size: 62.02,
+        image: "/Planta/Sienna/flat101.jpg",
+      },
+      {
+        id: 1,
+        name: "Flat 201 al 801  ",
+        size: 41.46,
+        image: "/Planta/Sienna/flat201.jpg",
+      },
+      {
+        id: 2,
+        name: "Flat 202 al 802  ",
+        size: 70.5,
+        image: "/Planta/Sienna/flat201.jpg",
+      },
+
+      {
+        id: 5,
+        name: " Flat 203 al 803 ",
+        size: 63.16,
+        image: "/Planta/Sienna/flat203.jpg",
+      },
+      {
+        id: 6,
+        name: " Flat 901",
+        size: 41.15,
+        image: "/Planta/Sienna/flat203.jpg",
+      },
+      {
+        id: 7,
+        name: " Duplex 902",
+        size: 132.99,
+        image: "/Planta/Sienna/duplex902.jpg",
+      },
+    ],
+    Type: "Flat, Duplex    ",
+  },
+  {
+    Id: 4,
+    Name: "VIVERDI ",
+    Status: "Vendido",
+    // Brochure:
+    //   " ",
+    Imagen:
+      "https://jkinmobiliaria.com/wp-content/uploads/2022/10/nueva-fachada-1-896x1024.png",
+
+    Direction: "Calle Valencia, Urb Mayorazgo Etapa 3, Distrito de Ate",
+    // Brochure:
+    //   "",
+    Description: `<ul><li>EDIFICIO MULTIFAMILIAR</li><li>4 FLAT Y 1 DUPLEX</li><li>SALAS CON BALCÓN Y VISTA AL PARQUE</li><li>INSTALACIONES DE GAS NATURAL</li><li>REPOSTEROS ALTOS Y BAJOS</li><li>CLOSETS COMPLETOS</li><li>PLATAFORMA DE DISCAPACITADOS</li><li>DEPÓSITO DE RESIDUOS</li><li>ELEGANTE ASENSOR</li><li>ESTACIONAMIENTO </li><li>PERFECTA UBICACIÓN</li></ul>`,
+    Plantas: [
+      {
+        id: 1,
+        name: "Flat 101",
+        size: 102.075,
+        image:
+          "https://jkinmobiliaria.com/wp-content/uploads/2022/09/FLAT-101-1.png",
+      },
+      {
+        id: 2,
+        name: " Flat 201",
+        size: 86.43,
+        image:
+          "https://jkinmobiliaria.com/wp-content/uploads/2022/09/FLAT-201-301-401.png",
+      },
+      {
+        id: 3,
+        name: " Flat 301",
+        size: 88.43,
+        image:
+          "https://jkinmobiliaria.com/wp-content/uploads/2022/09/FLAT-201-301-401.png",
+      },
+      {
+        id: 4,
+        name: " Flat 401",
+        size: 88.43,
+        image:
+          "https://jkinmobiliaria.com/wp-content/uploads/2022/09/FLAT-201-301-401.png",
+      },
+      {
+        id: 5,
+        name: " Duplex 501 Nivel 1",
+        size: 86.7,
+        image:
+          "https://jkinmobiliaria.com/wp-content/uploads/2022/09/DUPLEX-501-NIVEL-1.png",
+      },
+      {
+        id: 6,
+        name: " Duplex 501 Nivel 2",
+        size: 91.63,
+        image:
+          "https://jkinmobiliaria.com/wp-content/uploads/2022/09/DUPLEX-501-NIVEL-2-11-modificado-.png",
+      },
+    ],
+    Type: "Duplex, Flat",
+  },
+  {
+    Id: 5,
+    Name: "MELIA ",
+    Status: "Vendido",
+    Direction: "No Disponible",
+
+    Imagen:
+      "https://jkinmobiliaria.com/wp-content/uploads/2022/02/residencial-meli-portada.jpeg",
+
+    // Brochure:
+    //   "",
+    Description: `<ul><li>EDIFICIO MULTIFAMILIAR</li><li>7 FLATS Y 2 DUPLEX</li><li>CONCEPTO SMART</li><li>ELEGANTE ASENSOR</li><li>INSTALACIONES DE GAS NATURAL</li><li>PLATAFORMA DE DISCAPACITADOS</li><li>EXCELENTE UBICACIÓN</li><li>ACABADOS EN CUARZO</li><li>ENCHAPES DE PORCELANATO</li><li>REPOSTEROS ALTOS Y BAJOS</li><li>CLOSETS COMPLETOS</li><li>ELECCIÓN DE COLOR PARA MUEBLES DE MELAMINE</li></ul>`,
+    Plantas: [
+      {
+        id: 1,
+        name: "Flat 101",
+        size: 103.73,
+        image:
+          "https://jkinmobiliaria.com/wp-content/uploads/2022/02/flat101.jpg",
+      },
+      {
+        id: 2,
+        name: " Flat 201, 401",
+        size: 70.52,
+        image:
+          "https://jkinmobiliaria.com/wp-content/uploads/2022/02/flat-201-401-melia.jpg",
+      },
+      {
+        id: 3,
+        name: " Flat 202, 402",
+        size: 70.12,
+        image:
+          "https://jkinmobiliaria.com/wp-content/uploads/2022/02/Flat-202-402.jpg",
+      },
+      {
+        id: 4,
+        name: "Flat 301",
+        size: 70.52,
+        image:
+          "https://jkinmobiliaria.com/wp-content/uploads/2022/02/planta-301-meli.jpg",
+      },
+      {
+        id: 5,
+        name: " Flat 302",
+        size: 70.12,
+        image:
+          "https://jkinmobiliaria.com/wp-content/uploads/2022/02/302-residencial-meli-pueblo-libre-lima.png",
+      },
+      {
+        id: 6,
+        name: "Flat 501",
+        size: 141.38,
+        image:
+          "https://jkinmobiliaria.com/wp-content/uploads/2022/02/Flat-501.jpg",
+      },
+      {
+        id: 7,
+        name: " Flat 502",
+        size: 136.58,
+        image:
+          "https://jkinmobiliaria.com/wp-content/uploads/2022/02/Flat-502.jpg",
+      },
+    ],
+    Type: "Duplex, Flat",
+  },
+  {
+    Id: 7,
+    Name: "EL PRADO",
+    Status: "Vendido",
+    // Brochure:
+    //   " ",
+    Imagen:
+      "https://jkinmobiliaria.com/wp-content/uploads/2021/08/FACHADA-FINAL-MODIFICACION-JPG-1-1200.jpg",
+
+    Direction: "JIRON NICARAGUA 152 - JESUS MARIA",
+
+    Description: `<ul>
+    <li>EDIFICIO MULTIFAMILIAR</li>
+    <li>8 FLATS Y 4 TRIPLEX</li>
+    <li>8 ESTACIONAMIIENTOS</li>
+    <li>DESDE 89 M2 HASTA 143 M2</li>
+    <li>TABLEROS DE CUARZO EN COCINA Y BAÑOS</li>
+    <li>PISO LAMINADO ALEMAN 7MM</li>
+    <li>BAÑOS CON ENCHAPES COMPLETOS</li>
+    <li>DUPLEX CON TERRAZA Y JARDIN</li>
+    <li>ASCENSOR</li>
+    <li>OBSEQUIAMOS COCINA, CAMPANA, HORNO Y MICROONDAS</li>
+    </ul>`,
+    Plantas: [
+      {
+        id: 1,
+        name: "Flat 101",
+        size: 121,
+        image: "https://jkinmobiliaria.com/wp-content/uploads/2021/08/101.jpg",
+      },
+      {
+        id: 2,
+        name: " Flat 102 ",
+        size: 77,
+        image: "https://jkinmobiliaria.com/wp-content/uploads/2021/08/102.jpg",
+      },
+      {
+        id: 3,
+        name: " FLAT 201, 301, 401",
+        size: 89,
+        image:
+          "https://jkinmobiliaria.com/wp-content/uploads/2021/08/201-301-401.jpg",
+      },
+      {
+        id: 4,
+        name: "FLAT 202, 302, 402",
+        size: 95,
+        image:
+          "https://jkinmobiliaria.com/wp-content/uploads/2021/08/202-302-402.jpg",
+      },
+      {
+        id: 5,
+        name: "TRIPLEX 501",
+        size: 119,
+        image:
+          "https://jkinmobiliaria.com/wp-content/uploads/2021/08/TRIPLEX501.jpg",
+      },
+      {
+        id: 6,
+        name: " TRIPLEX 502",
+        size: 134,
+        image:
+          "https://jkinmobiliaria.com/wp-content/uploads/2021/08/TRIPLEX502.jpg",
+      },
+      {
+        id: 7,
+        name: " TRIPLEX 503",
+        size: 143,
+        image:
+          "https://jkinmobiliaria.com/wp-content/uploads/2021/08/TRIPLEX503.jpg",
+      },
+      {
+        id: 8,
+        name: " TRIPLEX 504",
+        size: 143,
+        image:
+          "https://jkinmobiliaria.com/wp-content/uploads/2021/08/TRIPLEX504.jpg",
+      },
+    ],
+    Type: "Flat, Triplex",
+  },
+  {
+    Id: 8,
+    Name: "BARI",
+    Status: "Vendido",
+    // Brochure:
+    //   " ",
+    Imagen:
+      "https://jkinmobiliaria.com/wp-content/uploads/2020/02/FACHADA-385x258-1.jpg",
+
+    Direction: "Parque Santa Maria Magdalena 173 - Pueblo Libre",
+
+    Description: `<ul>
+    <li>Edificio multifamiliar</li>
+    <li>4 flats, 2 duplex y 1 triplex</li>
+    <li>3 y 4 dormitorios</li>
+    <li>Gas natural, 3 puntos</li>
+    <li>Control de vigilancia</li>
+    <li>Ascensor</li>
+    <li>Concepto edificio inteligente</li>
+    <li>Tableros en cuarzo</li>
+    <li>Reposteros altos y bajos</li>
+    <li>Closets completos</li>
+    <li>Selección de melamina</li>
+    <li>Cocina equipada: horno, campana, cocina y microondas</li>
+    </ul>`,
+    Plantas: [
+      {
+        id: 1,
+        name: "Flat 101",
+        size: 109.62,
+        image: "https://jkinmobiliaria.com/wp-content/uploads/2020/02/101.jpeg",
+      },
+      {
+        id: 2,
+        name: " Flat 102 ",
+        size: 78,
+        image: "https://jkinmobiliaria.com/wp-content/uploads/2021/08/102.jpg",
+      },
+      {
+        id: 3,
+        name: " Duplex 202",
+        size: 79.42,
+        image: "https://jkinmobiliaria.com/wp-content/uploads/2020/02/202.jpeg",
+      },
+      {
+        id: 4,
+        name: " Flat 301",
+        size: 77.5,
+        image: "https://jkinmobiliaria.com/wp-content/uploads/2020/02/301.jpeg",
+      },
+      {
+        id: 5,
+        name: " Flat 401",
+        size: 78,
+        image: "https://jkinmobiliaria.com/wp-content/uploads/2020/02/401.jpeg",
+      },
+      {
+        id: 6,
+        name: "Triplex 402",
+        size: 135,
+        image: "https://jkinmobiliaria.com/wp-content/uploads/2020/02/402.jpeg",
+      },
+      {
+        id: 7,
+        name: "Duplex 501",
+        size: 143,
+        image:
+          "https://jkinmobiliaria.com/wp-content/uploads/2021/08/TRIPLEX503.jpg",
+      },
+      {
+        id: 8,
+        name: " TRIPLEX 504",
+        size: 137.43,
+        image: "https://jkinmobiliaria.com/wp-content/uploads/2020/02/501.jpeg",
+      },
+    ],
+    Type: "Flat, Triplex",
+  },
+  {
+    Id: 9,
+    Name: "TRIANA",
+    Status: "Vendido",
+    // Brochure:
+    //   " ",
+    Imagen:
+      "https://jkinmobiliaria.com/wp-content/uploads/2020/02/FACHADA-web-triana-385x258-1.jpg",
+
+    Direction: "Jr. Jose Ramón Pizarro 1421 Urb. Colmenares – Pueblo Libre",
+
+    Description: `<ul>
+    <li>Edificio multifamiliar</li>
+    <li>10 flats y 2 duplex</li>
+    <li>3 y 4 dormitorios</li>
+    <li>Gas natural, 3 puntos</li>
+    <li>Control de vigilancia</li>
+    <li>Ascensor</li>
+    <li>Concepto edificio inteligente</li>
+    <li>Tableros en cuarzo</li>
+    <li>Reposteros altos y bajos</li>
+    <li>Closets completos</li>
+    <li>Selección de melamina</li>
+    <li>Cocina equipada</li>
+    </ul>`,
+    Plantas: [
+      {
+        id: 1,
+        name: "Flat 101",
+        size: 144.52,
+        image:
+          "https://jkinmobiliaria.com/wp-content/uploads/2020/02/Imagen2.png",
+      },
+      {
+        id: 2,
+        name: " Flat 102 ",
+        size: 139.86,
+        image:
+          "https://jkinmobiliaria.com/wp-content/uploads/2020/02/Imagen3.png",
+      },
+      {
+        id: 3,
+        name: " Flat 201, 301, 401, 501",
+        size: 113.29,
+        image:
+          "https://jkinmobiliaria.com/wp-content/uploads/2020/02/Imagen4.png",
+      },
+      {
+        id: 4,
+        name: " Flat 202, 302, 402, 502",
+        size: 116.67,
+        image:
+          "https://jkinmobiliaria.com/wp-content/uploads/2020/02/Imagen5.png",
+      },
+      {
+        id: 5,
+        name: " Duplex 601",
+        size: 226.58,
+        image:
+          "https://jkinmobiliaria.com/wp-content/uploads/2020/02/Brochure-TRIANA_page-0007-1.jpg",
+      },
+      {
+        id: 6,
+        name: " Duplex 602",
+        size: 226.58,
+        image:
+          "https://jkinmobiliaria.com/wp-content/uploads/2020/02/Brochure-TRIANA_page-0008.jpg",
+      },
+    ],
+    Type: "Duplex, Flat",
   },
 ];
