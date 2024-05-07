@@ -798,55 +798,7 @@ export const DataProyectos = [
 
     Type: "Duplex, Flat",
   },
-  {
-    Name: "DEL PARQUE",
-    Status: "Vendido",
-    // Brochure:
-    //   " ",
-    Imagen:
-      "https://jkinmobiliaria.com/wp-content/uploads/2019/03/DELPARQUE-e1553225561839.png",
 
-    Direction:
-      "Jr. General Jose Ramon Pizarro (Ex Valle Riestra) N° 980 – Urb. Colmenares - Pueblo Libre",
-
-    Description: `<ul>
-    <li>8 flat, 2 duplex y 7 estacionamientos</li>
-    <li>desde 109 hasta 222 m2.</li>
-    <li>3 y 4 dormitorios con closets y cajonería completa</li>
-    <li>cocina con reposteros altos y bajos</li>
-    <li>piso laminado alemán de 7 mm</li>
-    <li>ascensor</li>
-    </ul>`,
-
-    Type: "Duplex, Flat",
-  },
-  {
-    Name: "LA FLORESTA",
-    Status: "Vendido",
-    // Brochure:
-    //   " ",
-    Imagen:
-      "https://jkinmobiliaria.com/wp-content/uploads/2019/06/FACHADA-02-mod-1.jpg",
-
-    Direction: "Jr. Jose Ramón Pizarro 1599 Urb. Colmenares – Pueblo Libre",
-
-    Description: `<ul>
-    <li>7 FLATS, 2 DUPLEX</li>
-    <li>9 ESTACIONAMIENTOS</li>
-    <li>DEPARTAMENTOS DESDE 75 M2 HASTA 177 M2</li>
-    <li>2, 3 Y 4 DORMITORIOS CON CLOSETS COMPLETOS</li>
-    <li>TABLEROS DE CUARZO EN COCINAS Y BAÑOS</li>
-    <li>COCINA CON REPOSTEROS ALTOS Y BAJOS</li>
-    <li>PISO LAMINADO ALEMÁN DE 7 MM</li>
-    <li>BAÑOS CON ENCHAPES COMPLETOS,</li>
-    <li>DUPLEX CON TERRAZAS</li>
-    <li>3 PUNTOS DE GAS NATURAL, COCINA HORNO Y THERMA</li>
-    <li>ASCENSOR</li>
-    <li>OBSEQUIAMOS POR PREVENTA COCINA, HORNO, CAMPANA, MICROONDA</li>
-    </ul>`,
-
-    Type: "Duplex, Flat",
-  },
   {
     Name: "DEL PARQUE",
     Status: "Vendido",
