@@ -658,4 +658,233 @@ export const DataProyectos = [
     ],
     Type: "Duplex, Flat",
   },
+  {
+    Id: 10,
+    Name: "VERSALLES",
+    Status: "Vendido",
+    // Brochure:
+    //   " ",
+    Imagen:
+      "https://jkinmobiliaria.com/wp-content/uploads/2016/03/Fachada-e1553223665127.jpeg",
+
+    Direction: "Jirón Jose Ramón Pizarro N° 1251-1255, Pueblo Libre, Lima",
+
+    Description: `<ul>
+    <li>7 Flats, 2 Duplex, 7 Estacionamientos</li>
+    <li>desde 84.13 hasta 191.38 M2</li>
+    <li>3 Y 4 Dormitorios con closets completos</li>
+    <li>cocina con reposteros altos y bajos, tableros en cuarzo</li>
+    <li>piso laminado alemán de 7 mm</li>
+    <li>baños con enchapes completos</li>
+    <li>3 puntos de gas natural</li>
+    <li>Ascensor</li>
+    </ul>`,
+
+    Type: "Duplex, Flat",
+  },
+  {
+    Name: "SANTA MARIA     ",
+    Status: "Vendido",
+    // Brochure:
+    //   " ",
+    Imagen:
+      "https://jkinmobiliaria.com/wp-content/uploads/2016/03/WhatsApp-Image-2018-07-16-at-18.33.16-e1553224109591.jpeg",
+
+    Direction: "Jr. Ciro Alegría N° 195 - 197 Urb. SUTA – Pueblo Libre, Lima",
+
+    Description: `<ul>
+    <li>8 departamentos, 4 flat, 2 duplex, 2 triplex y 7 estacionamientos</li>
+    <li>sistema de agua a presión constante</li>
+    <li>departamentos desde 58 hasta 214 m2.</li>
+    <li>2, 3 y 4 dormitorios con closets con cajonería completa</li>
+    <li>cocina con reposteros altos y bajos, tablero en cuarzo</li>
+    <li>piso laminado alemán de 7 mm</li>
+    <li>baños con enchapes completos</li>
+    <li>ascensor y estacionamientos</li>
+    </ul>`,
+
+    Type: "Duplex, Flat, Triplex",
+  },
+  {
+    Name: "VERCELLI",
+    Status: "Vendido",
+    // Brochure:
+    //   " ",
+    Imagen:
+      "https://jkinmobiliaria.com/wp-content/uploads/2016/03/vercelli-e1553224683480.png",
+
+    Direction: "Jr. Jose Ramón Pizarro N° 1140, Urb. Colmenares, Pueblo Libre",
+
+    Description: `<ul>
+    <li>7 flats, 2 duplex y 7 estacionamientos</li>
+    <li>departamentos desde 75.65 hasta 161.50 m2.</li>
+    <li>2, 3 y 4 dormitorios con closets completos</li>
+    <li>cocina con reposteros altos y bajos, tableros de cuarzo</li>
+    <li>piso laminado alemán de 7 mm</li>
+    <li>baños con enchapes completos</li>
+    <li>cocheras en semisotano</li>
+    </ul>`,
+
+    Type: "Duplex, Flat",
+  },
+  {
+    Name: "GREEN",
+    Status: "Vendido",
+    // Brochure:
+    //   " ",
+    Imagen:
+      "https://jkinmobiliaria.com/wp-content/uploads/2019/03/GREEN-e1553225320279.png",
+
+    Direction: "Jirón General José Ramón Pizarro 1224",
+
+    Description: `<ul>
+    <li>9 departamentos, 7 flat, 2 duplex y 8 estacionamientos</li>
+    <li>desde 75.65 hasta 161.91 m2.</li>
+    <li>2, 3 y 4 dormitorios con closets con cajonería completa</li>
+    <li>cocina con reposteros altos y bajos, tablero en cuarzo</li>
+    <li>piso laminado alemán de 7 mm</li>
+    <li>baños con enchapes completos, tableros en cuarzo</li>
+    </ul>`,
+
+    Type: "Duplex, Flat",
+  },
+  {
+    Name: "PARQUE COLMENARES",
+    Status: "Vendido",
+    // Brochure:
+    //   " ",
+    Imagen:
+      "https://jkinmobiliaria.com/wp-content/uploads/2016/03/colmenare-e1553225454136.jpg",
+
+    Direction: "Parque Colmenares N° 146 – Urb. Colmenares - Pueblo Libre ",
+
+    Description: `<ul>
+    <li>7 flat, 2 duplex y 8 estacionamientos</li>
+    <li>desde 93m2 hasta 266 m2</li>
+    <li>3 y 4 dormitorios con closets y cajonería completa</li>
+    <li>baños con ducha española y los duplex con cabina</li>
+    <li>cocina con reposteros altos y bajos color a su elección, tableros en cuarzo</li>
+    <li>piso laminado alemán de 7 mm</li>
+    <li>Ascensor</li>
+    </ul>`,
+
+    Type: "Duplex, Flat",
+  },
+
+  {
+    Name: "LA FLORESTA",
+    Status: "Vendido",
+    // Brochure:
+    //   " ",
+    Imagen:
+      "https://jkinmobiliaria.com/wp-content/uploads/2019/06/FACHADA-02-mod-1.jpg",
+
+    Direction: "Jr. Jose Ramón Pizarro 1599 Urb. Colmenares – Pueblo Libre",
+
+    Description: `<ul>
+    <li>7 FLATS, 2 DUPLEX</li>
+    <li>9 ESTACIONAMIENTOS</li>
+    <li>DEPARTAMENTOS DESDE 75 M2 HASTA 177 M2</li>
+    <li>2, 3 Y 4 DORMITORIOS CON CLOSETS COMPLETOS</li>
+    <li>TABLEROS DE CUARZO EN COCINAS Y BAÑOS</li>
+    <li>COCINA CON REPOSTEROS ALTOS Y BAJOS</li>
+    <li>PISO LAMINADO ALEMÁN DE 7 MM</li>
+    <li>BAÑOS CON ENCHAPES COMPLETOS,</li>
+    <li>DUPLEX CON TERRAZAS</li>
+    <li>3 PUNTOS DE GAS NATURAL, COCINA HORNO Y THERMA</li>
+    <li>ASCENSOR</li>
+    <li>OBSEQUIAMOS POR PREVENTA COCINA, HORNO, CAMPANA, MICROONDA</li>
+    </ul>`,
+
+    Type: "Duplex, Flat",
+  },
+  {
+    Name: "DEL PARQUE",
+    Status: "Vendido",
+    // Brochure:
+    //   " ",
+    Imagen:
+      "https://jkinmobiliaria.com/wp-content/uploads/2019/03/DELPARQUE-e1553225561839.png",
+
+    Direction:
+      "Jr. General Jose Ramon Pizarro (Ex Valle Riestra) N° 980 – Urb. Colmenares - Pueblo Libre",
+
+    Description: `<ul>
+    <li>8 flat, 2 duplex y 7 estacionamientos</li>
+    <li>desde 109 hasta 222 m2.</li>
+    <li>3 y 4 dormitorios con closets y cajonería completa</li>
+    <li>cocina con reposteros altos y bajos</li>
+    <li>piso laminado alemán de 7 mm</li>
+    <li>ascensor</li>
+    </ul>`,
+
+    Type: "Duplex, Flat",
+  },
+  {
+    Name: "LA FLORESTA",
+    Status: "Vendido",
+    // Brochure:
+    //   " ",
+    Imagen:
+      "https://jkinmobiliaria.com/wp-content/uploads/2019/06/FACHADA-02-mod-1.jpg",
+
+    Direction: "Jr. Jose Ramón Pizarro 1599 Urb. Colmenares – Pueblo Libre",
+
+    Description: `<ul>
+    <li>7 FLATS, 2 DUPLEX</li>
+    <li>9 ESTACIONAMIENTOS</li>
+    <li>DEPARTAMENTOS DESDE 75 M2 HASTA 177 M2</li>
+    <li>2, 3 Y 4 DORMITORIOS CON CLOSETS COMPLETOS</li>
+    <li>TABLEROS DE CUARZO EN COCINAS Y BAÑOS</li>
+    <li>COCINA CON REPOSTEROS ALTOS Y BAJOS</li>
+    <li>PISO LAMINADO ALEMÁN DE 7 MM</li>
+    <li>BAÑOS CON ENCHAPES COMPLETOS,</li>
+    <li>DUPLEX CON TERRAZAS</li>
+    <li>3 PUNTOS DE GAS NATURAL, COCINA HORNO Y THERMA</li>
+    <li>ASCENSOR</li>
+    <li>OBSEQUIAMOS POR PREVENTA COCINA, HORNO, CAMPANA, MICROONDA</li>
+    </ul>`,
+
+    Type: "Duplex, Flat",
+  },
+  {
+    Name: "DEL PARQUE",
+    Status: "Vendido",
+    // Brochure:
+    //   " ",
+    Imagen:
+      "https://jkinmobiliaria.com/wp-content/uploads/2019/03/DELPARQUE-e1553225561839.png",
+
+    Direction:
+      "Jr. General Jose Ramon Pizarro (Ex Valle Riestra) N° 980 – Urb. Colmenares - Pueblo Libre",
+
+    Description: `<ul>
+    <li>8 flat, 2 duplex y 7 estacionamientos</li>
+    <li>desde 109 hasta 222 m2.</li>
+    <li>3 y 4 dormitorios con closets y cajonería completa</li>
+    <li>cocina con reposteros altos y bajos</li>
+    <li>piso laminado alemán de 7 mm</li>
+    <li>ascensor</li>
+    </ul>`,
+
+    Type: "Duplex, Flat",
+  },
+  {
+    Name: "LOS CIPRESES ",
+    Status: "Vendido",
+    // Brochure:
+    //   " ",
+    Imagen:
+      "https://jkinmobiliaria.com/wp-content/uploads/2016/03/cip-e1553225816688.jpg",
+
+    Direction: "Calle Juan Acevedo N° 763",
+
+    Description: `<ul>
+    <li>9 departamentos</li>
+    <li>7 flat y 2 duplex</li>
+    <li>2, 3 y 4 dormitorios</li>
+    </ul>`,
+
+    Type: "Duplex, Flat",
+  },
 ];

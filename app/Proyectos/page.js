@@ -58,7 +58,7 @@ const Proyectos = () => {
 
           <div className="pt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-5 ">
             {Data.map((proyecto, index) => (
-              <Link href={`/Proyectos/${index}`} key={proyecto.Id}>
+              <Link href={`/Proyectos/${index}`} key={index}>
                 <div className="relative mx-auto w-full h-full">
                   <div className="relative inline-block w-full h-full transform transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-md">
                     <div className="rounded-lg bg-white p-5 shadow-md w-full h-full">
@@ -68,7 +68,7 @@ const Proyectos = () => {
                             <Image
                               src={proyecto.Imagen}
                               fill
-                              alt={proyecto.Id}
+                              alt={index}
                               style={{
                                 objectFit: "cover",
                               }}
