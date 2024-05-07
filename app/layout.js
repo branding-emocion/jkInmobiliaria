@@ -6,7 +6,7 @@ import Footer from "./Footer";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "JKinmobiliaria",
+  title: "Inmobiliaria",
   description:
     "Empresa moderna con profesionales de primera línea. Nuestros productos y servicios buscan dotar de felicidad y satisfacción. Institución ágil y dinámica para responder eficientemente a los imprevistos, beneficiando a nuestros clientes.",
 };
