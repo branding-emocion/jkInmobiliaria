@@ -57,15 +57,7 @@ const Proyectos = () => {
           </div>
 
           <div className="pt-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2 lg:gap-5 ">
-            {Data.sort((a, b) => {
-              if (a.status === "Disponible" && b.status !== "Disponible") {
-                return -1;
-              }
-              if (a.status === "Vendido" && b.status === "Vendido") {
-                return 1;
-              }
-              return 0;
-            }).map((proyecto, index) => (
+            {Data.map((proyecto, index) => (
               <Link href={`/Proyectos/${index}`} key={index}>
                 <div className="relative mx-auto w-full h-full">
                   <div className="relative inline-block w-full h-full transform transition-transform duration-300 ease-in-out hover:-translate-y-2 hover:shadow-md">
