@@ -122,7 +122,7 @@ export const DataProyectos = [
   {
     Id: 2,
     Name: "VIEW 684",
-    Status: "Disponible",
+    Status: "Vendido",
     Imagen: "/ViewImg.png",
     Brochure:
       "https://lugarsa.com/view684/wp-content/uploads/2022/12/BROCHURE-PREMIUN-VIEW.pdf",
