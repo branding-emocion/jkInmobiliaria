@@ -130,7 +130,7 @@ const Proyecto = ({ params: { id } }) => {
                       />
                     )}
                     <a
-                      href={`https://api.whatsapp.com/send?phone=51958255018&text=Me%20gustar%C3%ADa%20recibir%20mas%20informaci%C3%B3n%20acerca%20del%20proyecto%20${info.Name}%20`}
+                      href={`https://api.whatsapp.com/send?phone=51981184611&text=Me%20gustar%C3%ADa%20recibir%20mas%20informaci%C3%B3n%20acerca%20del%20proyecto%20${info.Name}%20`}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
