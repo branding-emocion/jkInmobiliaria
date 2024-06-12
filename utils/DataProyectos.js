@@ -3,8 +3,7 @@ export const DataProyectos = [
     Id: 1,
     Name: "PRIME LIFESTYLE",
     Status: "Disponible",
-    Brochure:
-      "https://jkinmobiliaria.com/wp-content/uploads/2023/10/BROCHURE_COMPLETO_PRIME.pdf",
+    Brochure: "/brochure/PRIME.pdf",
     Imagen: "/PrimeImg.png",
     RecorridosVirtuales: [
       {
@@ -49,8 +48,7 @@ export const DataProyectos = [
       },
     ],
     Direction: "AV. Cesar Vallejo N°1515 – 1519, Lince",
-    Brochure:
-      "https://jkinmobiliaria.com/wp-content/uploads/2023/10/BROCHURE_COMPLETO_PRIME.pdf",
+
     Description: ` <ul>
     <li>EDIFICIO MULTIFAMILIAR</li>
     <li>FLAT DESDE 66 m² HASTA 145 m² </li>
