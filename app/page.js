@@ -114,7 +114,7 @@ const HomePage = () => {
               <Image src={img} alt={`${id}`} fill />
             </section>
 
-            <div className=" absolute top-0 left-0 bg-black/60 w-full h-full text-white"></div>
+            <div className=" absolute top-0 left-0  w-full h-full text-white"></div>
           </div>
         ))}
       </Carousel>
