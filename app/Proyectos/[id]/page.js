@@ -179,7 +179,7 @@ const Proyecto = ({ params: { id } }) => {
                                       src: Planta.image,
                                     });
                                   }}
-                                  className="w-full h-[21rem] relative cursor-pointer"
+                                  className="w-[31rem] h-[21rem] mx-auto relative cursor-pointer"
                                 >
                                   <Image
                                     src={Planta.image}

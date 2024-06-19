@@ -28,8 +28,12 @@ export function ModalImageSee({ setModalImage, ModalImage }) {
             Imagen {ModalImage.Nombre}
           </DialogTitle>
           <DialogDescription>
-            <div>
-              <img src={ModalImage.src} alt={ModalImage.Nombre} />
+            <div className="w-full mx-auto">
+              <img
+                src={ModalImage.src}
+                className="mx-auto"
+                alt={ModalImage.Nombre}
+              />
             </div>
           </DialogDescription>
         </DialogHeader>

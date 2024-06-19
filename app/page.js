@@ -87,15 +87,15 @@ const HomePage = () => {
 
   const ArrCarousel = [
     {
-      id: 1,
+      img: "/slider/Slider1.webp",
+    },
+    {
       img: "https://jkinmobiliaria.com/wp-content/uploads/2021/01/triana.jpg",
     },
     {
-      id: 2,
       img: "https://jkinmobiliaria.com/wp-content/uploads/2021/01/bari.jpg",
     },
     {
-      id: 3,
       img: "https://jkinmobiliaria.com/wp-content/uploads/2021/01/WhatsApp-Image-2021-01-12-at-9.25.10-AM-2.jpeg",
     },
   ];
@@ -105,9 +105,9 @@ const HomePage = () => {
         <Modal setModalState={setModalState} ModalState={ModalState} />
       )}
       <Carousel infiniteLoop autoPlay showThumbs={false} showStatus={false}>
-        {ArrCarousel.map(({ id, img }) => (
+        {ArrCarousel.map(({ id, img }, key) => (
           <div
-            key={id}
+            key={key}
             className="relative w-full h-[250px] sm:h-[450px]  lg:h-[500px]"
           >
             <section className="h-full w-full object-cover overflow-hidden">
