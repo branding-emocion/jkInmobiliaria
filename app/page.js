@@ -95,9 +95,6 @@ const HomePage = () => {
     {
       img: "https://jkinmobiliaria.com/wp-content/uploads/2021/01/bari.jpg",
     },
-    {
-      img: "https://jkinmobiliaria.com/wp-content/uploads/2021/01/WhatsApp-Image-2021-01-12-at-9.25.10-AM-2.jpeg",
-    },
   ];
   return (
     <div>

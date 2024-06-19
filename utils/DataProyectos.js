@@ -60,59 +60,51 @@ export const DataProyectos = [
     Plantas: [
       {
         id: 1,
-        name: " FLAT 101 TIPO A",
+        name: "TIPO A - FLAT 101",
         size: 145.64,
-        image:
-          "https://jkinmobiliaria.com/wp-content/uploads/2023/10/BrochureCompleto_page-0016.jpg",
+        image: "/Planta/Prime/PA101.jpeg",
       },
       {
         id: 1,
-        name: " FLAT 102 TIPO B",
+        name: "TIPO B - FLAT 102",
         size: 131.14,
-        image:
-          "https://jkinmobiliaria.com/wp-content/uploads/2023/10/BrochureCompleto_page-0016.jpg",
+        image: "/Planta/Prime/PB102.png",
       },
       {
         id: 1,
-        name: " FLAT TIPO C",
+        name: "TIPO C - FLAT 201 al 501",
         size: 85.09,
-        image:
-          "https://jkinmobiliaria.com/wp-content/uploads/2023/10/flat6-scaled.jpg",
+        image: "/Planta/Prime/PC201501.jpeg",
       },
       {
         id: 1,
-        name: "  FLAT TIPO D",
+        name: "TIPO D - FLAT 202 al 502 ",
         size: 66.63,
-        image:
-          "https://jkinmobiliaria.com/wp-content/uploads/2023/10/BrochureCompleto_page-0017-scaled.jpg",
+        image: "/Planta/Prime/PD202502.png",
       },
       {
         id: 1,
-        name: " FLAT TIPO E",
+        name: "TIPO E -  FLAT 203 al 603",
         size: 87.63,
-        image:
-          "https://jkinmobiliaria.com/wp-content/uploads/2023/10/BrochureCompleto_page-0017-scaled.jpg",
+        image: "/Planta/Prime/PE203603.png",
       },
       {
         id: 1,
-        name: "  DUPLEX 601 TIPO F        ",
+        name: "TIPO F - DUPLEX 601",
         size: 101.39,
-        image:
-          "https://jkinmobiliaria.com/wp-content/uploads/2023/10/BrochureCompleto_page-0018-scaled.jpg",
+        image: "/Planta/Prime/PF601.png",
       },
       {
         id: 1,
-        name: " DUPLEX 602 TIPO G",
-        size: 145.64,
-        image:
-          "https://jkinmobiliaria.com/wp-content/uploads/2023/10/BrochureCompleto_page-0019-scaled.jpg",
+        name: "TIPO G - DUPLEX 602",
+        size: 126.26,
+        image: "/Planta/Prime/PG602.png",
       },
       {
         id: 1,
-        name: " DUPLEX 604 TIPO H ",
-        size: 69.55,
-        image:
-          "https://jkinmobiliaria.com/wp-content/uploads/2023/10/BrochureCompleto_page-0019-scaled.jpg",
+        name: "TIPO H - DUPLEX 604",
+        size: 69.59,
+        image: "/Planta/Prime/PH604.png",
       },
     ],
     Type: "Duplex, Flat    ",
