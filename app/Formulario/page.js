@@ -28,10 +28,8 @@ const Hompage = () => {
     ruc: "20522572714",
     direccionFiscal: "Av. Circunvalación Golf Los Incas N° 206 Int. 803",
     tipoDocumento: "dni",
-    mailEmpresa: "ventas@jkinmobiliaria.com",
+    // mailEmpresa: "ventas@jkinmobiliaria.com",
     esMenor: false, // Nuevo estado para detectar si es menor de edad
-    nombreTutor: "",
-    tipoDocumentoTutor: "",
   });
   const [Loading, setLoading] = useState(false);
 
