@@ -62,9 +62,6 @@ const Hompage = () => {
           e.preventDefault();
           setLoading(true);
 
-          console.log("inputValues", inputValues);
-
-          return;
           try {
             const SendMailData = await fetch("/api/SendMailForm", {
               method: "POST",
@@ -332,8 +329,8 @@ const Hompage = () => {
               <h3 className="text-lg font-semibold">
                 Identificación del bien contratado
               </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div className="space-y-2">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 ">
+                {/* <div className="space-y-2">
                   <Label htmlFor="tiendaCompra">Tienda de compra</Label>
                   <Select
                     id="tiendaCompra"
@@ -354,8 +351,8 @@ const Hompage = () => {
                       <SelectItem value="fisica">Tienda Física</SelectItem>
                     </SelectContent>
                   </Select>
-                </div>
-                <div className="space-y-2">
+                </div> */}
+                <div className="space-y-2 md:col-span-2">
                   <Label htmlFor="tipoBien">Tipo del bien contratado</Label>
                   <Select
                     id="tipoBien"
@@ -390,10 +387,10 @@ const Hompage = () => {
           </CardHeader>
           <CardContent className="space-y-6">
             <RadioGroup
-              name="complaintType"
-              value={inputValues.complaintType}
+              name="tipoSolicitud"
+              value={inputValues.tipoSolicitud}
               onValueChange={(value) =>
-                handleChange({ target: { name: "complaintType", value } })
+                handleChange({ target: { name: "tipoSolicitud", value } })
               }
               className="flex space-x-4"
               required
@@ -409,11 +406,11 @@ const Hompage = () => {
             </RadioGroup>
 
             <div className="space-y-2">
-              <Label htmlFor="complaintDetail">Detalle *</Label>
+              <Label htmlFor="Detalle">Detalle *</Label>
               <Textarea
-                id="complaintDetail"
-                name="complaintDetail"
-                value={inputValues.complaintDetail}
+                id="Detalle"
+                name="Detalle"
+                value={inputValues.Detalle}
                 onChange={handleChange}
                 placeholder="Ingrese el detalle de su reclamo o queja"
                 required
@@ -421,11 +418,11 @@ const Hompage = () => {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="complaintRequest">Pedido *</Label>
+              <Label htmlFor="Pedido">Pedido *</Label>
               <Textarea
-                id="complaintRequest"
-                name="complaintRequest"
-                value={inputValues.complaintRequest}
+                id="Pedido"
+                name="Pedido"
+                value={inputValues.Pedido}
                 onChange={handleChange}
                 placeholder="Ingrese su pedido"
                 required
