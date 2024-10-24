@@ -5,17 +5,17 @@ export async function POST(req) {
     const { Nombre, Apellidos, Correo, Telefono, DNI } = await req?.json();
 
     const transporter = nodemailer.createTransport({
-      host: "smtp.zoho.com",
+      host: "mail.brandingemocion.net",
       port: 465,
       secure: true,
       auth: {
-        user: "soporte@brandingemocion.com",
-        pass: "2o#tsUem",
+        user: "notificacion@brandingemocion.net",
+        pass: "noti@2024",
       },
     });
 
     const mensaje = {
-      from: "soporte@brandingemocion.com",
+      from: '"Formulario - Contacto" <notificacion@brandingemocion.net>',
       to: "ngarcia@jkinversiones.com,ventas@jkinversiones.com,jhonned01@gmail.com",
       subject: `🎉🥳 ¡Solicitud de contacto: ${Nombre || ""}  ${
         Apellidos || ""
