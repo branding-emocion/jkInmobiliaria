@@ -29,7 +29,7 @@ export async function POST(request) {
 
   const mailOptions = {
     from: '"Reclamos" <notificacion@brandingemocion.net>',
-    to: `jgarcia@jkinversiones.com,${data?.email}`, // Enviar a la empresa y al cliente
+    to: `clientes@jkinversiones.com,${data?.email}`, // Enviar a la empresa y al cliente
     subject: `Reclamo recibido - Pedido ${data?.nombres || "N/A"} ${
       data?.apellidos || "N/A"
     }`,
