@@ -25,7 +25,7 @@ import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 
 const Hompage = () => {
   const [inputValues, setInputValues] = useState({
-    ruc: "20522572714",
+    // ruc: "20522572714",
     direccionFiscal: "Av. Circunvalación Golf Los Incas N° 206 Int. 803",
     tipoDocumento: "dni",
     // mailEmpresa: "ventas@jkinmobiliaria.com",
@@ -48,10 +48,6 @@ const Hompage = () => {
     }));
   };
 
-  const handleFileChange = (e) => {
-    // Handle file attachment logic here
-  };
-
   return (
     <div className="bg-gray-50 ">
       <Title title={`Libro de reclamaciones`} image="/bannerjk1.jpg" />
@@ -68,7 +64,9 @@ const Hompage = () => {
 
             alert(SendMailData?.message);
 
-            console.log(SendMailData);
+            // reset form
+            setInputValues({});
+            e.target.reset();
           } catch (error) {
             alert(
               "intente nuevamente si el problema persiste contacta con nosotros"
@@ -98,8 +96,8 @@ const Hompage = () => {
             </div>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-2 gap-4">
-              <div className="space-y-2">
+            <>
+              {/* <div className="space-y-2">
                 <Label htmlFor="ruc">RUC</Label>
                 <Input
                   id="ruc"
@@ -108,28 +106,58 @@ const Hompage = () => {
                   onChange={handleChange}
                   readOnly
                 />
+              </div> */}
+
+              <div className="space-y-4 text-center  ">
+                <Label htmlFor="ruc" className="text-xl uppercase">
+                  Seleccione RUC
+                </Label>
+                <RadioGroup
+                  name="ruc"
+                  value={inputValues.ruc}
+                  onValueChange={(value) =>
+                    setInputValues((prevValues) => ({
+                      ...prevValues,
+                      ruc: value,
+                    }))
+                  }
+                  required
+                  className="flex justify-around items-center"
+                >
+                  <div className="flex items-center justify-start space-x-2">
+                    <RadioGroupItem value="JK-20544589670" id="ruc-jk" />
+                    <Label htmlFor="ruc-jk">JK 20544589670</Label>
+                  </div>
+                  <div className="flex items-center justify-start space-x-2">
+                    <RadioGroupItem value="LV-20544589670" id="ruc-lv" />
+                    <Label htmlFor="ruc-lv">Lv 20603440138</Label>
+                  </div>
+                </RadioGroup>
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="direccionFiscal">Dirección Fiscal</Label>
-                <Input
-                  id="direccionFiscal"
-                  name="direccionFiscal"
-                  value={inputValues.direccionFiscal}
-                  onChange={handleChange}
-                  readOnly
-                />
+
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="direccionFiscal">Dirección Fiscal</Label>
+                  <Input
+                    id="direccionFiscal"
+                    name="direccionFiscal"
+                    value={inputValues.direccionFiscal}
+                    onChange={handleChange}
+                    readOnly
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label htmlFor="Fecha">Fecha</Label>
+                  <Input
+                    id="Fecha"
+                    name="Fecha"
+                    value={new Date().toLocaleDateString()}
+                    onChange={handleChange}
+                    readOnly
+                  />
+                </div>
               </div>
-              <div className="space-y-2">
-                <Label htmlFor="Fecha">{}</Label>
-                <Input
-                  id="Fecha"
-                  name="Fecha"
-                  value={new Date().toLocaleDateString()}
-                  onChange={handleChange}
-                  readOnly
-                />
-              </div>
-            </div>
+            </>
           </CardContent>
         </Card>
 
