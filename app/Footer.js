@@ -1,5 +1,6 @@
 "use client";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { BsFacebook, BsInstagram, BsWhatsapp } from "react-icons/bs";
 
@@ -150,6 +151,14 @@ const Footer = () => {
                 <BsWhatsapp className="text-white w-8 h-8" />
               </a>
             </div>
+
+            <Link href={"/Formulario"}>
+              <img
+                src="/LibroReclamaciones.png"
+                className="flex justify-start items-center  w-auto h-36 object-cover"
+                alt="Reclamos"
+              />
+            </Link>
           </div>
 
           <div className=" pt-4 sm:pt-0  sm:col-span-2 lg:col-span-3 ">

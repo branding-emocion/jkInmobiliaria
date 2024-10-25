@@ -64,7 +64,9 @@ const Hompage = () => {
 
             alert(SendMailData?.message);
 
-            console.log(SendMailData);
+            // reset form
+            setInputValues({});
+            e.target.reset();
           } catch (error) {
             alert(
               "intente nuevamente si el problema persiste contacta con nosotros"
@@ -106,8 +108,10 @@ const Hompage = () => {
                 />
               </div> */}
 
-              <div className="space-y-4 ">
-                <Label htmlFor="ruc">Seleccione RUC</Label>
+              <div className="space-y-4 text-center  ">
+                <Label htmlFor="ruc" className="text-xl uppercase">
+                  Seleccione RUC
+                </Label>
                 <RadioGroup
                   name="ruc"
                   value={inputValues.ruc}
@@ -121,11 +125,11 @@ const Hompage = () => {
                   className="flex justify-around items-center"
                 >
                   <div className="flex items-center justify-start space-x-2">
-                    <RadioGroupItem value="JK" id="ruc-jk" />
+                    <RadioGroupItem value="JK-20544589670" id="ruc-jk" />
                     <Label htmlFor="ruc-jk">JK 20544589670</Label>
                   </div>
                   <div className="flex items-center justify-start space-x-2">
-                    <RadioGroupItem value="Lv" id="ruc-lv" />
+                    <RadioGroupItem value="LV-20544589670" id="ruc-lv" />
                     <Label htmlFor="ruc-lv">Lv 20603440138</Label>
                   </div>
                 </RadioGroup>
