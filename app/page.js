@@ -87,7 +87,7 @@ const HomePage = () => {
 
   const ArrCarousel = [
     {
-      img: "/slider/Slider1.webp",
+      img: "/slider/jk-slider.jpg",
     },
     {
       img: "https://jkinmobiliaria.com/wp-content/uploads/2021/01/triana.jpg",
@@ -105,10 +105,15 @@ const HomePage = () => {
         {ArrCarousel.map(({ id, img }, key) => (
           <div
             key={key}
-            className="relative w-full h-[250px] sm:h-[450px]  lg:h-[500px]"
+            className="relative w-full h-[250px] sm:h-[450px]  lg:h-[500px] 2xl:h-[700px]"
           >
             <section className="h-full w-full object-cover overflow-hidden">
-              <Image src={img} alt={`${id}`} fill />
+              <Image
+                src={img}
+                alt={`${id}`}
+                fill
+                style={{ objectFit: "cover" }}
+              />
             </section>
 
             <div className=" absolute top-0 left-0  w-full h-full text-white"></div>
