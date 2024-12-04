@@ -89,12 +89,12 @@ const HomePage = () => {
     {
       img: "/slider/jk-slider.jpg",
     },
-    {
-      img: "https://jkinmobiliaria.com/wp-content/uploads/2021/01/triana.jpg",
-    },
-    {
-      img: "https://jkinmobiliaria.com/wp-content/uploads/2021/01/bari.jpg",
-    },
+    // {
+    //   img: "https://jkinmobiliaria.com/wp-content/uploads/2021/01/triana.jpg",
+    // },
+    // {
+    //   img: "https://jkinmobiliaria.com/wp-content/uploads/2021/01/bari.jpg",
+    // },
   ];
   return (
     <div>
