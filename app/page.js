@@ -87,14 +87,17 @@ const HomePage = () => {
 
   const ArrCarousel = [
     {
-      img: "/slider/jk-slider.jpg",
+      img: "/slider/Slider1.jpg",
     },
-    // {
-    //   img: "https://jkinmobiliaria.com/wp-content/uploads/2021/01/triana.jpg",
-    // },
-    // {
-    //   img: "https://jkinmobiliaria.com/wp-content/uploads/2021/01/bari.jpg",
-    // },
+    {
+      img: "/slider/Slider2.jpg",
+    },
+    {
+      img: "/slider/Slider3.jpg",
+    },
+    {
+      img: "/slider/Slider4.jpg",
+    },
   ];
   return (
     <div>
