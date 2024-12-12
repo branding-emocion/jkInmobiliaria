@@ -115,7 +115,7 @@ const HomePage = () => {
                 src={img}
                 alt={`${id}`}
                 fill
-                style={{ objectFit: "cover" }}
+                style={{ objectFit: "fill" }}
               />
             </section>
 
