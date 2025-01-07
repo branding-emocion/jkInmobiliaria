@@ -12,6 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { DataProyectos } from "@/utils/DataProyectos";
+import { View } from "lucide-react";
 import Image from "next/image";
 import React, { useState } from "react";
 
@@ -40,7 +41,7 @@ const Proyecto = ({ params: { id } }) => {
             e.preventDefault();
             setModalImage({
               Visible: true,
-              Nombre: `${info.Name}`,
+              Nombre: `${info?.Name}`,
               src: info.Imagen,
             });
           }}
@@ -60,7 +61,8 @@ const Proyecto = ({ params: { id } }) => {
           <div className="lg:col-span-6 bg-white px-10 py-5">
             <div className="flex gap-x-4 pb-2">
               <Button
-                onClick={() => {
+                onClick={(e) => {
+                  e.preventDefault();
                   setNavigation({
                     Description: true,
                     PlantaBaja: false,
@@ -71,7 +73,8 @@ const Proyecto = ({ params: { id } }) => {
                 Descripción
               </Button>
               <Button
-                onClick={() => {
+                onClick={(e) => {
+                  e.preventDefault();
                   setNavigation({
                     Description: false,
                     PlantaBaja: true,
@@ -157,10 +160,22 @@ const Proyecto = ({ params: { id } }) => {
                         <Button>BROCHURE</Button>
                       </a>
                     )}
-                    {}
+                    {id == 1 && (
+
+                      
+                      <Button
+                        variant="outline"
+                        className="border-[#1a1a1a] text-[#1a1a1a] hover:bg-[#1a1a1a] hover:text-white"
+                      >
+                        <View className="w-5 h-5 mr-2" />
+                        Recorrido Virtual
+                      </Button>
+                    )}
+
+                    <a href="http://" target="_blank" rel="noopener noreferrer"></a>
                   </>
                 )) ||
-                  (Navigation.PlantaBaja && (
+                  (Navigation?.PlantaBaja && (
                     <>
                       {info?.Plantas?.length && info.Plantas && (
                         <Accordion type="single" collapsible>
