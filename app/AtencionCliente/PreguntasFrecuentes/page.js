@@ -227,7 +227,7 @@ const PreguntasFrecuentes = () => {
                       Junta de Propietarios quien los representara ante la
                       constructora en la recepción de las áreas comunes y
                       canalizara todas las coordinaciones para la atención de
-                      sus observaciones enviando al correo de
+                      sus observaciones enviando al correo de{" "}
                       <span>
                         <a href="mailto:postventa@jkinversiones.com">
                           postventa@jkinversiones.com
