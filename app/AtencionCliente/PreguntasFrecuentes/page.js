@@ -24,13 +24,17 @@ const PreguntasFrecuentes = () => {
                     instalaciones y acabados de los departamentos?{" "}
                   </AccordionTrigger>
                   <AccordionContent>
-                    El comprar en preventa es conveniente ya que se obtiene un
-                    ahorro en el precio de venta ya que a medida que se vaya
-                    construyendo el precio va en aumento, así mismo permite
-                    fraccionar el pago de la inicial hasta el inicio de la
-                    construcción, por otro lado, se obtiene la posibilidad de
-                    tener mayores opciones para personalizar el modelo del
-                    departamento sin alterar el diseño estructural del edificio.{" "}
+                    Los cuidados con las instalaciones y acabados de los
+                    departamentos son esenciales para asegurar su durabilidad y
+                    buen estado. Es importante realizar revisiones periódicas
+                    para detectar posibles daños en la plomería, electricidad y
+                    sistemas de ventilación. Además, se debe tener especial
+                    cuidado con los acabados, como pisos, paredes y techos, para
+                    evitar desgaste prematuro. También se recomienda seguir las
+                    instrucciones del fabricante para el mantenimiento de los
+                    materiales utilizados en la construcción y asegurar que los
+                    acabados permanezcan en óptimas condiciones a lo largo del
+                    tiempo.{" "}
                   </AccordionContent>
                 </AccordionItem>
                 <AccordionItem value="item-2">
@@ -102,8 +106,8 @@ const PreguntasFrecuentes = () => {
                   <AccordionContent>
                     Toda atención de posventa se realiza enviando un correo
                     electrónico a{" "}
-                    <a href="mailto:posventa@jkinversiones.com">
-                      posventa@jkinversiones.com
+                    <a href="mailto:postventa@jkinversiones.com">
+                      postventa@jkinversiones.com
                     </a>
                     , para casos de emergencia que no pueden esperar deberán
                     comunicarse de inmediato a nuestro teléfono 01 7433661 Anexo
@@ -225,8 +229,8 @@ const PreguntasFrecuentes = () => {
                       canalizara todas las coordinaciones para la atención de
                       sus observaciones enviando al correo de
                       <span>
-                        <a href="mailto:posventa@jkinversiones.com">
-                          posventa@jkinversiones.com
+                        <a href="mailto:postventa@jkinversiones.com">
+                          postventa@jkinversiones.com
                         </a>{" "}
                         su requerimiento.
                       </span>
