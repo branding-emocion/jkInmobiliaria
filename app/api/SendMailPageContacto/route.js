@@ -16,7 +16,7 @@ export async function POST(req) {
 
     const mensaje = {
       from: '"Formulario - Contacto" <notificacion@brandingemocion.net>',
-      to: "ngarcia@jkinversiones.com,ventas@jkinversiones.com,jhonned01@gmail.com",
+      to: "ngarcia@jkinversiones.com,ventas@jkinversiones.com",
       subject: `🎉🥳 ¡Solicitud de contacto: ${Nombre || ""}  ${
         Apellidos || ""
       }! 🥳🎉`,
