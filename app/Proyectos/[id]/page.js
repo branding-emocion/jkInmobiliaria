@@ -46,15 +46,19 @@ export async function generateMetadata({ params }, parent) {
     description: cleanDescription || `Proyecto inmobiliario ${info.Name}`,
 
     openGraph: {
-      ...parentMetadata.openGraph,
       title: `${info.Name} - JK Inmobiliaria`,
       description: cleanDescription || `Proyecto inmobiliario ${info.Name}`,
-      url: `${baseUrl}/Proyectos/${id}`,
-      images: `${imageUrl}`,
+      url: `${baseUrl}`,
+      images: [
+        {
+          url: `${imageUrl}`, // Must be an absolute URL
+          width: 800,
+          height: 600,
+        },
+      ],
     },
 
     twitter: {
-      ...parentMetadata.twitter,
       title: `${info.Name} - JK Inmobiliaria`,
       description: cleanDescription || `Proyecto inmobiliario ${info.Name}`,
       images: "https://jkinmobiliaria.com/Metajk.png",
