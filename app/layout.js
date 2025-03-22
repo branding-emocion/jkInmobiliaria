@@ -53,7 +53,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "JK Inmobiliaria",
     description: "Empresa moderna con profesionales de primera línea.",
-    images: ["/Metajk.png"], // URL ABSOLUTA
+    images: ["www.jkinmobiliaria.com/Metajk.png"], // URL ABSOLUTA
   },
 
   robots: {
