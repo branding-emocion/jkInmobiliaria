@@ -47,20 +47,13 @@ export const metadata = {
     locale: "es_ES",
     url: "https://www.jkinmobiliaria.com",
     siteName: "JK Inmobiliaria",
-    images: [
-      {
-        url: "https://www.jkinmobiliaria.com/Metajk.png", // URL ABSOLUTA para la imagen por defecto
-        width: 1200,
-        height: 630,
-        alt: "JK Inmobiliaria",
-      },
-    ],
+    images: "/Metajk.png",
   },
   twitter: {
     card: "summary_large_image",
     title: "JK Inmobiliaria",
     description: "Empresa moderna con profesionales de primera línea.",
-    images: ["https://www.jkinmobiliaria.com/Metajk.png"], // URL ABSOLUTA
+    images: ["/Metajk.png"], // URL ABSOLUTA
   },
 };
 

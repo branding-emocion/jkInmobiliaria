@@ -37,7 +37,7 @@ export async function generateMetadata({ params }, parent) {
       ? info.Imagen
       : `${info.Imagen.startsWith("/") ? info.Imagen : `/${info.Imagen}`}`;
   } else {
-    imageUrl = "/default-og-image.jpg"; // Imagen por defecto
+    imageUrl = "https://jkinmobiliaria.com/Metajk.png"; // Imagen por defecto
   }
 
   // Metadatos específicos para esta página, extendiendo los del padre
@@ -50,21 +50,14 @@ export async function generateMetadata({ params }, parent) {
       title: `${info.Name} - JK Inmobiliaria`,
       description: cleanDescription || `Proyecto inmobiliario ${info.Name}`,
       url: `${baseUrl}/Proyectos/${id}`,
-      images: [
-        {
-          url: imageUrl,
-
-          alt: info.Name,
-        },
-        ...previousImages,
-      ],
+      images: `${imageUrl}`,
     },
 
     twitter: {
       ...parentMetadata.twitter,
       title: `${info.Name} - JK Inmobiliaria`,
       description: cleanDescription || `Proyecto inmobiliario ${info.Name}`,
-      images: [imageUrl],
+      images: "https://jkinmobiliaria.com/Metajk.png",
     },
 
     alternates: {
