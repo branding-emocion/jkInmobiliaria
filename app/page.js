@@ -17,7 +17,6 @@ const HomePage = () => {
     Info: [],
   });
 
-  
   const Data = DataProyectos.filter((pro) => pro.Status == "Disponible");
   const Asociaciones = [
     {
@@ -87,7 +86,7 @@ const HomePage = () => {
   ];
 
   const ArrCarousel = [
-    { img: "/slider/portada-web.jpg" },
+    { img: "/slider/DiaPadre.jpg" },
 
     // {
     //   img: "/slider/Slider1.jpg",
