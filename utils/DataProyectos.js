@@ -2,7 +2,7 @@ export const DataProyectos = [
   {
     Id: 1,
     Name: "PRIME LIFESTYLE",
-    Status: "Disponible",
+    Status: "Vendido",
     Brochure: "/brochure/PRIME.pdf",
     Imagen: "/PrimeImg.png",
     RecorridosVirtuales: [
