@@ -1,5 +1,94 @@
 export const DataProyectos = [
   {
+    Id: 3,
+    Name: "SIENNA",
+    Status: "Disponible",
+    Imagen: "/SiennaImg.jpg",
+    Meta: "/Metajk.png",
+    Brochure: "/brochure/SIENNA.pdf",
+    Direction: "Magdalena del Mar, Lima, Lima Metropolitana, Lima, 15076, Perú",
+    Description: `<ul><li>Tableros de cuarzo</li><li>Cocina equipada</li><li>Closets completos</li><li>Enchapes en tendencia</li><li>Ascensor</li><li>Cristales enmarcados</li></ul>`,
+    RecorridosVirtuales: [
+      {
+        id: 1,
+        dpto: "DEP.101 (TIPO A)",
+        url: "https://jkinmobiliaria.viewin360.co/share/collection/7c9xK?logo=bWVkaWEvNDgxMzA5LzY1ZjEtZjNiNi0xMzZlLTIxNzQuanBn&card=1&info=0&logosize=159&fs=1&vr=1&zoom=1&initload=0&autorotate=-0.51&autop=10&thumbs=1&inst=es",
+      },
+      {
+        id: 2,
+        dpto: "DEP.102 (TIPO B)",
+        url: "https://jkinmobiliaria.viewin360.co/share/collection/7c9xw?logo=bWVkaWEvNDgxMzA5LzY1ZjEtZjNiNi0xMzZlLTIxNzQuanBn&card=1&info=0&logosize=159&fs=1&vr=1&zoom=1&initload=0&autorotate=-0.51&autop=10&thumbs=1&inst=es",
+      },
+      {
+        id: 3,
+        dpto: "DEP.201 AL 801 (TIPO C)",
+        url: "https://jkinmobiliaria.viewin360.co/share/collection/7cvSc?logo=bWVkaWEvNDgxMzA5LzY1ZjEtZjNiNi0xMzZlLTIxNzQuanBn&card=1&info=0&logosize=159&fs=1&vr=1&zoom=1&initload=0&autorotate=-0.51&autop=10&thumbs=1&inst=es",
+      },
+      {
+        id: 4,
+        dpto: "DEP.202 AL 802 (TIPO D)",
+        url: "https://jkinmobiliaria.viewin360.co/share/collection/7c95L?logo=bWVkaWEvNDgxMzA5LzY1ZjEtZjNiNi0xMzZlLTIxNzQuanBn&card=1&info=0&logosize=159&fs=1&vr=1&zoom=1&initload=0&autorotate=-0.51&autop=10&thumbs=1&inst=es",
+      },
+      {
+        id: 5,
+        dpto: "DEP.203 AL 803 (TIPO E)",
+        url: " https://jkinmobiliaria.viewin360.co/share/collection/7c9L0?logo=bWVkaWEvNDgxMzA5LzY1ZjEtZjNiNi0xMzZlLTIxNzQuanBn&card=1&info=0&logosize=159&fs=1&vr=1&zoom=1&initload=0&autorotate=-0.51&autop=10&thumbs=1&inst=es",
+      },
+      {
+        id: 6,
+        dpto: "DUPLEX 902  (TIPO G)",
+        url: "https://jkinmobiliaria.viewin360.co/share/collection/7cFls?logo=bWVkaWEvNDgxMzA5LzY1ZjEtZjNiNi0xMzZlLTIxNzQuanBn&card=1&info=0&logosize=159&fs=1&vr=1&zoom=1&initload=0&autorotate=-0.51&autop=10&thumbs=1&inst=es",
+      },
+    ],
+    Direction: "Jirón General Clovis 627 - 631 Urb. El Carmen, Pueblo Libre",
+    Plantas: [
+      {
+        id: 3,
+        name: " Flat tipo A - 101 ",
+        size: 56,
+        image: "/Planta/Sienna/SA101.png",
+      },
+      {
+        id: 4,
+        name: " Flat tipo B - 102",
+        size: 62.02,
+        image: "/Planta/Sienna/SB102.png",
+      },
+      {
+        id: 1,
+        name: "Flat tipo C - 201 al 801  ",
+        size: 41.46,
+        image: "/Planta/Sienna/SC201801.png",
+      },
+      {
+        id: 2,
+        name: "Flat tipo D - 202 al 802  ",
+        size: 70.5,
+        image: "/Planta/Sienna/SD202802.png",
+      },
+
+      {
+        id: 5,
+        name: " Flat tipo E - 203 al 803 ",
+        size: 63.16,
+        image: "/Planta/Sienna/SE203803.png",
+      },
+      {
+        id: 6,
+        name: " Flat tipo F - 901",
+        size: 41.15,
+        image: "/Planta/Sienna/SF901.png",
+      },
+      {
+        id: 7,
+        name: "Duplex tipo G - 902",
+        size: 132.99,
+        image: "/Planta/Sienna/duplex902.jpg",
+      },
+    ],
+    Type: "Flat, Duplex    ",
+  },
+  {
     Id: 1,
     Name: "PRIME LIFESTYLE",
     Status: "Vendido",
@@ -108,96 +197,6 @@ export const DataProyectos = [
       },
     ],
     Type: "Duplex, Flat    ",
-  },
-
-  {
-    Id: 3,
-    Name: "SIENNA",
-    Status: "Disponible",
-    Imagen: "/SiennaImg.jpg",
-    Meta: "/Metajk.png",
-    Brochure: "/brochure/SIENNA.pdf",
-    Direction: "Magdalena del Mar, Lima, Lima Metropolitana, Lima, 15076, Perú",
-    Description: `<ul><li>Tableros de cuarzo</li><li>Cocina equipada</li><li>Closets completos</li><li>Enchapes en tendencia</li><li>Ascensor</li><li>Cristales enmarcados</li></ul>`,
-    RecorridosVirtuales: [
-      {
-        id: 1,
-        dpto: "DEP.101 (TIPO A)",
-        url: "https://jkinmobiliaria.viewin360.co/share/collection/7c9xK?logo=bWVkaWEvNDgxMzA5LzY1ZjEtZjNiNi0xMzZlLTIxNzQuanBn&card=1&info=0&logosize=159&fs=1&vr=1&zoom=1&initload=0&autorotate=-0.51&autop=10&thumbs=1&inst=es",
-      },
-      {
-        id: 2,
-        dpto: "DEP.102 (TIPO B)",
-        url: "https://jkinmobiliaria.viewin360.co/share/collection/7c9xw?logo=bWVkaWEvNDgxMzA5LzY1ZjEtZjNiNi0xMzZlLTIxNzQuanBn&card=1&info=0&logosize=159&fs=1&vr=1&zoom=1&initload=0&autorotate=-0.51&autop=10&thumbs=1&inst=es",
-      },
-      {
-        id: 3,
-        dpto: "DEP.201 AL 801 (TIPO C)",
-        url: "https://jkinmobiliaria.viewin360.co/share/collection/7cvSc?logo=bWVkaWEvNDgxMzA5LzY1ZjEtZjNiNi0xMzZlLTIxNzQuanBn&card=1&info=0&logosize=159&fs=1&vr=1&zoom=1&initload=0&autorotate=-0.51&autop=10&thumbs=1&inst=es",
-      },
-      {
-        id: 4,
-        dpto: "DEP.202 AL 802 (TIPO D)",
-        url: "https://jkinmobiliaria.viewin360.co/share/collection/7c95L?logo=bWVkaWEvNDgxMzA5LzY1ZjEtZjNiNi0xMzZlLTIxNzQuanBn&card=1&info=0&logosize=159&fs=1&vr=1&zoom=1&initload=0&autorotate=-0.51&autop=10&thumbs=1&inst=es",
-      },
-      {
-        id: 5,
-        dpto: "DEP.203 AL 803 (TIPO E)",
-        url: " https://jkinmobiliaria.viewin360.co/share/collection/7c9L0?logo=bWVkaWEvNDgxMzA5LzY1ZjEtZjNiNi0xMzZlLTIxNzQuanBn&card=1&info=0&logosize=159&fs=1&vr=1&zoom=1&initload=0&autorotate=-0.51&autop=10&thumbs=1&inst=es",
-      },
-      {
-        id: 6,
-        dpto: "DUPLEX 902  (TIPO G)",
-        url: "https://jkinmobiliaria.viewin360.co/share/collection/7cFls?logo=bWVkaWEvNDgxMzA5LzY1ZjEtZjNiNi0xMzZlLTIxNzQuanBn&card=1&info=0&logosize=159&fs=1&vr=1&zoom=1&initload=0&autorotate=-0.51&autop=10&thumbs=1&inst=es",
-      },
-    ],
-    Direction: "Jirón General Clovis 627 - 631 Urb. El Carmen, Pueblo Libre",
-    Plantas: [
-      {
-        id: 3,
-        name: " Flat tipo A - 101 ",
-        size: 56,
-        image: "/Planta/Sienna/SA101.png",
-      },
-      {
-        id: 4,
-        name: " Flat tipo B - 102",
-        size: 62.02,
-        image: "/Planta/Sienna/SB102.png",
-      },
-      {
-        id: 1,
-        name: "Flat tipo C - 201 al 801  ",
-        size: 41.46,
-        image: "/Planta/Sienna/SC201801.png",
-      },
-      {
-        id: 2,
-        name: "Flat tipo D - 202 al 802  ",
-        size: 70.5,
-        image: "/Planta/Sienna/SD202802.png",
-      },
-
-      {
-        id: 5,
-        name: " Flat tipo E - 203 al 803 ",
-        size: 63.16,
-        image: "/Planta/Sienna/SE203803.png",
-      },
-      {
-        id: 6,
-        name: " Flat tipo F - 901",
-        size: 41.15,
-        image: "/Planta/Sienna/SF901.png",
-      },
-      {
-        id: 7,
-        name: "Duplex tipo G - 902",
-        size: 132.99,
-        image: "/Planta/Sienna/duplex902.jpg",
-      },
-    ],
-    Type: "Flat, Duplex    ",
   },
   {
     Id: 2,
