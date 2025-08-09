@@ -26,8 +26,7 @@ const HomePage = () => {
     },
     {
       id: 2,
-      image:
-        "https://jkinmobiliaria.com/wp-content/uploads/2021/01/logo1-292x300.png",
+      image: "/slider/Asc2.png",
     },
   ];
 
@@ -273,7 +272,7 @@ const HomePage = () => {
           </h1>
 
           <div className=" flex flex-wrap gap-2 gap-x-4">
-            <div className="grid grid-cols-1 sm:grid-cols-2  gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 place-items-center  gap-6">
               {Asociaciones.map(({ id, image }) => (
                 <div key={id}>
                   <Image
