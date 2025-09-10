@@ -85,7 +85,7 @@ const HomePage = () => {
   ];
 
   const ArrCarousel = [
-    { img: "/slider/PortadaSep.jpg" },
+    { img: "/slider/NuevaPortada.jpg" },
 
     // {
     //   img: "/slider/Slider1.jpg",
