@@ -13,7 +13,7 @@ export async function POST(request) {
           clientEmail: process.env.FIREBASE_ADMIN_CLIENT_EMAIL,
           privateKey: process.env.FIREBASE_ADMIN_PRIVATE_KEY?.replace(/\\n/g, "\n"),
         }),
-        storageBucket: "jkinmobiliaria-f8394.firebasestorage.app",
+        storageBucket: process.env.FIREBASE_ADMIN_STORAGE_BUCKET,
       });
     }
 
@@ -56,7 +56,7 @@ export async function POST(request) {
 
     // Obtener referencia al storage
     const app = getApps()[0];
-    const bucket = getStorage(app).bucket("jkinmobiliaria-f8394.firebasestorage.app");
+    const bucket = getStorage(app).bucket(process.env.FIREBASE_ADMIN_STORAGE_BUCKET);
     const fileRef = bucket.file(destination);
 
     // Subir el archivo
