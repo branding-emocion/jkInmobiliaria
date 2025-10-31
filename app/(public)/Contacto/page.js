@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import ListProyectos from "../../ListProyectos";
 import { useState } from "react";
+import { toast } from "sonner";
 
 const Contacto = () => {
   const [InputValues, setInputValues] = useState({});
@@ -56,10 +57,10 @@ const Contacto = () => {
                         }
                       ).then((res) => res.json());
                       setLoading(false);
-                      alert(SendMail.body);
+                      toast.success(SendMail.body || "Mensaje enviado correctamente");
                     } catch (error) {
                       console.log(error);
-                      alert("Error al enviar el mensaje");
+                      toast.error("Error al enviar el mensaje");
                     }
                   }}
                   className="space-y-4"

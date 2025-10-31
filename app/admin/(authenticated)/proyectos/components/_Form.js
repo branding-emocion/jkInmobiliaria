@@ -2,8 +2,10 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
 import { compressImage, isValidImage } from "@/lib/imageCompression";
+import { toast } from "sonner";
 
 // Importar partials
 import DescriptionTab from "./partials/_description";
@@ -60,12 +62,12 @@ export default function Form({ mode = "create", projectId = null, onLoadingChang
         if (p.Imagen) setPreviews(prev => ({ ...prev, imagenPrincipal: p.Imagen }));
         if (p.Brochure) setPreviews(prev => ({ ...prev, brochurePDF: p.Brochure }));
       } else {
-        alert("Error al cargar el proyecto");
+        toast.error("Error al cargar el proyecto");
         router.push("/admin/proyectos");
       }
     } catch (error) {
       console.error("Error:", error);
-      alert("Error al cargar el proyecto");
+      toast.error("Error al cargar el proyecto");
       router.push("/admin/proyectos");
     } finally {
       setLoadingData(false);
@@ -101,7 +103,7 @@ export default function Form({ mode = "create", projectId = null, onLoadingChang
     // Validar PDF
     if (fileType === "brochurePDF") {
       if (file.type !== "application/pdf") {
-        alert("Por favor selecciona un archivo PDF");
+        toast.error("Por favor selecciona un archivo PDF");
         return;
       }
       setTempFiles(prev => ({ ...prev, [fileType]: file }));
@@ -118,10 +120,10 @@ export default function Form({ mode = "create", projectId = null, onLoadingChang
         setPreviews(prev => ({ ...prev, [fileType]: URL.createObjectURL(compressedFile) }));
       } catch (error) {
         console.error("Error al comprimir:", error);
-        alert("Error al procesar la imagen");
+        toast.error("Error al procesar la imagen");
       }
     } else {
-      alert("Por favor selecciona una imagen válida");
+      toast.error("Por favor selecciona una imagen válida");
     }
   };
 
@@ -155,7 +157,7 @@ export default function Form({ mode = "create", projectId = null, onLoadingChang
   const handlePlantaImageSelect = async (e, plantaId) => {
     const file = e.target.files?.[0];
     if (!file || !isValidImage(file)) {
-      alert("Por favor selecciona una imagen válida");
+      toast.error("Por favor selecciona una imagen válida");
       return;
     }
 
@@ -169,7 +171,7 @@ export default function Form({ mode = "create", projectId = null, onLoadingChang
       }));
     } catch (error) {
       console.error("Error al comprimir:", error);
-      alert("Error al procesar la imagen");
+      toast.error("Error al procesar la imagen");
     }
   };
 
@@ -211,7 +213,7 @@ export default function Form({ mode = "create", projectId = null, onLoadingChang
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!formData.Name?.trim()) {
-      alert("Por favor ingresa el nombre del proyecto");
+      toast.error("Por favor ingresa el nombre del proyecto");
       return;
     }
 
@@ -254,14 +256,14 @@ export default function Form({ mode = "create", projectId = null, onLoadingChang
       const data = await res.json();
 
       if (data.success) {
-        alert(`✅ Proyecto ${mode === "edit" ? "actualizado" : "creado"} exitosamente`);
+        toast.success(`Proyecto ${mode === "edit" ? "actualizado" : "creado"} exitosamente`);
         router.push("/admin/proyectos");
       } else {
-        alert(`Error: ${data.error}`);
+        toast.error(`Error: ${data.error}`);
       }
     } catch (error) {
       console.error("Error:", error);
-      alert(`Error: ${error.message}`);
+      toast.error(`Error: ${error.message}`);
     } finally {
       setLoading(false);
     }
@@ -279,50 +281,109 @@ export default function Form({ mode = "create", projectId = null, onLoadingChang
   }
 
   return (
-    <form id="proyecto-form" onSubmit={handleSubmit}>
+    <div className="space-y-6">
+      {/* Header Integrado */}
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900">
+            {mode === "edit" ? "Editar Proyecto" : "Nuevo Proyecto"}
+          </h1>
+          <p className="text-sm text-gray-500 mt-1">
+            {mode === "edit" 
+              ? "Actualiza la información del proyecto inmobiliario" 
+              : "Completa la información del proyecto inmobiliario"}
+          </p>
+        </div>
+        <div className="flex items-center gap-3">
+          <Button 
+            type="button" 
+            variant="outline" 
+            onClick={() => router.push("/admin/proyectos")}
+            disabled={loading}
+          >
+            Cancelar
+          </Button>
+          <Button 
+            type="submit" 
+            form="proyecto-form" 
+            disabled={loading}
+            className="bg-blue-600 hover:bg-blue-700"
+          >
+            {loading ? (
+              <>
+                <Loader2 className="w-4 h-4 animate-spin mr-2" />
+                {mode === "edit" ? "Actualizando..." : "Creando..."}
+              </>
+            ) : (
+              mode === "edit" ? "Actualizar Proyecto" : "Crear Proyecto"
+            )}
+          </Button>
+        </div>
+      </div>
+
+      {/* Form */}
+      <form id="proyecto-form" onSubmit={handleSubmit}>
         <Tabs defaultValue="description" className="w-full">
-          <TabsList className="grid w-full grid-cols-3 mb-8">
-            <TabsTrigger value="description">Descripción</TabsTrigger>
-            <TabsTrigger value="plants">Planta Baja</TabsTrigger>
-            <TabsTrigger value="tours">Recorridos 360°</TabsTrigger>
+          <TabsList className="grid w-full grid-cols-3 h-12 bg-gray-100 p-1 rounded-lg">
+            <TabsTrigger 
+              value="description"
+              className="data-[state=active]:bg-white data-[state=active]:shadow-sm"
+            >
+              📝 Descripción
+            </TabsTrigger>
+            <TabsTrigger 
+              value="plants"
+              className="data-[state=active]:bg-white data-[state=active]:shadow-sm"
+            >
+              🏢 Plantas
+            </TabsTrigger>
+            <TabsTrigger 
+              value="tours"
+              className="data-[state=active]:bg-white data-[state=active]:shadow-sm"
+            >
+              🌐 Tours 360°
+            </TabsTrigger>
           </TabsList>
 
-          <TabsContent value="description">
-            <DescriptionTab
-              formData={formData}
-              handleInputChange={handleInputChange}
-              caracteristicas={caracteristicas}
-              nuevaCaracteristica={nuevaCaracteristica}
-              setNuevaCaracteristica={setNuevaCaracteristica}
-              agregarCaracteristica={agregarCaracteristica}
-              eliminarCaracteristica={eliminarCaracteristica}
-              tempFiles={tempFiles}
-              previews={previews}
-              handleFileSelect={handleFileSelect}
-              removeFile={removeFile}
-              mode={mode}
-            />
-          </TabsContent>
+          <div className="mt-6">
+            <TabsContent value="description" className="mt-0">
+              <DescriptionTab
+                formData={formData}
+                handleInputChange={handleInputChange}
+                caracteristicas={caracteristicas}
+                nuevaCaracteristica={nuevaCaracteristica}
+                setNuevaCaracteristica={setNuevaCaracteristica}
+                agregarCaracteristica={agregarCaracteristica}
+                eliminarCaracteristica={eliminarCaracteristica}
+                tempFiles={tempFiles}
+                previews={previews}
+                handleFileSelect={handleFileSelect}
+                removeFile={removeFile}
+                mode={mode}
+              />
+            </TabsContent>
 
-          <TabsContent value="plants">
-            <PlantsTab
-              plantas={formData.Plantas}
-              addPlanta={addPlanta}
-              updatePlanta={updatePlanta}
-              removePlanta={removePlanta}
-              handlePlantaImageSelect={handlePlantaImageSelect}
-            />
-          </TabsContent>
+            <TabsContent value="plants" className="mt-0">
+              <PlantsTab
+                plantas={formData.Plantas}
+                addPlanta={addPlanta}
+                updatePlanta={updatePlanta}
+                removePlanta={removePlanta}
+                handlePlantaImageSelect={handlePlantaImageSelect}
+              />
+            </TabsContent>
 
-          <TabsContent value="tours">
-            <ToursTab
-              recorridos={formData.RecorridosVirtuales}
-              addRecorrido={addRecorrido}
-              updateRecorrido={updateRecorrido}
-              removeRecorrido={removeRecorrido}
-            />
-          </TabsContent>
+            <TabsContent value="tours" className="mt-0">
+              <ToursTab
+                recorridos={formData.RecorridosVirtuales}
+                addRecorrido={addRecorrido}
+                updateRecorrido={updateRecorrido}
+                removeRecorrido={removeRecorrido}
+              />
+            </TabsContent>
+          </div>
         </Tabs>
       </form>
+    </div>
   );
 }

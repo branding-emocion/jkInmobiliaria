@@ -9,12 +9,10 @@ import {
   Trash2,
   Eye,
   Loader2,
-  Home,
-  CheckCircle2,
-  TrendingUp,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { toast } from "sonner";
 
 export default function AdminDashboard() {
   const [proyectos, setProyectos] = useState([]);
@@ -45,128 +43,145 @@ export default function AdminDashboard() {
     }
   };
 
-  const handleDelete = async (id) => {
-    if (!confirm("¿Estás seguro de eliminar este proyecto?")) return;
-
-    try {
-      const response = await fetch(`/api/proyectos/${id}`, {
-        method: "DELETE",
-      });
-
-      const data = await response.json();
-
-      if (data.success) {
-        alert("Proyecto eliminado correctamente");
-        fetchProyectos();
-      } else {
-        alert("Error al eliminar el proyecto");
+  const handleDelete = (id, nombre) => {
+    toast(
+      <div className="flex flex-col gap-3">
+        <div>
+          <p className="font-semibold text-gray-900">¿Eliminar proyecto?</p>
+          <p className="text-sm text-gray-600 mt-1">
+            Se eliminará "{nombre}" permanentemente.
+          </p>
+        </div>
+        <div className="flex gap-2">
+          <button
+            onClick={() => {
+              toast.dismiss();
+              toast.promise(
+                async () => {
+                  const response = await fetch(`/api/proyectos/${id}`, {
+                    method: "DELETE",
+                  });
+                  const data = await response.json();
+                  
+                  if (!data.success) {
+                    throw new Error(data.error || "Error al eliminar el proyecto");
+                  }
+                  
+                  await fetchProyectos();
+                  return data;
+                },
+                {
+                  loading: "Eliminando proyecto...",
+                  success: "Proyecto eliminado correctamente",
+                  error: (err) => err.message || "Error al eliminar el proyecto",
+                }
+              );
+            }}
+            className="flex-1 bg-red-600 hover:bg-red-700 text-white text-sm font-medium px-3 py-1.5 rounded-md transition-colors"
+          >
+            Eliminar
+          </button>
+          <button
+            onClick={() => toast.dismiss()}
+            className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm font-medium px-3 py-1.5 rounded-md transition-colors"
+          >
+            Cancelar
+          </button>
+        </div>
+      </div>,
+      {
+        duration: Infinity,
+        closeButton: false,
       }
-    } catch (error) {
-      console.error("Error deleting proyecto:", error);
-      alert("Error al eliminar el proyecto");
-    }
+    );
   };
-
-  const stats = [
-    {
-      title: "Total Proyectos",
-      value: pagination?.total || 0,
-      icon: Home,
-      textColor: "text-blue-600",
-      bgColor: "bg-blue-50",
-    },
-    {
-      title: "Disponibles",
-      value: proyectos.filter((p) => p.Status === "Disponible").length,
-      icon: CheckCircle2,
-      textColor: "text-green-600",
-      bgColor: "bg-green-50",
-    },
-    {
-      title: "Vendidos",
-      value: proyectos.filter((p) => p.Status === "Vendido").length,
-      icon: TrendingUp,
-      textColor: "text-purple-600",
-      bgColor: "bg-purple-50",
-    },
-  ];
 
   return (
     <>
-        {/* Barra de Control Unificada */}
-        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-5 mb-6">
-          {/* Estadísticas Compactas */}
-          <div className="grid grid-cols-3 gap-4 mb-5 pb-5 border-b border-gray-100">
-            {stats.map((stat, index) => (
-              <div key={index} className="flex items-center gap-3">
-                <div className={`${stat.bgColor} p-2.5 rounded-lg`}>
-                  <stat.icon className={`w-5 h-5 ${stat.textColor}`} />
-                </div>
-                <div>
-                  <p className="text-xs font-medium text-gray-500">
-                    {stat.title}
-                  </p>
-                  <p className="text-2xl font-bold text-gray-900">
-                    {stat.value}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Acciones */}
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-            <div>
-              <h2 className="text-base font-semibold text-gray-900 mb-2">
-                Filtrar Proyectos
-              </h2>
-              <div className="flex flex-wrap gap-2">
-                <Button
-                  onClick={() => { setFilter("Todas"); setCurrentPage(1); }}
-                  variant={filter === "Todas" ? "default" : "outline"}
-                  size="sm"
-                  className={
-                    filter === "Todas"
-                      ? "bg-blue-600 hover:bg-blue-700"
-                      : "hover:bg-blue-50 hover:text-blue-700"
-                  }
-                >
-                  Todas
-                </Button>
-                <Button
-                  onClick={() => { setFilter("Disponible"); setCurrentPage(1); }}
-                  variant={filter === "Disponible" ? "default" : "outline"}
-                  size="sm"
-                  className={
-                    filter === "Disponible"
-                      ? "bg-green-600 hover:bg-green-700"
-                      : "hover:bg-green-50 hover:text-green-700"
-                  }
-                >
-                  Disponibles
-                </Button>
-                <Button
-                  onClick={() => { setFilter("Vendido"); setCurrentPage(1); }}
-                  variant={filter === "Vendido" ? "default" : "outline"}
-                  size="sm"
-                  className={
-                    filter === "Vendido"
-                      ? "bg-purple-600 hover:bg-purple-700"
-                      : "hover:bg-purple-50 hover:text-purple-700"
-                  }
-                >
-                  Vendidos
-                </Button>
-              </div>
-            </div>
-
-            <Link href="/admin/proyectos/nuevo">
-              <Button className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 gap-2 shadow-md hover:shadow-lg transition-all">
-                <Plus className="w-4 h-4" />
-                Nuevo Proyecto
+        {/* Barra de Control */}
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+          {/* Filtros */}
+          <div className="flex items-center gap-3">
+            <h2 className="text-base lg:text-lg font-semibold text-gray-900">
+              Proyectos
+            </h2>
+            <div className="h-6 w-px bg-gray-300"></div>
+            <div className="flex gap-2">
+              <Button
+                onClick={() => { setFilter("Todas"); setCurrentPage(1); }}
+                variant={filter === "Todas" ? "default" : "ghost"}
+                size="sm"
+                className={`h-9 gap-2 ${
+                  filter === "Todas"
+                    ? "bg-blue-600 hover:bg-blue-700"
+                    : "hover:bg-gray-100"
+                }`}
+              >
+                Todas
+                {filter === "Todas" && !loading && pagination?.total !== undefined && (
+                  <span className="bg-white/20 px-2 py-0.5 rounded-full text-xs font-semibold min-w-[24px] text-center">
+                    {pagination.total}
+                  </span>
+                )}
+                {filter === "Todas" && loading && (
+                  <span className="bg-white/20 px-2 py-0.5 rounded-full text-xs font-semibold">
+                    <Loader2 className="w-3 h-3 animate-spin" />
+                  </span>
+                )}
               </Button>
-            </Link>
+              <Button
+                onClick={() => { setFilter("Disponible"); setCurrentPage(1); }}
+                variant={filter === "Disponible" ? "default" : "ghost"}
+                size="sm"
+                className={`h-9 gap-2 ${
+                  filter === "Disponible"
+                    ? "bg-green-600 hover:bg-green-700"
+                    : "hover:bg-gray-100"
+                }`}
+              >
+                Disponibles
+                {filter === "Disponible" && !loading && pagination?.total !== undefined && (
+                  <span className="bg-white/20 px-2 py-0.5 rounded-full text-xs font-semibold min-w-[24px] text-center">
+                    {pagination.total}
+                  </span>
+                )}
+                {filter === "Disponible" && loading && (
+                  <span className="bg-white/20 px-2 py-0.5 rounded-full text-xs font-semibold">
+                    <Loader2 className="w-3 h-3 animate-spin" />
+                  </span>
+                )}
+              </Button>
+              <Button
+                onClick={() => { setFilter("Vendido"); setCurrentPage(1); }}
+                variant={filter === "Vendido" ? "default" : "ghost"}
+                size="sm"
+                className={`h-9 gap-2 ${
+                  filter === "Vendido"
+                    ? "bg-purple-600 hover:bg-purple-700"
+                    : "hover:bg-gray-100"
+                }`}
+              >
+                Vendidos
+                {filter === "Vendido" && !loading && pagination?.total !== undefined && (
+                  <span className="bg-white/20 px-2 py-0.5 rounded-full text-xs font-semibold min-w-[24px] text-center">
+                    {pagination.total}
+                  </span>
+                )}
+                {filter === "Vendido" && loading && (
+                  <span className="bg-white/20 px-2 py-0.5 rounded-full text-xs font-semibold">
+                    <Loader2 className="w-3 h-3 animate-spin" />
+                  </span>
+                )}
+              </Button>
+            </div>
           </div>
+
+          <Link href="/admin/proyectos/nuevo">
+            <Button className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 gap-2 shadow-md hover:shadow-lg transition-all h-9">
+              <Plus className="w-4 h-4" />
+              Nuevo Proyecto
+            </Button>
+          </Link>
         </div>
 
         {/* Projects Grid */}
@@ -207,6 +222,7 @@ export default function AdminDashboard() {
                       src={proyecto.Imagen}
                       alt={proyecto.Name}
                       fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
                       className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   ) : (
@@ -263,7 +279,7 @@ export default function AdminDashboard() {
                     <Button
                       variant="destructive"
                       size="sm"
-                      onClick={() => handleDelete(proyecto.id)}
+                      onClick={() => handleDelete(proyecto.id, proyecto.Name)}
                       className="h-8 px-2 hover:bg-red-600"
                     >
                       <Trash2 className="w-3.5 h-3.5" />

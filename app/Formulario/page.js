@@ -22,6 +22,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import Title from "../Title";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { toast } from "sonner";
 
 const Hompage = () => {
   const [inputValues, setInputValues] = useState({
@@ -62,14 +63,14 @@ const Hompage = () => {
               body: JSON.stringify(inputValues),
             }).then((res) => res.json());
 
-            alert(SendMailData?.message);
+            toast.success(SendMailData?.message || "Formulario enviado correctamente");
 
             // reset form
             setInputValues({});
             e.target.reset();
           } catch (error) {
-            alert(
-              "intente nuevamente si el problema persiste contacta con nosotros"
+            toast.error(
+              "Intente nuevamente, si el problema persiste contáctenos"
             );
           } finally {
             setLoading(false);

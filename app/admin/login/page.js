@@ -64,6 +64,7 @@ export default function AdminLogin() {
                 src="/logo1.jpg"
                 alt="JK Inmobiliaria"
                 fill
+                sizes="80px"
                 className="object-cover"
               />
             </div>
@@ -90,10 +91,11 @@ export default function AdminLogin() {
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="admin@jkinmobiliaria.com"
+                placeholder="correo@ejemplo.com"
                 required
                 disabled={loading}
                 className="h-11"
+                autoComplete="email"
               />
             </div>
 
@@ -106,10 +108,11 @@ export default function AdminLogin() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••"
+                placeholder="Contraseña"
                 required
                 disabled={loading}
                 className="h-11"
+                autoComplete="current-password"
               />
             </div>
 
