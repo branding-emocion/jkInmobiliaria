@@ -3,7 +3,7 @@ function Title({ title, image }) {
   return (
     <section
       style={{
-        backgroundImage: `url("${image}")`,
+        backgroundImage: image ? `url("${image}")` : 'none',
       }}
     >
       <div className="py-7 flex h-full w-full items-center justify-center  mx-auto px-8 lg:w-full bg-black/50">

@@ -180,7 +180,6 @@ const Footer = () => {
       </div>
     </footer>
   );
-  s;
 };
 
 export default Footer;

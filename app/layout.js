@@ -75,11 +75,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="es">
       <body className={inter.className}>
-        <div className="max-w-[1800px] mx-auto ">
-          <MenuPrincipal />
-          {children}
-          <Footer />
-        </div>
+        {children}
       </body>
     </html>
   );

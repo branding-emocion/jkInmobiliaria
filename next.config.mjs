@@ -6,6 +6,10 @@ const nextConfig = {
         protocol: "https",
         hostname: "jkinmobiliaria.com",
       },
+      {
+        protocol: "https",
+        hostname: "storage.googleapis.com",
+      },
     ],
   },
 };

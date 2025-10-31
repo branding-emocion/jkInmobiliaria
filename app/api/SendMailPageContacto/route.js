@@ -5,12 +5,12 @@ export async function POST(req) {
     const { Nombre, Apellidos, Correo, Telefono, DNI } = await req?.json();
 
     const transporter = nodemailer.createTransport({
-      host: "mail.brandingemocion.net",
-      port: 465,
+      host: process.env.SMTP_HOST,
+      port: parseInt(process.env.SMTP_PORT),
       secure: true,
       auth: {
-        user: "notificacion@brandingemocion.net",
-        pass: "noti@2024",
+        user: process.env.SMTP_USER,
+        pass: process.env.SMTP_PASSWORD,
       },
     });
 
