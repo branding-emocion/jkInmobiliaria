@@ -1,18 +1,27 @@
 import { NextResponse } from "next/server";
 import { adminDb } from "@/lib/firebase-admin";
 
-// GET - Obtener proyectos con paginación
+// GET - Obtener proyectos con paginación REAL (mejor práctica de Firestore)
 export async function GET(request) {
   try {
     const { searchParams } = new URL(request.url);
     const status = searchParams.get("status");
-    const page = parseInt(searchParams.get("page") || "1");
     const limit = parseInt(searchParams.get("limit") || "10");
 
-    const proyectosRef = adminDb.collection("proyectos");
-    const snapshot = await proyectosRef.get();
-    let proyectos = [];
+    // ✅ MEJOR PRÁCTICA: Query optimizada con Firestore
+    let query = adminDb
+      .collection("proyectos")
+      .orderBy("createdAt", "desc")
+      .limit(limit);
 
+    // Filtrar por status usando where() de Firestore
+    if (status && status !== "Todas") {
+      query = query.where("Status", "==", status);
+    }
+
+    const snapshot = await query.get();
+    
+    const proyectos = [];
     snapshot.forEach((doc) => {
       proyectos.push({
         id: doc.id,
@@ -20,36 +29,10 @@ export async function GET(request) {
       });
     });
 
-    // Filtrar por status
-    if (status) {
-      proyectos = proyectos.filter(p => p.Status === status);
-    }
-
-    // Ordenar por fecha de creación (más reciente primero)
-    proyectos.sort((a, b) => {
-      const dateA = new Date(a.createdAt || 0);
-      const dateB = new Date(b.createdAt || 0);
-      return dateB - dateA;
-    });
-
-    // Paginación
-    const total = proyectos.length;
-    const totalPages = Math.ceil(total / limit);
-    const startIndex = (page - 1) * limit;
-    const endIndex = startIndex + limit;
-    const paginatedData = proyectos.slice(startIndex, endIndex);
-
     return NextResponse.json({ 
       success: true, 
-      data: paginatedData,
-      pagination: {
-        page,
-        limit,
-        total,
-        totalPages,
-        hasNext: page < totalPages,
-        hasPrev: page > 1
-      }
+      data: proyectos,
+      total: proyectos.length,
     });
   } catch (error) {
     console.error("Error getting proyectos:", error);
@@ -60,7 +43,7 @@ export async function GET(request) {
   }
 }
 
-// POST - Crear un nuevo proyecto
+// POST - Crear un nuevo proyecto (con mejores prácticas)
 export async function POST(request) {
   try {
     const data = await request.json();
@@ -73,10 +56,13 @@ export async function POST(request) {
       );
     }
 
+    // ✅ MEJOR PRÁCTICA: Usar serverTimestamp de Firestore
+    const { Timestamp } = await import('firebase-admin/firestore');
+    
     const proyectoData = {
       ...data,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
+      createdAt: Timestamp.now(),
+      updatedAt: Timestamp.now(),
     };
 
     const docRef = await adminDb.collection("proyectos").add(proyectoData);

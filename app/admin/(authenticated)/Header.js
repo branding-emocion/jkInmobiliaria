@@ -1,5 +1,7 @@
 "use client";
 import { useRouter } from "next/navigation";
+import { signOut } from "firebase/auth";
+import { auth } from "@/lib/firebase";
 import { Button } from "@/components/ui/button";
 import { LogOut, Globe, ExternalLink } from "lucide-react";
 import Image from "next/image";
@@ -8,9 +10,14 @@ import Link from "next/link";
 export default function Header() {
   const router = useRouter();
 
-  const handleLogout = () => {
-    localStorage.removeItem("adminAuthenticated");
-    router.push("/admin/login");
+  const handleLogout = async () => {
+    try {
+      // ✅ Firebase Auth maneja la sesión automáticamente
+      await signOut(auth);
+      router.push("/admin/login");
+    } catch (error) {
+      console.error("Error al cerrar sesión:", error);
+    }
   };
 
   return (

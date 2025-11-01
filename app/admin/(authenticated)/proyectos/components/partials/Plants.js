@@ -30,7 +30,7 @@ export default function PlantsTab({
           type="button" 
           onClick={addPlanta} 
           size="sm" 
-          className="gap-2 bg-blue-600 hover:bg-blue-700 h-9"
+          className="gap-2 bg-blue-600 hover:bg-blue-700 h-9 cursor-pointer"
         >
           <Plus className="w-4 h-4" />
           <span className="hidden sm:inline">Agregar</span>
@@ -54,7 +54,7 @@ export default function PlantsTab({
               type="button" 
               onClick={addPlanta} 
               size="sm" 
-              className="gap-2 bg-blue-600"
+              className="gap-2 bg-blue-600 cursor-pointer"
             >
               <Plus className="w-4 h-4" />
               Agregar Primera Planta
@@ -88,7 +88,7 @@ export default function PlantsTab({
                   variant="ghost"
                   size="sm"
                   onClick={() => removePlanta(planta.id)}
-                  className="text-red-600 hover:text-red-700 hover:bg-red-50 h-8 w-8 p-0"
+                  className="text-red-600 hover:text-red-700 hover:bg-red-50 h-8 w-8 p-0 cursor-pointer"
                 >
                   <Trash2 className="w-4 h-4" />
                 </Button>
@@ -100,7 +100,7 @@ export default function PlantsTab({
                   <div className="relative w-full h-32 lg:h-40 group rounded-lg overflow-hidden">
                     <Image
                       src={planta.imagePreview}
-                      alt="Planta"
+                      alt={`Planta ${planta.name || index + 1}`}
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       className="object-cover"
@@ -109,7 +109,7 @@ export default function PlantsTab({
                       type="button"
                       variant="destructive"
                       size="sm"
-                      className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity h-7 w-7 p-0"
+                      className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity h-7 w-7 p-0 cursor-pointer"
                       onClick={() => {
                         updatePlanta(planta.id, "imageFile", null);
                         updatePlanta(planta.id, "imagePreview", "");
@@ -119,16 +119,29 @@ export default function PlantsTab({
                     </Button>
                   </div>
                 ) : (
-                  <div className="border-2 border-dashed border-gray-300 rounded-lg h-32 lg:h-40 flex flex-col items-center justify-center text-center hover:border-blue-400 transition-colors cursor-pointer bg-gray-50">
-                    <Upload className="w-6 lg:w-8 h-6 lg:h-8 text-gray-400 mb-1.5" />
-                    <p className="text-xs text-gray-500 mb-2">Click para subir</p>
+                  <label 
+                    htmlFor={`planta-image-${planta.id}`}
+                    className="border-2 border-dashed border-gray-300 rounded-lg h-32 lg:h-40 flex flex-col items-center justify-center text-center hover:border-blue-500 hover:bg-blue-50 transition-all cursor-pointer bg-gray-50 group"
+                  >
+                    <div className="flex flex-col items-center">
+                      <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mb-2 group-hover:bg-blue-200 transition-colors">
+                        <Upload className="w-6 h-6 text-blue-600" />
+                      </div>
+                      <p className="text-sm font-medium text-gray-700 mb-0.5">
+                        Click para subir imagen
+                      </p>
+                      <p className="text-xs text-gray-500">
+                        PNG, JPG, WEBP hasta 5MB
+                      </p>
+                    </div>
                     <Input
+                      id={`planta-image-${planta.id}`}
                       type="file"
                       accept="image/*"
                       onChange={(e) => handlePlantaImageSelect(e, planta.id)}
-                      className="max-w-[140px] h-8 text-xs"
+                      className="hidden"
                     />
-                  </div>
+                  </label>
                 )}
               </div>
 
@@ -137,7 +150,7 @@ export default function PlantsTab({
                 <div>
                   <Label className="text-xs lg:text-sm font-medium">Nombre</Label>
                   <Input
-                    value={planta.name}
+                    value={planta.name || ""}
                     onChange={(e) => updatePlanta(planta.id, "name", e.target.value)}
                     placeholder="Tipo A - 101"
                     className="mt-1.5 h-9 text-sm"
@@ -148,7 +161,7 @@ export default function PlantsTab({
                   <Input
                     type="number"
                     step="0.01"
-                    value={planta.size}
+                    value={planta.size || ""}
                     onChange={(e) => updatePlanta(planta.id, "size", e.target.value)}
                     placeholder="56.00"
                     className="mt-1.5 h-9 text-sm"

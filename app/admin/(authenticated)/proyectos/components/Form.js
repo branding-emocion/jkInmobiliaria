@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
@@ -8,9 +8,9 @@ import { compressImage, isValidImage } from "@/lib/imageCompression";
 import { toast } from "sonner";
 
 // Importar partials
-import DescriptionTab from "./partials/_description";
-import PlantsTab from "./partials/_plants";
-import ToursTab from "./partials/_tours";
+import DescriptionTab from "./partials/Description";
+import PlantsTab from "./partials/Plants";
+import ToursTab from "./partials/Tours";
 
 export default function Form({ mode = "create", projectId = null, onLoadingChange }) {
   const router = useRouter();
@@ -33,11 +33,7 @@ export default function Form({ mode = "create", projectId = null, onLoadingChang
   const [previews, setPreviews] = useState({ imagenPrincipal: "", brochurePDF: "" });
 
   // Load Data
-  useEffect(() => {
-    if (mode === "edit" && projectId) fetchProyecto();
-  }, [mode, projectId]);
-
-  const fetchProyecto = async () => {
+  const fetchProyecto = useCallback(async () => {
     try {
       setLoadingData(true);
       const res = await fetch(`/api/proyectos/${projectId}`);
@@ -72,7 +68,11 @@ export default function Form({ mode = "create", projectId = null, onLoadingChang
     } finally {
       setLoadingData(false);
     }
-  };
+  }, [projectId, router]);
+
+  useEffect(() => {
+    if (mode === "edit" && projectId) fetchProyecto();
+  }, [mode, projectId, fetchProyecto]);
 
   // Características
   useEffect(() => {
@@ -94,7 +94,10 @@ export default function Form({ mode = "create", projectId = null, onLoadingChang
   };
 
   // File Handlers
-  const handleInputChange = (field, value) => setFormData(prev => ({ ...prev, [field]: value }));
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
 
   const handleFileSelect = async (e, fileType) => {
     const file = e.target.files?.[0];
@@ -300,6 +303,7 @@ export default function Form({ mode = "create", projectId = null, onLoadingChang
             variant="outline" 
             onClick={() => router.push("/admin/proyectos")}
             disabled={loading}
+            className="cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
           >
             Cancelar
           </Button>
@@ -307,7 +311,7 @@ export default function Form({ mode = "create", projectId = null, onLoadingChang
             type="submit" 
             form="proyecto-form" 
             disabled={loading}
-            className="bg-blue-600 hover:bg-blue-700"
+            className="bg-blue-600 hover:bg-blue-700 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {loading ? (
               <>

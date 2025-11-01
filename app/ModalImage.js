@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 import {
   Dialog,
   DialogContent,
@@ -28,11 +29,12 @@ export function ModalImageSee({ setModalImage, ModalImage }) {
             Imagen {ModalImage.Nombre}
           </DialogTitle>
           <DialogDescription>
-            <div className="w-full mx-auto">
-              <img
+            <div className="w-full mx-auto relative h-[500px]">
+              <Image
                 src={ModalImage.src}
-                className="mx-auto"
-                alt={ModalImage.Nombre}
+                fill
+                className="object-contain"
+                alt={ModalImage.Nombre || "Imagen del proyecto"}
               />
             </div>
           </DialogDescription>

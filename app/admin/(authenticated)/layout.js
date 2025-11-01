@@ -1,20 +1,41 @@
 "use client";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useRouter, usePathname } from "next/navigation";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "@/lib/firebase";
 import { Toaster } from "sonner";
-import Header from "./layouts/Header";
+import Header from "./Header";
 
 export default function AuthenticatedLayout({ children }) {
   const router = useRouter();
   const pathname = usePathname();
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // Verificar autenticación en todas las páginas autenticadas
-    const isAuthenticated = localStorage.getItem("adminAuthenticated");
-    if (isAuthenticated !== "true") {
-      router.push("/admin/login");
-    }
+    // ✅ Firebase Auth maneja automáticamente la sesión
+    // onAuthStateChanged detecta si el usuario está autenticado
+    const unsubscribe = onAuthStateChanged(auth, (user) => {
+      if (!user) {
+        // No hay usuario autenticado, redirigir al login
+        router.push("/admin/login");
+      } else {
+        // Usuario autenticado correctamente
+        setLoading(false);
+      }
+    });
+
+    // Cleanup: cancelar suscripción cuando el componente se desmonte
+    return () => unsubscribe();
   }, [router, pathname]);
+
+  // Mostrar loading mientras verifica la autenticación
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/30 to-gray-50 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/30 to-gray-50">

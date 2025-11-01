@@ -153,10 +153,12 @@ const Footer = () => {
             </div>
 
             <Link href={"/Formulario"}>
-              <img
+              <Image
                 src="/LibroReclamaciones.png"
+                width={200}
+                height={144}
                 className="flex justify-start items-center  w-auto h-36 object-cover"
-                alt="Reclamos"
+                alt="Libro de Reclamaciones"
               />
             </Link>
           </div>

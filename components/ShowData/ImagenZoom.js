@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Image from "next/image";
 
 function ImagenZoom({ src, Info }) {
   const [coords, setCoords] = useState({ x: 0, y: 0 });
@@ -32,11 +33,15 @@ function ImagenZoom({ src, Info }) {
           </div> */}
       </div>
 
-      <img
-        src={src}
-        alt="Producto con zoom"
-        className=" max-w-[441px] max-h-[350px]  object-contain "
-      />
+      <div className="relative max-w-[441px] max-h-[350px]">
+        <Image
+          src={src}
+          alt="Producto con zoom"
+          width={441}
+          height={350}
+          className="max-w-[441px] max-h-[350px] object-contain"
+        />
+      </div>
 
       {showZoom && (
         <div

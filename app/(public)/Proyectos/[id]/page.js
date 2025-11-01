@@ -1,5 +1,6 @@
 import ClientSideProyecto from "./ClienteSide";
 import { Building } from "lucide-react";
+import Link from "next/link";
 
 // Función para obtener proyecto desde Firebase
 async function getProyecto(index) {
@@ -99,7 +100,7 @@ export default async function Proyecto({ params }) {
         <Building className="w-16 h-16 text-gray-400 mb-4" />
         <h1 className="text-2xl font-bold text-gray-700 mb-2">Proyecto no encontrado</h1>
         <p className="text-gray-500 mb-6">El proyecto que buscas no existe o ha sido eliminado</p>
-        <a href="/Proyectos" className="text-blue-600 hover:underline">← Volver a proyectos</a>
+        <Link href="/Proyectos" className="text-blue-600 hover:underline">← Volver a proyectos</Link>
       </div>
     );
   }

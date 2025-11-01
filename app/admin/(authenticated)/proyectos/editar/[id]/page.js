@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useParams } from "next/navigation";
-import Form from "../../components/_Form";
+import Form from "../../components/Form";
 
 export default function EditarProyecto() {
   const params = useParams();

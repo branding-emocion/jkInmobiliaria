@@ -28,7 +28,7 @@ export default function ToursTab({
           type="button" 
           onClick={addRecorrido} 
           size="sm" 
-          className="gap-2 bg-blue-600 hover:bg-blue-700 h-9"
+          className="gap-2 bg-blue-600 hover:bg-blue-700 h-9 cursor-pointer"
         >
           <Plus className="w-4 h-4" />
           <span className="hidden sm:inline">Agregar</span>
@@ -52,7 +52,7 @@ export default function ToursTab({
               type="button" 
               onClick={addRecorrido} 
               size="sm" 
-              className="gap-2 bg-blue-600"
+              className="gap-2 bg-blue-600 cursor-pointer"
             >
               <Plus className="w-4 h-4" />
               Agregar Primer Recorrido
@@ -78,7 +78,7 @@ export default function ToursTab({
                         Título/Departamento
                       </Label>
                       <Input
-                        value={recorrido.dpto}
+                        value={recorrido.dpto || ""}
                         onChange={(e) => updateRecorrido(recorrido.id, "dpto", e.target.value)}
                         placeholder="DEP.101 (TIPO A)"
                         className="mt-1.5 h-9 text-sm"
@@ -90,7 +90,7 @@ export default function ToursTab({
                         URL del Tour 360°
                       </Label>
                       <Input
-                        value={recorrido.url}
+                        value={recorrido.url || ""}
                         onChange={(e) => updateRecorrido(recorrido.id, "url", e.target.value)}
                         placeholder="https://tour.ejemplo.com"
                         className="mt-1.5 h-9 text-sm"
@@ -106,7 +106,7 @@ export default function ToursTab({
                   variant="ghost"
                   size="sm"
                   onClick={() => removeRecorrido(recorrido.id)}
-                  className="text-red-600 hover:text-red-700 hover:bg-red-50 h-9 w-9 p-0 flex-shrink-0 sm:self-end"
+                  className="text-red-600 hover:text-red-700 hover:bg-red-50 h-9 w-9 p-0 flex-shrink-0 sm:self-end cursor-pointer"
                 >
                   <Trash2 className="w-4 h-4" />
                 </Button>
@@ -119,7 +119,7 @@ export default function ToursTab({
                     href={recorrido.url} 
                     target="_blank" 
                     rel="noopener noreferrer"
-                    className="text-xs text-blue-600 hover:text-blue-700 flex items-center gap-1.5 hover:underline"
+                    className="text-xs text-blue-600 hover:text-blue-700 flex items-center gap-1.5 hover:underline cursor-pointer"
                   >
                     <ExternalLink className="w-3 h-3" />
                     <span className="truncate">{recorrido.url}</span>

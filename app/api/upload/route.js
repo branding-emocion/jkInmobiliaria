@@ -1,26 +1,21 @@
 import { NextResponse } from "next/server";
 import { getStorage } from "firebase-admin/storage";
-import { getApps, initializeApp, cert } from "firebase-admin/app";
+import { getApps } from "firebase-admin/app";
 
-// POST - Subir archivos a Firebase Storage organizados por proyecto
+// ✅ MEJOR PRÁCTICA: Subir archivos usando Firebase Storage con manejo optimizado
 export async function POST(request) {
   try {
-    // Inicializar Firebase Admin si no existe
     if (!getApps().length) {
-      initializeApp({
-        credential: cert({
-          projectId: process.env.FIREBASE_ADMIN_PROJECT_ID,
-          clientEmail: process.env.FIREBASE_ADMIN_CLIENT_EMAIL,
-          privateKey: process.env.FIREBASE_ADMIN_PRIVATE_KEY?.replace(/\\n/g, "\n"),
-        }),
-        storageBucket: process.env.FIREBASE_ADMIN_STORAGE_BUCKET,
-      });
+      return NextResponse.json(
+        { success: false, error: "Firebase Admin no inicializado" },
+        { status: 500 }
+      );
     }
 
     const formData = await request.formData();
     const file = formData.get("file");
     const projectName = formData.get("projectName") || "temp";
-    const fileType = formData.get("fileType") || "archivo"; // imagen-principal, meta, brochure, planta
+    const fileType = formData.get("fileType") || "archivo";
 
     if (!file) {
       return NextResponse.json(
@@ -29,11 +24,19 @@ export async function POST(request) {
       );
     }
 
+    // Validar tamaño (10MB máximo)
+    if (file.size > 10 * 1024 * 1024) {
+      return NextResponse.json(
+        { success: false, error: "El archivo excede el tamaño máximo de 10MB" },
+        { status: 400 }
+      );
+    }
+
     // Convertir el archivo a buffer
     const bytes = await file.arrayBuffer();
     const buffer = Buffer.from(bytes);
 
-    // Limpiar nombre del proyecto (quitar espacios y caracteres especiales)
+    // Limpiar nombre del proyecto
     const cleanProjectName = projectName.trim().replace(/[^a-zA-Z0-9]/g, '_');
     
     // Generar nombre único para el archivo
@@ -41,7 +44,7 @@ export async function POST(request) {
     const sanitizedFileName = file.name.replace(/[^a-zA-Z0-9.-]/g, '_');
     const uniqueFileName = `${timestamp}_${sanitizedFileName}`;
 
-    // Organizar por proyecto y tipo (igual que el script de migración)
+    // ✅ MEJOR PRÁCTICA: Organizar archivos por carpetas
     let destination;
     if (fileType === 'planta') {
       destination = `proyectos/${cleanProjectName}/plantas/${uniqueFileName}`;
@@ -50,19 +53,20 @@ export async function POST(request) {
     } else if (fileType === 'meta') {
       destination = `proyectos/${cleanProjectName}/meta/${uniqueFileName}`;
     } else {
-      // imagen-principal o cualquier otro
       destination = `proyectos/${cleanProjectName}/${uniqueFileName}`;
     }
 
     // Obtener referencia al storage
-    const app = getApps()[0];
-    const bucket = getStorage(app).bucket(process.env.FIREBASE_ADMIN_STORAGE_BUCKET);
+    const bucket = getStorage().bucket();
     const fileRef = bucket.file(destination);
 
-    // Subir el archivo
+    // ✅ MEJOR PRÁCTICA: Subir con metadata correcta
     await fileRef.save(buffer, {
       metadata: {
         contentType: file.type,
+        metadata: {
+          firebaseStorageDownloadTokens: crypto.randomUUID(),
+        }
       },
     });
 

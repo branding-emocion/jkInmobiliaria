@@ -40,8 +40,9 @@ export default function DescriptionTab({
           <div>
             <Label className="text-xs lg:text-sm font-medium">Nombre del Proyecto <span className="text-red-500">*</span></Label>
             <Input
+              name="Name"
               value={formData.Name}
-              onChange={(e) => handleInputChange("Name", e.target.value)}
+              onChange={handleInputChange}
               placeholder="Ej: EDIFICIO AURORA"
               required
               className="mt-1.5 h-9 lg:h-10 text-sm"
@@ -51,13 +52,17 @@ export default function DescriptionTab({
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 lg:gap-3">
             <div>
               <Label className="text-xs lg:text-sm font-medium">Estado</Label>
-              <Select value={formData.Status} onValueChange={(value) => handleInputChange("Status", value)}>
+              <Select 
+                value={formData.Status} 
+                onValueChange={(value) => handleInputChange({ target: { name: "Status", value } })}
+              >
                 <SelectTrigger className="mt-1.5 h-9 lg:h-10 text-sm">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="Disponible">Disponible</SelectItem>
                   <SelectItem value="Vendido">Vendido</SelectItem>
+                  <SelectItem value="Agotado">Agotado</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -65,8 +70,9 @@ export default function DescriptionTab({
             <div>
               <Label className="text-xs lg:text-sm font-medium">Tipo</Label>
               <Input
+                name="Type"
                 value={formData.Type}
-                onChange={(e) => handleInputChange("Type", e.target.value)}
+                onChange={handleInputChange}
                 placeholder="Flat, Dúplex"
                 className="mt-1.5 h-9 lg:h-10 text-sm"
               />
@@ -76,8 +82,9 @@ export default function DescriptionTab({
           <div>
             <Label className="text-xs lg:text-sm font-medium">Dirección</Label>
             <Input
+              name="Direction"
               value={formData.Direction}
-              onChange={(e) => handleInputChange("Direction", e.target.value)}
+              onChange={handleInputChange}
               placeholder="Dirección completa"
               className="mt-1.5 h-9 lg:h-10 text-sm"
             />
@@ -110,16 +117,29 @@ export default function DescriptionTab({
             </Button>
           </div>
         ) : (
-          <div className="border-2 border-dashed border-gray-300 rounded-lg h-40 sm:h-48 lg:h-52 flex flex-col items-center justify-center text-center hover:border-blue-400 transition-colors cursor-pointer">
-            <Upload className="w-8 lg:w-10 h-8 lg:h-10 text-gray-400 mb-2" />
-            <p className="text-xs lg:text-sm text-gray-600 mb-2 lg:mb-3">Arrastra o haz click</p>
+          <label 
+            htmlFor="imagen-principal-input"
+            className="border-2 border-dashed border-gray-300 rounded-lg h-40 sm:h-48 lg:h-52 flex flex-col items-center justify-center text-center hover:border-blue-500 hover:bg-blue-50 transition-all cursor-pointer group"
+          >
+            <div className="flex flex-col items-center">
+              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-3 group-hover:bg-blue-200 transition-colors">
+                <Upload className="w-8 h-8 text-blue-600" />
+              </div>
+              <p className="text-sm font-medium text-gray-700 mb-1">
+                Click para subir imagen principal
+              </p>
+              <p className="text-xs text-gray-500">
+                PNG, JPG, WEBP hasta 5MB
+              </p>
+            </div>
             <Input
+              id="imagen-principal-input"
               type="file"
               accept="image/*"
               onChange={(e) => handleFileSelect(e, "imagenPrincipal")}
-              className="max-w-[180px] lg:max-w-[200px] text-xs"
+              className="hidden"
             />
-          </div>
+          </label>
         )}
       </Card>
 
@@ -238,16 +258,29 @@ export default function DescriptionTab({
             </div>
           </div>
         ) : (
-          <div className="border-2 border-dashed border-gray-300 rounded-lg h-40 sm:h-48 lg:h-52 flex flex-col items-center justify-center text-center hover:border-blue-400 transition-colors cursor-pointer">
-            <Upload className="w-8 lg:w-10 h-8 lg:h-10 text-gray-400 mb-2" />
-            <p className="text-xs lg:text-sm text-gray-600 mb-2 lg:mb-3">Arrastra o haz click</p>
+          <label 
+            htmlFor="brochure-pdf-input"
+            className="border-2 border-dashed border-gray-300 rounded-lg h-40 sm:h-48 lg:h-52 flex flex-col items-center justify-center text-center hover:border-blue-500 hover:bg-blue-50 transition-all cursor-pointer group"
+          >
+            <div className="flex flex-col items-center">
+              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mb-3 group-hover:bg-blue-200 transition-colors">
+                <Upload className="w-8 h-8 text-blue-600" />
+              </div>
+              <p className="text-sm font-medium text-gray-700 mb-1">
+                Click para subir brochure
+              </p>
+              <p className="text-xs text-gray-500">
+                PDF hasta 10MB
+              </p>
+            </div>
             <Input
+              id="brochure-pdf-input"
               type="file"
               accept="application/pdf"
               onChange={(e) => handleFileSelect(e, "brochurePDF")}
-              className="max-w-[180px] lg:max-w-[200px] text-xs"
+              className="hidden"
             />
-          </div>
+          </label>
         )}
       </Card>
     </div>

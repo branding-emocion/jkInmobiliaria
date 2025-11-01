@@ -1,6 +1,8 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "@/lib/firebase";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card } from "@/components/ui/card";
@@ -15,13 +17,8 @@ export default function AdminLogin() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  useEffect(() => {
-    // Verificar si ya está autenticado
-    const isAuthenticated = localStorage.getItem("adminAuthenticated");
-    if (isAuthenticated === "true") {
-      router.push("/admin/proyectos");
-    }
-  }, [router]);
+  // ✅ Firebase Auth maneja automáticamente la persistencia
+  // No necesitas useEffect ni localStorage
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -29,24 +26,32 @@ export default function AdminLogin() {
     setLoading(true);
 
     try {
-      const response = await fetch("/api/admin/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
-
-      const data = await response.json();
-
-      if (data.success) {
-        localStorage.setItem("adminAuthenticated", "true");
-        router.push("/admin/proyectos");
-      } else {
-        setError(data.error || "Credenciales incorrectas");
-      }
+      // ✅ Firebase Authentication - persiste automáticamente
+      await signInWithEmailAndPassword(auth, email, password);
+      
+      // Firebase Auth redirige automáticamente vía onAuthStateChanged
+      router.push("/admin/proyectos");
     } catch (error) {
-      setError("Error al iniciar sesión");
+      console.error("Error de autenticación:", error);
+      
+      // Mensajes de error en español
+      switch (error.code) {
+        case "auth/invalid-email":
+          setError("Correo electrónico inválido");
+          break;
+        case "auth/user-disabled":
+          setError("Esta cuenta ha sido deshabilitada");
+          break;
+        case "auth/user-not-found":
+        case "auth/wrong-password":
+          setError("Credenciales incorrectas");
+          break;
+        case "auth/too-many-requests":
+          setError("Demasiados intentos fallidos. Intenta más tarde");
+          break;
+        default:
+          setError("Error al iniciar sesión");
+      }
     } finally {
       setLoading(false);
     }
@@ -94,7 +99,7 @@ export default function AdminLogin() {
                 placeholder="correo@ejemplo.com"
                 required
                 disabled={loading}
-                className="h-11"
+                className="h-11 disabled:opacity-50 disabled:cursor-not-allowed"
                 autoComplete="email"
               />
             </div>
@@ -111,7 +116,7 @@ export default function AdminLogin() {
                 placeholder="Contraseña"
                 required
                 disabled={loading}
-                className="h-11"
+                className="h-11 disabled:opacity-50 disabled:cursor-not-allowed"
                 autoComplete="current-password"
               />
             </div>
@@ -125,7 +130,7 @@ export default function AdminLogin() {
 
             <Button
               type="submit"
-              className="w-full h-11 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold shadow-lg hover:shadow-xl transition-all"
+              className="w-full h-11 bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white font-semibold shadow-lg hover:shadow-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed"
               disabled={loading}
             >
               {loading ? (
@@ -141,8 +146,8 @@ export default function AdminLogin() {
 
           {/* Link al sitio público */}
           <div className="mt-6 pt-6 border-t border-gray-200 text-center">
-            <Link href="/" className="inline-flex items-center gap-2 text-sm text-gray-600 hover:text-blue-600 transition-colors font-medium">
-              <Globe className="w-4 h-4" />
+            <Link href="/" className="inline-flex items-center gap-2 text-sm text-gray-600 hover:text-blue-600 transition-colors font-medium group">
+              <Globe className="w-4 h-4 group-hover:scale-110 transition-transform" />
               Ver sitio web público
             </Link>
           </div>

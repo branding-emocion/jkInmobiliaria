@@ -28,7 +28,7 @@ export async function GET(request, { params }) {
   }
 }
 
-// PUT - Actualizar un proyecto
+// PUT - Actualizar un proyecto (con mejores prácticas)
 export async function PUT(request, { params }) {
   try {
     const { id } = await params;
@@ -44,10 +44,16 @@ export async function PUT(request, { params }) {
       );
     }
 
+    // ✅ MEJOR PRÁCTICA: Usar serverTimestamp de Firestore
+    const { Timestamp, FieldValue } = await import('firebase-admin/firestore');
+    
     const updateData = {
       ...data,
-      updatedAt: new Date().toISOString(),
+      updatedAt: Timestamp.now(),
     };
+
+    // No permitir actualizar createdAt
+    delete updateData.createdAt;
 
     await docRef.update(updateData);
 

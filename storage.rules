@@ -1,0 +1,65 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+    
+    // ====================================
+    // FUNCIONES AUXILIARES
+    // ====================================
+    
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isAdmin() {
+      return isAuthenticated() && 
+             request.auth.token.admin == true;
+    }
+    
+    function isValidSize() {
+      return request.resource.size < 10 * 1024 * 1024; // 10MB
+    }
+    
+    function isImage() {
+      return request.resource.contentType.matches('image/.*');
+    }
+    
+    function isPDF() {
+      return request.resource.contentType == 'application/pdf';
+    }
+    
+    // ====================================
+    // PROYECTOS
+    // ====================================
+    match /proyectos/{proyectoName}/{allPaths=**} {
+      allow read: if true;
+      allow create, update: if isAdmin() && 
+                              isValidSize() && 
+                              (isImage() || isPDF());
+      allow delete: if isAdmin();
+    }
+    
+    // ====================================
+    // BLOG
+    // ====================================
+    match /blog/{allPaths=**} {
+      allow read: if true;
+      allow write: if isAdmin() && isValidSize() && isImage();
+    }
+    
+    // ====================================
+    // SLIDER
+    // ====================================
+    match /slider/{fileName} {
+      allow read: if true;
+      allow write: if isAdmin() && isValidSize() && isImage();
+    }
+    
+    // ====================================
+    // BLOQUEAR TODO LO DEMÁS
+    // ====================================
+    match /{allPaths=**} {
+      allow read, write: if false;
+    }
+  }
+}
