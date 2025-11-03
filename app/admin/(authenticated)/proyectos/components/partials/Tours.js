@@ -106,7 +106,7 @@ export default function ToursTab({
                   variant="ghost"
                   size="sm"
                   onClick={() => removeRecorrido(recorrido.id)}
-                  className="text-red-600 hover:text-red-700 hover:bg-red-50 h-9 w-9 p-0 flex-shrink-0 sm:self-end cursor-pointer"
+                  className="cursor-pointer text-red-600 hover:text-red-700 hover:bg-red-50 h-9 w-9 p-0 flex-shrink-0 sm:self-end"
                 >
                   <Trash2 className="w-4 h-4" />
                 </Button>

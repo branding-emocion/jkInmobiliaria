@@ -62,7 +62,6 @@ export default function Form({ mode = "create", projectId = null, onLoadingChang
         router.push("/admin/proyectos");
       }
     } catch (error) {
-      console.error("Error:", error);
       toast.error("Error al cargar el proyecto");
       router.push("/admin/proyectos");
     } finally {
@@ -118,11 +117,9 @@ export default function Form({ mode = "create", projectId = null, onLoadingChang
     if (fileType === "imagenPrincipal" && isValidImage(file)) {
       try {
         const compressedFile = await compressImage(file, 1200, 0.85);
-        console.log(`📦 Imagen comprimida: ${(file.size / 1024).toFixed(0)}KB → ${(compressedFile.size / 1024).toFixed(0)}KB`);
         setTempFiles(prev => ({ ...prev, [fileType]: compressedFile }));
         setPreviews(prev => ({ ...prev, [fileType]: URL.createObjectURL(compressedFile) }));
       } catch (error) {
-        console.error("Error al comprimir:", error);
         toast.error("Error al procesar la imagen");
       }
     } else {
@@ -166,14 +163,12 @@ export default function Form({ mode = "create", projectId = null, onLoadingChang
 
     try {
       const compressedFile = await compressImage(file, 1200, 0.85);
-      console.log(`📦 Planta comprimida: ${(file.size / 1024).toFixed(0)}KB → ${(compressedFile.size / 1024).toFixed(0)}KB`);
       const previewUrl = URL.createObjectURL(compressedFile);
       setFormData(prev => ({
         ...prev,
         Plantas: prev.Plantas.map(p => p.id === plantaId ? { ...p, imageFile: compressedFile, imagePreview: previewUrl } : p)
       }));
     } catch (error) {
-      console.error("Error al comprimir:", error);
       toast.error("Error al procesar la imagen");
     }
   };
@@ -223,11 +218,13 @@ export default function Form({ mode = "create", projectId = null, onLoadingChang
     setLoading(true);
 
     try {
-      let imagenUrl = previews.imagenPrincipal;
-      let brochureUrl = previews.brochurePDF;
-
-      if (tempFiles.imagenPrincipal) imagenUrl = await uploadFile(tempFiles.imagenPrincipal, "imagen-principal");
-      if (tempFiles.brochurePDF) brochureUrl = await uploadFile(tempFiles.brochurePDF, "brochure");
+      const imagenUrl = tempFiles.imagenPrincipal 
+        ? await uploadFile(tempFiles.imagenPrincipal, "imagen-principal")
+        : previews.imagenPrincipal;
+      
+      const brochureUrl = tempFiles.brochurePDF 
+        ? await uploadFile(tempFiles.brochurePDF, "brochure")
+        : previews.brochurePDF;
 
       const plantasConUrls = await Promise.all(
         formData.Plantas.map(async (p) => {
@@ -265,7 +262,6 @@ export default function Form({ mode = "create", projectId = null, onLoadingChang
         toast.error(`Error: ${data.error}`);
       }
     } catch (error) {
-      console.error("Error:", error);
       toast.error(`Error: ${error.message}`);
     } finally {
       setLoading(false);
@@ -331,19 +327,19 @@ export default function Form({ mode = "create", projectId = null, onLoadingChang
           <TabsList className="grid w-full grid-cols-3 h-12 bg-gray-100 p-1 rounded-lg">
             <TabsTrigger 
               value="description"
-              className="data-[state=active]:bg-white data-[state=active]:shadow-sm"
+              className="cursor-pointer data-[state=active]:bg-white data-[state=active]:shadow-sm"
             >
               📝 Descripción
             </TabsTrigger>
             <TabsTrigger 
               value="plants"
-              className="data-[state=active]:bg-white data-[state=active]:shadow-sm"
+              className="cursor-pointer data-[state=active]:bg-white data-[state=active]:shadow-sm"
             >
               🏢 Plantas
             </TabsTrigger>
             <TabsTrigger 
               value="tours"
-              className="data-[state=active]:bg-white data-[state=active]:shadow-sm"
+              className="cursor-pointer data-[state=active]:bg-white data-[state=active]:shadow-sm"
             >
               🌐 Tours 360°
             </TabsTrigger>

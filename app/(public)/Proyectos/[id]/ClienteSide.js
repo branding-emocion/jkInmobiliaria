@@ -71,7 +71,7 @@ function ClientSideProyecto({ params: { id }, info }) {
                     PlantaBaja: false,
                   });
                 }}
-                className="uppercase active:bg-[#004274]"
+                className="cursor-pointer uppercase active:bg-[#004274]"
               >
                 Descripción
               </Button>
@@ -83,11 +83,11 @@ function ClientSideProyecto({ params: { id }, info }) {
                     PlantaBaja: true,
                   });
                 }}
-                className="uppercase active:bg-[#004274]"
+                className="cursor-pointer uppercase active:bg-[#004274]"
               >
                 Planta Baja
               </Button>
-              {info?.RecorridosVirtuales?.length && (
+              {info?.RecorridosVirtuales?.length > 0 && (
                 <Button
                   onClick={() => {
                     setNavigation({
@@ -96,7 +96,7 @@ function ClientSideProyecto({ params: { id }, info }) {
                       RecorridoVirtual: true,
                     });
                   }}
-                  className="uppercase active:bg-[#004274]"
+                  className="cursor-pointer uppercase active:bg-[#004274]"
                 >
                   Recorridos Virtuales{" "}
                 </Button>
@@ -139,6 +139,7 @@ function ClientSideProyecto({ params: { id }, info }) {
                       href={`https://api.whatsapp.com/send?phone=51981184611&text=Me%20gustar%C3%ADa%20recibir%20mas%20informaci%C3%B3n%20acerca%20del%20proyecto%20${info.Name}%20`}
                       target="_blank"
                       rel="noopener noreferrer"
+                      className="cursor-pointer"
                     >
                       <Image
                         src={
@@ -160,14 +161,15 @@ function ClientSideProyecto({ params: { id }, info }) {
                         href={info.Brochure}
                         target="_blank"
                         rel="noopener noreferrer"
+                        className="cursor-pointer"
                       >
-                        <Button>BROCHURE</Button>
+                        <Button className="cursor-pointer">BROCHURE</Button>
                       </a>
                     )}
                     {id == 1 && (
                       <Button
                         variant="outline"
-                        className="border-[#1a1a1a] text-[#1a1a1a] hover:bg-[#1a1a1a] hover:text-white"
+                        className="cursor-pointer border-[#1a1a1a] text-[#1a1a1a] hover:bg-[#1a1a1a] hover:text-white"
                       >
                         <View className="w-5 h-5 mr-2" />
                         Recorrido Virtual
@@ -222,11 +224,12 @@ function ClientSideProyecto({ params: { id }, info }) {
                     <>
                       <div className="py-1 grid grid-cols-1 md:grid-cols-2 gap-3">
                         {info.RecorridosVirtuales?.map((item) => (
-                          <Button key={item.id}>
+                          <Button key={item.id} className="cursor-pointer">
                             <a
                               href={item.url}
                               target="_blank"
                               rel="noopener noreferrer"
+                              className="cursor-pointer"
                             >
                               {item.dpto}
                             </a>

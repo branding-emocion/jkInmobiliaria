@@ -12,14 +12,10 @@ export default function AuthenticatedLayout({ children }) {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    // ✅ Firebase Auth maneja automáticamente la sesión
-    // onAuthStateChanged detecta si el usuario está autenticado
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (!user) {
-        // No hay usuario autenticado, redirigir al login
         router.push("/admin/login");
       } else {
-        // Usuario autenticado correctamente
         setLoading(false);
       }
     });

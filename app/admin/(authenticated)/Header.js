@@ -6,17 +6,17 @@ import { Button } from "@/components/ui/button";
 import { LogOut, Globe, ExternalLink } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { toast } from "sonner";
 
 export default function Header() {
   const router = useRouter();
 
   const handleLogout = async () => {
     try {
-      // ✅ Firebase Auth maneja la sesión automáticamente
       await signOut(auth);
       router.push("/admin/login");
     } catch (error) {
-      console.error("Error al cerrar sesión:", error);
+      toast.error("Error al cerrar sesión");
     }
   };
 
@@ -49,7 +49,7 @@ export default function Header() {
               <Button
                 variant="ghost"
                 size="sm"
-                className="gap-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 h-9"
+                className="cursor-pointer gap-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 h-9"
               >
                 <Globe className="w-4 h-4" />
                 <span className="hidden sm:inline text-sm">Ver Sitio</span>
@@ -63,7 +63,7 @@ export default function Header() {
               onClick={handleLogout}
               variant="ghost"
               size="sm"
-              className="gap-2 text-gray-600 hover:text-red-600 hover:bg-red-50 h-9"
+              className="cursor-pointer gap-2 text-gray-600 hover:text-red-600 hover:bg-red-50 h-9"
             >
               <LogOut className="w-4 h-4" />
               <span className="hidden md:inline text-sm">Salir</span>

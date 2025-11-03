@@ -96,7 +96,7 @@ const MenuPrincipal = () => {
           {/* Escudo Logo "inicio" */}
 
           <span className="text-3xl cursor-pointer mx-2 md:hidden block text-white">
-            <button name="Menu" onClick={() => setIsOpen(!isOpen)}>
+            <button name="Menu" onClick={() => setIsOpen(!isOpen)} className="cursor-pointer">
               <svg
                 className="h-10 w-10 text-white"
                 xmlns="http://www.w3.org/2000/svg"
@@ -157,7 +157,7 @@ const MenuPrincipal = () => {
               <button
                 name="Menu"
                 type="button"
-                className=" hover:opacity-40 hover:text-white p-4 flex items-center uppercase md:text-base text-base font-bold"
+                className="cursor-pointer hover:opacity-40 hover:text-white p-4 flex items-center uppercase md:text-base text-base font-bold"
               >
                 atención al cliente
                 <BiSolidDownArrow

@@ -27,7 +27,7 @@ export default function DeleteButton({ id, nombre }) {
                 
                 if (data.success) {
                   toast.success("Proyecto eliminado correctamente");
-                  router.refresh(); // ✅ Refrescar Server Component
+                  router.refresh();
                 } else {
                   toast.error(data.error || "Error al eliminar");
                 }
@@ -35,13 +35,13 @@ export default function DeleteButton({ id, nombre }) {
                 toast.error("Error al eliminar el proyecto");
               }
             }}
-            className="flex-1 bg-red-600 hover:bg-red-700 text-white text-sm font-medium px-3 py-1.5 rounded-md transition-colors"
+            className="cursor-pointer flex-1 bg-red-600 hover:bg-red-700 text-white text-sm font-medium px-3 py-1.5 rounded-md transition-colors"
           >
             Eliminar
           </button>
           <button
             onClick={() => toast.dismiss()}
-            className="flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm font-medium px-3 py-1.5 rounded-md transition-colors"
+            className="cursor-pointer flex-1 bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm font-medium px-3 py-1.5 rounded-md transition-colors"
           >
             Cancelar
           </button>
@@ -56,7 +56,7 @@ export default function DeleteButton({ id, nombre }) {
       variant="destructive"
       size="sm"
       onClick={handleDelete}
-      className="h-8 px-2 hover:bg-red-600"
+      className="cursor-pointer h-8 px-2 hover:bg-red-600"
     >
       <Trash2 className="w-3.5 h-3.5" />
     </Button>

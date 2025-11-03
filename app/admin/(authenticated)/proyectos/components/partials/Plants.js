@@ -88,7 +88,7 @@ export default function PlantsTab({
                   variant="ghost"
                   size="sm"
                   onClick={() => removePlanta(planta.id)}
-                  className="text-red-600 hover:text-red-700 hover:bg-red-50 h-8 w-8 p-0 cursor-pointer"
+                  className="cursor-pointer text-red-600 hover:text-red-700 hover:bg-red-50 h-8 w-8 p-0"
                 >
                   <Trash2 className="w-4 h-4" />
                 </Button>
@@ -109,7 +109,7 @@ export default function PlantsTab({
                       type="button"
                       variant="destructive"
                       size="sm"
-                      className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity h-7 w-7 p-0 cursor-pointer"
+                      className="cursor-pointer absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity h-7 w-7 p-0"
                       onClick={() => {
                         updatePlanta(planta.id, "imageFile", null);
                         updatePlanta(planta.id, "imagePreview", "");

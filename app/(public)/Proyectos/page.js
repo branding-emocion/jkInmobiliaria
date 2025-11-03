@@ -50,7 +50,7 @@ const Proyectos = () => {
                 e.preventDefault();
                 setData(allProyectos);
               }}
-              className="focus:bg-white focus:text-black bg-[#001a56]"
+              className="cursor-pointer focus:bg-white focus:text-black bg-[#001a56]"
             >
               TODAS
             </Button>
@@ -63,7 +63,7 @@ const Proyectos = () => {
 
                 setData(info);
               }}
-              className="focus:bg-white focus:text-black bg-[#001a56]"
+              className="cursor-pointer focus:bg-white focus:text-black bg-[#001a56]"
             >
               DISPONIBLE
             </Button>
@@ -76,7 +76,7 @@ const Proyectos = () => {
 
                 setData(info);
               }}
-              className="focus:bg-white focus:text-black bg-[#001a56]"
+              className="cursor-pointer focus:bg-white focus:text-black bg-[#001a56]"
             >
               VENDIDO
             </Button>
@@ -85,7 +85,7 @@ const Proyectos = () => {
           {loading ? (
             <div className="flex flex-col justify-center items-center h-64 pt-4">
               <Loader2 className="w-12 h-12 animate-spin text-[#001a56] mb-4" />
-              <p className="text-gray-600">Cargando proyectos desde Firebase...</p>
+              <p className="text-gray-600">Cargando proyectos...</p>
             </div>
           ) : error ? (
             <div className="flex flex-col justify-center items-center h-64 pt-4">
@@ -94,7 +94,7 @@ const Proyectos = () => {
               <p className="text-gray-500 text-sm mb-4">{error}</p>
               <Button 
                 onClick={() => window.location.reload()} 
-                className="bg-[#001a56]"
+                className="cursor-pointer bg-[#001a56]"
               >
                 Reintentar
               </Button>
@@ -153,7 +153,7 @@ const Proyectos = () => {
 
                       <div className="mt-2   ">
                         <div className="flex justify-center gap-x-2">
-                          <Button className="bg-[#001a56] text-white hover:scale-105 hover:bg-[#001a56] hover:text-white">
+                          <Button className="cursor-pointer bg-[#001a56] text-white hover:scale-105 hover:bg-[#001a56] hover:text-white">
                             Detalles
                           </Button>
                         </div>

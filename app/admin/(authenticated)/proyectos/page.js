@@ -1,4 +1,3 @@
-// ✅ SERVER COMPONENT (Sin "use client")
 import { adminDb } from "@/lib/firebase-admin";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -7,8 +6,7 @@ import Image from "next/image";
 import Link from "next/link";
 import DeleteButton from "./DeleteButton";
 
-// ✅ Función async para obtener datos en el servidor
-async function getProyectos(filter = "Todas") {
+async function getProyectos(filter) {
   try {
     let query = adminDb
       .collection("proyectos")
@@ -31,13 +29,9 @@ async function getProyectos(filter = "Todas") {
   }
 }
 
-// ✅ Server Component (async)
 export default async function AdminDashboard({ searchParams }) {
-  // ✅ Next.js 15: searchParams es una Promise, hay que hacer await
   const params = await searchParams;
   const filter = params?.filter || "Todas";
-  
-  // ✅ Consultar directamente en el servidor (NO fetch, NO useState, NO useEffect)
   const proyectos = await getProyectos(filter);
 
   const filters = [
@@ -62,7 +56,7 @@ export default async function AdminDashboard({ searchParams }) {
                 <Button
                   variant={filter === f.value ? "default" : "ghost"}
                   size="sm"
-                  className={`h-9 gap-2 ${
+                  className={`cursor-pointer h-9 gap-2 ${
                     filter === f.value
                       ? f.color === "green"
                         ? "bg-green-600 hover:bg-green-700"
@@ -87,7 +81,7 @@ export default async function AdminDashboard({ searchParams }) {
         </div>
 
         <Link href="/admin/proyectos/nuevo">
-          <Button className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 gap-2 shadow-md hover:shadow-lg transition-all h-9">
+          <Button className="cursor-pointer bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 gap-2 shadow-md hover:shadow-lg transition-all h-9">
             <Plus className="w-4 h-4" />
             Nuevo Proyecto
           </Button>
@@ -109,7 +103,7 @@ export default async function AdminDashboard({ searchParams }) {
               : `No hay proyectos con el estado "${filter}"`}
           </p>
           <Link href="/admin/proyectos/nuevo">
-            <Button className="bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 shadow-md">
+            <Button className="cursor-pointer bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 shadow-md">
               Crear Proyecto
             </Button>
           </Link>
@@ -162,7 +156,7 @@ export default async function AdminDashboard({ searchParams }) {
                     <Button
                       variant="outline"
                       size="sm"
-                      className="w-full gap-1 text-xs h-8 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-300"
+                      className="cursor-pointer w-full gap-1 text-xs h-8 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-300"
                     >
                       <Eye className="w-3.5 h-3.5" />
                       Ver
@@ -171,7 +165,7 @@ export default async function AdminDashboard({ searchParams }) {
                   <Link href={`/admin/proyectos/editar/${proyecto.id}`} className="flex-1">
                     <Button
                       size="sm"
-                      className="w-full gap-1 text-xs h-8 bg-blue-600 hover:bg-blue-700"
+                      className="cursor-pointer w-full gap-1 text-xs h-8 bg-blue-600 hover:bg-blue-700"
                     >
                       <Edit className="w-3.5 h-3.5" />
                       Editar

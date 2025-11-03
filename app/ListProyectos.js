@@ -172,7 +172,7 @@ const ListProyectos = () => {
                     </p>
                   )}
                   
-                  <Button className="bg-white text-[#001a56] hover:bg-gray-100 font-semibold text-sm py-2 px-4">
+                  <Button className="cursor-pointer bg-white text-[#001a56] hover:bg-gray-100 font-semibold text-sm py-2 px-4">
                     Ver Detalles
                   </Button>
                 </div>
@@ -185,7 +185,7 @@ const ListProyectos = () => {
             <>
               <button
                 onClick={handlePrev}
-                className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-[#001a56] rounded-full p-2 shadow-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"
+                className="cursor-pointer absolute left-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-[#001a56] rounded-full p-2 shadow-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"
                 aria-label="Anterior"
               >
                 <ChevronLeft className="w-6 h-6" />
@@ -193,7 +193,7 @@ const ListProyectos = () => {
               
               <button
                 onClick={handleNext}
-                className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-[#001a56] rounded-full p-2 shadow-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"
+                className="cursor-pointer absolute right-2 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white text-[#001a56] rounded-full p-2 shadow-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 z-10"
                 aria-label="Siguiente"
               >
                 <ChevronRight className="w-6 h-6" />

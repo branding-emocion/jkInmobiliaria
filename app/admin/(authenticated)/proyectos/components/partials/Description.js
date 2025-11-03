@@ -45,24 +45,25 @@ export default function DescriptionTab({
               onChange={handleInputChange}
               placeholder="Ej: EDIFICIO AURORA"
               required
+              minLength={3}
               className="mt-1.5 h-9 lg:h-10 text-sm"
             />
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 lg:gap-3">
             <div>
-              <Label className="text-xs lg:text-sm font-medium">Estado</Label>
+              <Label className="text-xs lg:text-sm font-medium">Estado <span className="text-red-500">*</span></Label>
               <Select 
                 value={formData.Status} 
                 onValueChange={(value) => handleInputChange({ target: { name: "Status", value } })}
+                required
               >
-                <SelectTrigger className="mt-1.5 h-9 lg:h-10 text-sm">
+                <SelectTrigger className="cursor-pointer mt-1.5 h-9 lg:h-10 text-sm">
                   <SelectValue />
                 </SelectTrigger>
                 <SelectContent>
                   <SelectItem value="Disponible">Disponible</SelectItem>
                   <SelectItem value="Vendido">Vendido</SelectItem>
-                  <SelectItem value="Agotado">Agotado</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -110,7 +111,7 @@ export default function DescriptionTab({
               type="button"
               variant="destructive"
               size="sm"
-              className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity h-8 w-8 p-0"
+              className="cursor-pointer absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity h-8 w-8 p-0"
               onClick={() => removeFile("imagenPrincipal")}
             >
               <X className="w-4 h-4" />
@@ -167,14 +168,14 @@ export default function DescriptionTab({
             type="button" 
             onClick={agregarCaracteristica} 
             size="sm" 
-            className="bg-blue-600 h-9 px-2.5 lg:px-3"
+            className="cursor-pointer bg-blue-600 h-9 px-2.5 lg:px-3"
           >
             <Plus className="w-4 h-4" />
           </Button>
         </div>
 
         {caracteristicas.length > 0 ? (
-          <>
+          <div>
             <style jsx>{`
               .custom-scrollbar::-webkit-scrollbar {
                 width: 8px;
@@ -207,7 +208,7 @@ export default function DescriptionTab({
                       variant="ghost"
                       size="sm"
                       onClick={() => eliminarCaracteristica(index)}
-                      className="text-red-600 h-6 w-6 lg:h-7 lg:w-7 p-0 flex-shrink-0"
+                      className="text-red-600 h-6 w-6 lg:h-7 lg:w-7 p-0 flex-shrink-0 cursor-pointer"
                     >
                       <X className="w-3.5 h-3.5" />
                     </Button>
@@ -215,7 +216,7 @@ export default function DescriptionTab({
                 ))}
               </ul>
             </div>
-          </>
+          </div>
         ) : (
           <div className="flex-1 flex items-center justify-center bg-gray-50 border border-dashed rounded-lg min-h-[100px]">
             <div className="text-center py-4 lg:py-6">
@@ -250,7 +251,7 @@ export default function DescriptionTab({
                 variant="outline" 
                 size="sm" 
                 onClick={() => removeFile("brochurePDF")}
-                className="text-red-600 border-red-200 hover:bg-red-50"
+                className="cursor-pointer text-red-600 border-red-200 hover:bg-red-50"
               >
                 <X className="w-4 h-4 mr-1" />
                 Eliminar

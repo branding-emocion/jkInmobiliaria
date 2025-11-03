@@ -17,24 +17,15 @@ export default function AdminLogin() {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
-  // ✅ Firebase Auth maneja automáticamente la persistencia
-  // No necesitas useEffect ni localStorage
-
   const handleLogin = async (e) => {
     e.preventDefault();
     setError("");
     setLoading(true);
 
     try {
-      // ✅ Firebase Authentication - persiste automáticamente
       await signInWithEmailAndPassword(auth, email, password);
-      
-      // Firebase Auth redirige automáticamente vía onAuthStateChanged
       router.push("/admin/proyectos");
     } catch (error) {
-      console.error("Error de autenticación:", error);
-      
-      // Mensajes de error en español
       switch (error.code) {
         case "auth/invalid-email":
           setError("Correo electrónico inválido");

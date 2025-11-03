@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { adminDb } from "@/lib/firebase-admin";
 
-// GET - Obtener un proyecto por ID
 export async function GET(request, { params }) {
   try {
     const { id } = await params;
@@ -20,7 +19,6 @@ export async function GET(request, { params }) {
       data: { id: doc.id, ...doc.data() },
     });
   } catch (error) {
-    console.error("Error getting proyecto:", error);
     return NextResponse.json(
       { success: false, error: error.message },
       { status: 500 }
@@ -28,7 +26,6 @@ export async function GET(request, { params }) {
   }
 }
 
-// PUT - Actualizar un proyecto (con mejores prácticas)
 export async function PUT(request, { params }) {
   try {
     const { id } = await params;
@@ -44,15 +41,13 @@ export async function PUT(request, { params }) {
       );
     }
 
-    // ✅ MEJOR PRÁCTICA: Usar serverTimestamp de Firestore
-    const { Timestamp, FieldValue } = await import('firebase-admin/firestore');
+    const { FieldValue } = await import('firebase-admin/firestore');
     
     const updateData = {
       ...data,
-      updatedAt: Timestamp.now(),
+      updatedAt: FieldValue.serverTimestamp(),
     };
 
-    // No permitir actualizar createdAt
     delete updateData.createdAt;
 
     await docRef.update(updateData);
@@ -62,7 +57,6 @@ export async function PUT(request, { params }) {
       data: { id, ...updateData },
     });
   } catch (error) {
-    console.error("Error updating proyecto:", error);
     return NextResponse.json(
       { success: false, error: error.message },
       { status: 500 }
@@ -70,7 +64,6 @@ export async function PUT(request, { params }) {
   }
 }
 
-// DELETE - Eliminar un proyecto
 export async function DELETE(request, { params }) {
   try {
     const { id } = await params;
@@ -84,14 +77,32 @@ export async function DELETE(request, { params }) {
       );
     }
 
+    const proyectoData = doc.data();
+
+    const { adminStorage } = await import("@/lib/firebase-admin");
+    const bucket = adminStorage.bucket();
+
+    const sanitizedProjectName = proyectoData.Name.replace(/[^a-zA-Z0-9]/g, "-").toLowerCase();
+    const projectFolder = `proyectos/${sanitizedProjectName}/`;
+
+    try {
+      const [files] = await bucket.getFiles({ prefix: projectFolder });
+      
+      if (files.length > 0) {
+        await Promise.all(
+          files.map(file => file.delete().catch(() => {}))
+        );
+      }
+    } catch (storageError) {
+    }
+
     await docRef.delete();
 
     return NextResponse.json({
       success: true,
-      message: "Proyecto eliminado correctamente",
+      message: "Proyecto y archivos eliminados correctamente",
     });
   } catch (error) {
-    console.error("Error deleting proyecto:", error);
     return NextResponse.json(
       { success: false, error: error.message },
       { status: 500 }

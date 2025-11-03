@@ -14,7 +14,6 @@ export async function POST(request) {
     },
   });
 
-  // Mapeo dinámico de las filas de la tabla
   const generateTableRows = (data) =>
     Object.entries(data)
       .map(
@@ -25,14 +24,12 @@ export async function POST(request) {
         </tr>
       `
       )
-      .join(""); // Join para unir todas las filas en un solo string
+      .join("");
 
   const mailOptions = {
     from: '"Reclamos" <notificacion@brandingemocion.net>',
-    to: `clientes@jkinversiones.com,${data?.email}`, // Enviar a la empresa y al cliente
-    subject: `Reclamo recibido - Pedido ${data?.nombres || "N/A"} ${
-      data?.apellidos || "N/A"
-    }`,
+    to: `clientes@jkinversiones.com,${data?.email}`,
+    subject: `Reclamo recibido - Pedido ${data?.nombres || "N/A"} ${data?.apellidos || "N/A"}`,
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: auto; border: 1px solid #ccc; padding: 20px; border-radius: 10px; background-color: #f9f9f9;">
         <h2 style="color: #4CAF50; text-align: center;">Formulario de Reclamos</h2>
@@ -40,9 +37,7 @@ export async function POST(request) {
           Hemos recibido su reclamo y lo estamos procesando. A continuación, los detalles de su solicitud:
         </p>
         <table style="width: 100%; border-collapse: collapse; margin-top: 20px;">
-          ${generateTableRows(
-            data
-          )}  <!-- Aquí se insertan las filas generadas -->
+          ${generateTableRows(data)}
         </table>
         <p style="text-align: center; color: #555; margin-top: 20px;">
           Nos pondremos en contacto con usted en un plazo máximo de 48 horas para resolver su queja.
@@ -54,16 +49,15 @@ export async function POST(request) {
     `,
   };
 
-  console.log("mailOptions", mailOptions);
-
   try {
     await transporter.sendMail(mailOptions);
-    return NextResponse.json({ message: "Reclamo enviado con éxito" });
-  } catch (error) {
-    console.log("error", error);
-
     return NextResponse.json(
-      { message: "Error al enviar el reclamo", error },
+      { message: "Reclamo enviado con éxito" },
+      { status: 200 }
+    );
+  } catch (error) {
+    return NextResponse.json(
+      { success: false, message: "Error al enviar el correo" },
       { status: 500 }
     );
   }
