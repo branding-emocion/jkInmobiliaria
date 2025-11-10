@@ -830,4 +830,104 @@ export const DataProyectos = [
 
     Type: "Duplex, Flat",
   },
+  {
+  Id: 12,
+  Name: "HORIZON 585",
+  Status: "Disponible",
+  Imagen: "/HorizonImg.png",
+  Meta: "/HorizonImg.png", 
+  Brochure: "/brochure/HORIZON.pdf",
+  Direction: "Jirón Daniel Carrión 585, Magdalena del Mar, Lima",
+  Description: `<ul>
+    <li>12 exclusivos departamentos</li>
+    <li>2, 3 y 4 dormitorios</li>
+    <li>Edificio inteligente</li>
+    <li>Desde 83 m² hasta 120 m²</li>
+    <li>Tableros de cuarzo</li>
+    <li>Cocina equipada</li>
+    <li>Closets completos</li>
+    <li>Enchapes en tendencia</li>
+    <li>Ascensor</li>
+    <li>Cristales enmarcados</li>
+  </ul>`,
+  RecorridosVirtuales: [
+    {
+      id: 1,
+      dpto: "DEP.101 (TIPO A - FLAT)",
+      url: "",
+    },
+    {
+      id: 2,
+      dpto: "DEP.201 (TIPO B - FLAT)",
+      url: "",
+    },
+    {
+      id: 3,
+      dpto: "DEP.301 (TIPO C - FLAT)",
+      url: "",
+    },
+    {
+      id: 4,
+      dpto: "DEP.401 (TIPO D - DUPLEX)",
+      url: "",
+    },
+    {
+      id: 5,
+      dpto: "DEP.501 (TIPO E - TRIPLEX)",
+      url: "",
+    },
+  ],
+  Plantas: [
+    {
+      id: 1,
+      name: "Flat Tipo A - 101",
+      size: 91.90,
+      image: "/Planta/Horizon/A101.png",
+    },
+    {
+      id: 2,
+      name: "Flat Tipo B - 102",
+      size: 111.33,
+      image: "/Planta/Horizon/B201.png",
+    },
+    {
+      id: 3,
+      name: "Flat Tipo C - 201 - 301 - 401",
+      size: 90.14,
+      image: "/Planta/Horizon/C301.png",
+    },
+    {
+      id: 4,
+      name: "Flat Tipo D - 203 - 302 - 403",
+      size: 83.38,
+      image: "/Planta/Horizon/C203.png",
+    },
+    {
+      id: 5,
+      name: "Duplex Tipo E - 202",
+      size: 87.76,
+      image: "/Planta/Horizon/D401.png",
+    },
+    {
+      id: 6,
+      name: "Triplex Tipo F - 402",
+      size: 128.92,
+      image: "/Planta/Horizon/F402.png",
+    },
+    {
+      id: 7,
+      name: "Duplex Tipo F - 501",
+      size: 180.59,
+      image: "/Planta/Horizon/D501.png",
+    },
+        {
+      id: 7,
+      name: "Duplex Tipo G - 521",
+      size: 163.52,
+      image: "/Planta/Horizon/D502.png",
+    },
+  ],
+  Type: "Flat, Duplex, Triplex",
+},
+
 ];
