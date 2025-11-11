@@ -2,7 +2,6 @@ import ClientSideProyecto from "./ClienteSide";
 import { Building } from "lucide-react";
 import Link from "next/link";
 
-// ✅ Función para obtener un proyecto desde la API /api/proyectos/[id]
 async function getProyecto(id) {
   try {
     const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
@@ -27,12 +26,11 @@ async function getProyecto(id) {
   }
 }
 
-// ✅ Metadatos dinámicos para SEO y redes sociales
 export async function generateMetadata({ params }, parent) {
+  const { id } = await params; // 👈 se “espera” el params
   const parentMetadata = await parent;
   const previousImages = parentMetadata?.openGraph?.images || [];
 
-  const { id } = params;
   const info = await getProyecto(id);
 
   if (!info) {
@@ -46,9 +44,8 @@ export async function generateMetadata({ params }, parent) {
     ? info.Description.replace(/<[^>]*>/g, "").trim()
     : "";
 
-  const baseUrl = "https://www.jkinmobiliaria.com";
+  const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "https://www.jkinmobiliaria.com";
 
-  // ✅ URL de imagen para OG/Twitter
   let imageUrl = "https://jkinmobiliaria.com/Metajk.png";
   if (info.Meta) {
     imageUrl = info.Meta.startsWith("http")
@@ -61,9 +58,8 @@ export async function generateMetadata({ params }, parent) {
   }
 
   return {
-    title: `${info.Name}`,
+    title: `${info.Name} - JK Inmobiliaria`,
     description: cleanDescription || `Proyecto inmobiliario ${info.Name}`,
-
     openGraph: {
       title: `${info.Name} - JK Inmobiliaria`,
       description: cleanDescription || `Proyecto inmobiliario ${info.Name}`,
@@ -77,23 +73,20 @@ export async function generateMetadata({ params }, parent) {
         },
       ],
     },
-
     twitter: {
       card: "summary_large_image",
       title: `${info.Name} - JK Inmobiliaria`,
       description: cleanDescription || `Proyecto inmobiliario ${info.Name}`,
       images: [imageUrl],
     },
-
     alternates: {
       canonical: `${baseUrl}/Proyectos/${id}`,
     },
   };
 }
 
-// ✅ Componente de página (Server Component)
 export default async function Proyecto({ params }) {
-  const { id } = params;
+  const { id } = await params; // 👈 necesario en Next 15
   const info = await getProyecto(id);
 
   if (!info) {
