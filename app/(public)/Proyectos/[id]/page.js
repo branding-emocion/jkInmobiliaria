@@ -2,39 +2,43 @@ import ClientSideProyecto from "./ClienteSide";
 import { Building } from "lucide-react";
 import Link from "next/link";
 
-// Función para obtener proyecto desde Firebase
-async function getProyecto(index) {
+// ✅ Función para obtener un proyecto desde la API /api/proyectos/[id]
+async function getProyecto(id) {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/api/proyectos`, {
-      cache: 'no-store'
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+    const res = await fetch(`${baseUrl}/api/proyectos/${id}`, {
+      cache: "no-store",
     });
-    const data = await res.json();
-    
-    if (data.success && data.data && data.data[index]) {
-      return data.data[index];
+
+    if (!res.ok) {
+      console.error("Error al obtener proyecto:", res.status);
+      return null;
     }
+
+    const data = await res.json();
+    if (data.success && data.data) {
+      return data.data;
+    }
+
     return null;
   } catch (error) {
-    console.error('Error fetching proyecto:', error);
+    console.error("Error fetching proyecto:", error);
     return null;
   }
 }
 
-// Función para generar metadatos para redes sociales
+// ✅ Metadatos dinámicos para SEO y redes sociales
 export async function generateMetadata({ params }, parent) {
-  // Obtener los metadatos del padre
   const parentMetadata = await parent;
-  const previousImages = (await parent).openGraph?.images || [];
+  const previousImages = parentMetadata?.openGraph?.images || [];
 
-  console.log("previousImages:", previousImages);
-
-  const { id } = await params;
+  const { id } = params;
   const info = await getProyecto(id);
 
   if (!info) {
     return {
       title: "Proyecto no encontrado",
-      description: "No se encontró información del proyecto",
+      description: "No se encontró información del proyecto.",
     };
   }
 
@@ -42,24 +46,20 @@ export async function generateMetadata({ params }, parent) {
     ? info.Description.replace(/<[^>]*>/g, "").trim()
     : "";
 
-  // URL base ya está definida en el layout principal con metadataBase
   const baseUrl = "https://www.jkinmobiliaria.com";
 
-  // URL de la imagen para compartir en redes sociales
-  let imageUrl;
+  // ✅ URL de imagen para OG/Twitter
+  let imageUrl = "https://jkinmobiliaria.com/Metajk.png";
   if (info.Meta) {
     imageUrl = info.Meta.startsWith("http")
       ? info.Meta
-      : `${info.Meta.startsWith("/") ? info.Meta : `/${info.Meta}`}`;
+      : `${baseUrl}${info.Meta.startsWith("/") ? info.Meta : `/${info.Meta}`}`;
   } else if (info.Imagen) {
     imageUrl = info.Imagen.startsWith("http")
       ? info.Imagen
-      : `${info.Imagen.startsWith("/") ? info.Imagen : `/${info.Imagen}`}`;
-  } else {
-    imageUrl = "https://jkinmobiliaria.com/Metajk.png"; // Imagen por defecto
+      : `${baseUrl}${info.Imagen.startsWith("/") ? info.Imagen : `/${info.Imagen}`}`;
   }
 
-  // Metadatos específicos para esta página, extendiendo los del padre
   return {
     title: `${info.Name}`,
     description: cleanDescription || `Proyecto inmobiliario ${info.Name}`,
@@ -67,10 +67,11 @@ export async function generateMetadata({ params }, parent) {
     openGraph: {
       title: `${info.Name} - JK Inmobiliaria`,
       description: cleanDescription || `Proyecto inmobiliario ${info.Name}`,
-      url: `${baseUrl}`,
+      url: `${baseUrl}/Proyectos/${id}`,
       images: [
+        ...previousImages,
         {
-          url: `${imageUrl}`, // Must be an absolute URL
+          url: imageUrl,
           width: 800,
           height: 600,
         },
@@ -78,9 +79,10 @@ export async function generateMetadata({ params }, parent) {
     },
 
     twitter: {
+      card: "summary_large_image",
       title: `${info.Name} - JK Inmobiliaria`,
       description: cleanDescription || `Proyecto inmobiliario ${info.Name}`,
-      images: "https://jkinmobiliaria.com/Metajk.png",
+      images: [imageUrl],
     },
 
     alternates: {
@@ -89,25 +91,27 @@ export async function generateMetadata({ params }, parent) {
   };
 }
 
-// Componente de página (Server Component)
+// ✅ Componente de página (Server Component)
 export default async function Proyecto({ params }) {
-  const { id } = await params;
+  const { id } = params;
   const info = await getProyecto(id);
 
   if (!info) {
     return (
       <div className="min-h-screen flex flex-col items-center justify-center p-8">
         <Building className="w-16 h-16 text-gray-400 mb-4" />
-        <h1 className="text-2xl font-bold text-gray-700 mb-2">Proyecto no encontrado</h1>
-        <p className="text-gray-500 mb-6">El proyecto que buscas no existe o ha sido eliminado</p>
-        <Link href="/Proyectos" className="text-blue-600 hover:underline">← Volver a proyectos</Link>
+        <h1 className="text-2xl font-bold text-gray-700 mb-2">
+          Proyecto no encontrado
+        </h1>
+        <p className="text-gray-500 mb-6">
+          El proyecto que buscas no existe o ha sido eliminado.
+        </p>
+        <Link href="/Proyectos" className="text-blue-600 hover:underline">
+          ← Volver a proyectos
+        </Link>
       </div>
     );
   }
 
-  return (
-    <>
-      <ClientSideProyecto params={{ id }} info={info} />
-    </>
-  );
+  return <ClientSideProyecto params={{ id }} info={info} />;
 }

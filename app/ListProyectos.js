@@ -147,21 +147,16 @@ const ListProyectos = () => {
           onMouseLeave={resumeAutoplay}
         >
           {/* Carrusel Container */}
-          <div className="overflow-hidden">
-            <Link href={`/Proyectos/${currentIndex}`}>
+         <div className="overflow-hidden">
+            <Link href={`/Proyectos/${Data[currentIndex].id}`}>
               <div className="relative h-[400px] cursor-pointer">
-                {/* Imagen del proyecto actual */}
                 <Image
                   src={Data[currentIndex].Imagen}
                   fill
                   alt={Data[currentIndex].Name}
                   className="object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-                
-                {/* Overlay sutil solo en la parte inferior */}
                 <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/70 to-transparent" />
-                
-                {/* Info del proyecto */}
                 <div className="absolute bottom-0 left-0 right-0 p-4 text-white z-10">
                   <h2 className="text-xl font-bold mb-1 drop-shadow-lg">
                     {Data[currentIndex].Name}
@@ -171,7 +166,6 @@ const ListProyectos = () => {
                       {Data[currentIndex].Direction}
                     </p>
                   )}
-                  
                   <Button className="cursor-pointer bg-white text-[#001a56] hover:bg-gray-100 font-semibold text-sm py-2 px-4">
                     Ver Detalles
                   </Button>

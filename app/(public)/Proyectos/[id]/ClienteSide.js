@@ -20,9 +20,8 @@ function ClientSideProyecto({ params: { id }, info }) {
   const [Navigation, setNavigation] = useState({
     Description: true,
     PlantaBaja: false,
+    RecorridoVirtual: false,
   });
-
-  console.log("infoPos", info);
 
   const [ModalImage, setModalImage] = useState({
     id: null,
@@ -35,9 +34,11 @@ function ClientSideProyecto({ params: { id }, info }) {
       {ModalImage?.Visible && (
         <ModalImageSee setModalImage={setModalImage} ModalImage={ModalImage} />
       )}
+
       <Title title={`Proyecto ${info.Name}`} image={`${info?.Imagen}`} />
 
       <div className="p-2 container space-y-4 mx-auto">
+        {/* ==== Imagen principal del proyecto ==== */}
         <section
           onClick={(e) => {
             e.preventDefault();
@@ -55,13 +56,15 @@ function ClientSideProyecto({ params: { id }, info }) {
               objectFit: "cover",
             }}
             fill
-            alt={info.Name}
+            alt={info.Name || "Proyecto inmobiliario"}
             priority
           />
         </section>
 
+        {/* ==== Contenido principal ==== */}
         <div className="grid grid-cols-1 lg:grid-cols-9 gap-x-10">
           <div className="lg:col-span-6 bg-white px-10 py-5">
+            {/* ==== Navegación ==== */}
             <div className="flex gap-x-4 pb-2">
               <Button
                 onClick={(e) => {
@@ -69,24 +72,28 @@ function ClientSideProyecto({ params: { id }, info }) {
                   setNavigation({
                     Description: true,
                     PlantaBaja: false,
+                    RecorridoVirtual: false,
                   });
                 }}
                 className="cursor-pointer uppercase active:bg-[#004274]"
               >
                 Descripción
               </Button>
+
               <Button
                 onClick={(e) => {
                   e.preventDefault();
                   setNavigation({
                     Description: false,
                     PlantaBaja: true,
+                    RecorridoVirtual: false,
                   });
                 }}
                 className="cursor-pointer uppercase active:bg-[#004274]"
               >
                 Planta Baja
               </Button>
+
               {info?.RecorridosVirtuales?.length > 0 && (
                 <Button
                   onClick={() => {
@@ -98,29 +105,30 @@ function ClientSideProyecto({ params: { id }, info }) {
                   }}
                   className="cursor-pointer uppercase active:bg-[#004274]"
                 >
-                  Recorridos Virtuales{" "}
+                  Recorridos Virtuales
                 </Button>
               )}
             </div>
 
+            {/* ==== Tarjeta principal ==== */}
             <Card>
               <CardHeader>
                 <CardTitle className="uppercase">
                   {(Navigation.Description && "Descripción") ||
-                    (Navigation.PlantaBaja && "Planta baja") ||
-                    (Navigation.RecorridoVirtual &&
-                      "Recorridos virtuales")}{" "}
+                    (Navigation.PlantaBaja && "Plantas") ||
+                    (Navigation.RecorridoVirtual && "Recorridos Virtuales")}{" "}
                   {info.Name}
                 </CardTitle>
                 <Separator />
               </CardHeader>
+
               <CardContent>
-                {(Navigation.Description && (
+                {/* ==== Descripción ==== */}
+                {Navigation.Description && (
                   <>
                     {info.Direction && (
                       <h1 className="pb-2">
                         <span className="font-bold pr-2 uppercase">
-                          {" "}
                           Dirección:
                         </span>
                         {info.Direction}
@@ -135,23 +143,18 @@ function ClientSideProyecto({ params: { id }, info }) {
                         }}
                       />
                     )}
+
                     <a
-                      href={`https://api.whatsapp.com/send?phone=51981184611&text=Me%20gustar%C3%ADa%20recibir%20mas%20informaci%C3%B3n%20acerca%20del%20proyecto%20${info.Name}%20`}
+                      href={`https://api.whatsapp.com/send?phone=51981184611&text=Me%20gustar%C3%ADa%20recibir%20más%20informaci%C3%B3n%20acerca%20del%20proyecto%20${info.Name}%20`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="cursor-pointer"
                     >
                       <Image
-                        src={
-                          "https://jkinmobiliaria.com/wp-content/uploads/2022/03/BOTON-WHATSAPP-300x107.webp" ||
-                          "/placeholder.svg"
-                        }
-                        alt="Contacto"
+                        src="https://jkinmobiliaria.com/wp-content/uploads/2022/03/BOTON-WHATSAPP-300x107.webp"
+                        alt="Contacto por WhatsApp"
                         width={250}
                         height={80}
-                        style={{
-                          objectFit: "cover",
-                        }}
                         className="pb-4"
                       />
                     </a>
@@ -166,6 +169,8 @@ function ClientSideProyecto({ params: { id }, info }) {
                         <Button className="cursor-pointer">BROCHURE</Button>
                       </a>
                     )}
+
+                    {/* Botón especial si id == 1 */}
                     {id == 1 && (
                       <Button
                         variant="outline"
@@ -175,75 +180,69 @@ function ClientSideProyecto({ params: { id }, info }) {
                         Recorrido Virtual
                       </Button>
                     )}
-
-                    <a
-                      href="http://"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    ></a>
                   </>
-                )) ||
-                  (Navigation?.PlantaBaja && (
-                    <>
-                      {info?.Plantas?.length && info.Plantas && (
-                        <Accordion type="single" collapsible>
-                          {info?.Plantas?.map((Planta, key) => (
-                            <AccordionItem key={key} value={`item-${key + 1}`}>
-                              <AccordionTrigger>
-                                {Planta.name} Tamaño: {Planta.size} mt²
-                              </AccordionTrigger>
-                              <AccordionContent>
-                                <figure
-                                  onClick={(e) => {
-                                    e.preventDefault();
-                                    setModalImage({
-                                      Visible: true,
-                                      Nombre: `${Planta.name}`,
-                                      src: Planta.image,
-                                    });
-                                  }}
-                                  className="w-[31rem] h-[21rem] mx-auto relative cursor-pointer"
-                                >
-                                  <Image
-                                    src={Planta.image || "/placeholder.svg"}
-                                    alt={key}
-                                    style={{
-                                      objectFit: "cover",
-                                    }}
-                                    fill
-                                  />
-                                </figure>
-                              </AccordionContent>
-                            </AccordionItem>
-                          ))}
-                        </Accordion>
-                      )}
-                    </>
-                  )) ||
-                  (Navigation.RecorridoVirtual && (
-                    <>
-                      <div className="py-1 grid grid-cols-1 md:grid-cols-2 gap-3">
-                        {info.RecorridosVirtuales?.map((item) => (
-                          <Button key={item.id} className="cursor-pointer">
-                            <a
-                              href={item.url}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="cursor-pointer"
-                            >
-                              {item.dpto}
-                            </a>
-                          </Button>
+                )}
+
+                {/* ==== Plantas ==== */}
+                {Navigation.PlantaBaja && (
+                  <>
+                    {info?.Plantas?.length > 0 && (
+                      <Accordion type="single" collapsible>
+                        {info.Plantas.map((Planta, key) => (
+                          <AccordionItem key={key} value={`item-${key + 1}`}>
+                            <AccordionTrigger>
+                              {Planta.name} — Tamaño: {Planta.size} m²
+                            </AccordionTrigger>
+                            <AccordionContent>
+                              <figure
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  setModalImage({
+                                    Visible: true,
+                                    Nombre: `${Planta.name}`,
+                                    src: Planta.image,
+                                  });
+                                }}
+                                className="mx-auto relative aspect-[16/9] w-full max-w-4xl bg-white rounded-xl border shadow-md overflow-hidden cursor-pointer"
+                              >
+                                <Image
+                                  src={Planta.image || "/placeholder.svg"}
+                                  alt={Planta.name}
+                                  fill
+                                  className="object-contain"
+                                />
+                              </figure>
+                            </AccordionContent>
+                          </AccordionItem>
                         ))}
-                      </div>
-                    </>
-                  ))}
+                      </Accordion>
+                    )}
+                  </>
+                )}
+
+                {/* ==== Recorridos Virtuales ==== */}
+                {Navigation.RecorridoVirtual && (
+                  <div className="py-1 grid grid-cols-1 md:grid-cols-2 gap-3">
+                    {info.RecorridosVirtuales?.map((item) => (
+                      <Button key={item.id} className="cursor-pointer">
+                        <a
+                          href={item.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="cursor-pointer"
+                        >
+                          {item.dpto}
+                        </a>
+                      </Button>
+                    ))}
+                  </div>
+                )}
               </CardContent>
             </Card>
           </div>
-          <>
-            <ListProyectos />
-          </>{" "}
+
+          {/* ==== Listado lateral ==== */}
+          <ListProyectos />
         </div>
       </div>
     </div>
