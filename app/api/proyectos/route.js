@@ -1,35 +1,35 @@
 import { NextResponse } from "next/server";
 import { adminDb } from "@/lib/firebase-admin";
 
-// ✅ GET — Listar proyectos
+// ✅ Listar proyectos
 export async function GET(request) {
   try {
     const { searchParams } = new URL(request.url);
     const status = searchParams.get("status");
-    // 🔧 Aumentamos el límite por defecto a 50
     const limit = parseInt(searchParams.get("limit") || "50");
 
-    let query = adminDb.collection("proyectos").orderBy("createdAt", "desc");
+    let query = adminDb.collection("proyectos");
 
-    // 🔍 Filtrar por estado si se envía
+    // Filtro por estado
     if (status && status !== "Todas") {
       query = query.where("Status", "==", status);
     }
 
-    // 🔧 Solo aplicamos límite si se especifica manualmente
-    if (limit > 0) {
-      query = query.limit(limit);
+    // 🔧 Evitamos error de campo faltante
+    try {
+      query = query.orderBy("createdAt", "desc");
+    } catch {
+      console.warn("⚠️ Algunos proyectos no tienen createdAt");
     }
+
+    if (limit > 0) query = query.limit(limit);
 
     const snapshot = await query.get();
 
-    const proyectos = [];
-    snapshot.forEach((doc) => {
-      proyectos.push({
-        id: doc.id,
-        ...doc.data(),
-      });
-    });
+    const proyectos = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
 
     return NextResponse.json({
       success: true,
@@ -45,7 +45,7 @@ export async function GET(request) {
   }
 }
 
-// ✅ POST — Crear nuevo proyecto
+// ✅ Crear proyecto
 export async function POST(request) {
   try {
     const data = await request.json();
@@ -61,7 +61,7 @@ export async function POST(request) {
 
     const proyectoData = {
       ...data,
-      createdAt: FieldValue.serverTimestamp(),
+      createdAt: FieldValue.serverTimestamp(), // 🔥 necesario para orden correcto
       updatedAt: FieldValue.serverTimestamp(),
     };
 
