@@ -1,0 +1,20 @@
+"use client";
+function Title({ title, image }) {
+  return (
+    <section
+      style={{
+        backgroundImage: image ? `url("${image}")` : 'none',
+      }}
+    >
+      <div className="py-7 flex h-full w-full items-center justify-center  mx-auto px-8 lg:w-full bg-black/50">
+        <div className="max-w-2xl text-center">
+          <h1 className=" py-20 text-white lg:text-6xl font-semibold uppercase">
+            {title}
+          </h1>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+export default Title;

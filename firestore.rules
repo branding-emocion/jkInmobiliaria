@@ -1,0 +1,65 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    
+    // ====================================
+    // FUNCIONES AUXILIARES
+    // ====================================
+    
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+    
+    function isAdmin() {
+      return isAuthenticated() && 
+             request.auth.token.admin == true;
+    }
+    
+    function isValidTimestamp(fieldName) {
+      return request.resource.data[fieldName] is timestamp;
+    }
+    
+    // ====================================
+    // COLECCIÓN: proyectos
+    // ====================================
+    match /proyectos/{proyectoId} {
+      // Lectura pública
+      allow read: if true;
+      
+      // Solo admins pueden crear
+      allow create: if isAdmin() &&
+                      request.resource.data.keys().hasAll(['Name', 'Status']) &&
+                      isValidTimestamp('createdAt');
+      
+      // Solo admins pueden actualizar
+      allow update: if isAdmin() &&
+                      isValidTimestamp('updatedAt');
+      
+      // Solo admins pueden eliminar
+      allow delete: if isAdmin();
+    }
+    
+    // ====================================
+    // COLECCIÓN: mensajes (formulario contacto)
+    // ====================================
+    match /mensajes/{mensajeId} {
+      // Cualquiera puede crear (formulario público)
+      allow create: if request.resource.data.keys().hasAll(['email', 'nombre']) &&
+                      isValidTimestamp('createdAt');
+      
+      // Solo admins pueden leer y eliminar
+      allow read, delete: if isAdmin();
+      
+      // Nadie puede actualizar
+      allow update: if false;
+    }
+    
+    // ====================================
+    // BLOQUEAR TODO LO DEMÁS
+    // ====================================
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
