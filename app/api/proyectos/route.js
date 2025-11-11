@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { adminDb } from "@/lib/firebase-admin";
 
-// ✅ Listar proyectos
+// ✅ Listar proyectos (funciona sin índice)
 export async function GET(request) {
   try {
     const { searchParams } = new URL(request.url);
@@ -10,22 +10,23 @@ export async function GET(request) {
 
     let query = adminDb.collection("proyectos");
 
-    // Filtro por estado
+    // 🔍 Filtro por estado (opcional)
     if (status && status !== "Todas") {
       query = query.where("Status", "==", status);
     }
 
-    // 🔧 Evitamos error de campo faltante
-    try {
-      query = query.orderBy("createdAt", "desc");
-    } catch {
-      console.warn("⚠️ Algunos proyectos no tienen createdAt");
+    // ⚙️ Intentamos aplicar orden solo si no hay filtro (para evitar el índice)
+    if (!status || status === "Todas") {
+      try {
+        query = query.orderBy("createdAt", "desc");
+      } catch {
+        console.warn("⚠️ Algunos proyectos no tienen createdAt");
+      }
     }
 
     if (limit > 0) query = query.limit(limit);
 
     const snapshot = await query.get();
-
     const proyectos = snapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
@@ -37,7 +38,7 @@ export async function GET(request) {
       total: proyectos.length,
     });
   } catch (error) {
-    console.error("Error en GET /api/proyectos:", error);
+    console.error("❌ Error en GET /api/proyectos:", error);
     return NextResponse.json(
       { success: false, error: error.message },
       { status: 500 }
@@ -61,7 +62,7 @@ export async function POST(request) {
 
     const proyectoData = {
       ...data,
-      createdAt: FieldValue.serverTimestamp(), // 🔥 necesario para orden correcto
+      createdAt: FieldValue.serverTimestamp(),
       updatedAt: FieldValue.serverTimestamp(),
     };
 
@@ -72,7 +73,7 @@ export async function POST(request) {
       data: { id: docRef.id, ...proyectoData },
     });
   } catch (error) {
-    console.error("Error en POST /api/proyectos:", error);
+    console.error("❌ Error en POST /api/proyectos:", error);
     return NextResponse.json(
       { success: false, error: error.message },
       { status: 500 }

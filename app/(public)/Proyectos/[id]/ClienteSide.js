@@ -151,7 +151,7 @@ function ClientSideProyecto({ params: { id }, info }) {
                       className="cursor-pointer"
                     >
                       <Image
-                        src="https://jkinmobiliaria.com/wp-content/uploads/2022/03/BOTON-WHATSAPP-300x107.webp"
+                        src="/inicio/BOTON-WHATSAPP-300x107.webp"
                         alt="Contacto por WhatsApp"
                         width={250}
                         height={80}

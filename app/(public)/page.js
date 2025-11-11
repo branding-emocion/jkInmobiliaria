@@ -76,7 +76,7 @@ export default function HomePage() {
     {
       id: 1,
       image:
-        "https://jkinmobiliaria.com/wp-content/uploads/2021/01/logo2-292x300.png",
+        "/inicio/defensora.webp",
     },
     { id: 2, image: "/slider/Asc2.png" },
   ];
@@ -89,7 +89,7 @@ export default function HomePage() {
       cell: "981 184 611",
       mail: "ngarcia@jkinversiones.com",
       image:
-        "https://jkinmobiliaria.com/wp-content/uploads/2019/03/profile-1-150x150.png",
+        "/inicio/user1.webp",
     },
     {
       id: 2,
@@ -98,39 +98,39 @@ export default function HomePage() {
       cell: "981 184 611",
       mail: "ventas@jkinversiones.com",
       image:
-        "https://jkinmobiliaria.com/wp-content/uploads/2019/03/profile-150x150.png",
+        "/inicio/user2.webp",
     },
   ];
 
   const PorqueElegirnos = [
     {
       id: 1,
-      img: "https://jkinmobiliaria.com/wp-content/uploads/2016/03/alm-e1553225893602.jpg",
+      img: "/inicio/img1.webp",
       text: "Amplia experiencia en el sector inmobiliario.",
     },
     {
       id: 2,
-      img: "https://jkinmobiliaria.com/wp-content/uploads/2016/03/vercelli4-208x208.png",
+      img: "/inicio/img2.webp",
       text: "Calidad y seguridad totalmente garantizada.",
     },
     {
       id: 3,
-      img: "https://jkinmobiliaria.com/wp-content/uploads/2016/03/Terraza-169x169.jpeg",
+      img: "/inicio/img3.webp",
       text: "Dptos disponibles al alcance de tu bolsillo.",
     },
     {
       id: 4,
-      img: "https://jkinmobiliaria.com/wp-content/uploads/2019/03/job-interview-3410427_1920-200x200.jpg",
+      img: "/inicio/img4.webp",
       text: "Te asesoramos con los trámites.",
     },
     {
       id: 5,
-      img: "https://jkinmobiliaria.com/wp-content/uploads/2019/03/team-3373638_1920-196x196.jpg",
+      img: "/inicio/img5.webp",
       text: "Equipo de profesionales a tu servicio.",
     },
     {
       id: 6,
-      img: "https://jkinmobiliaria.com/wp-content/uploads/2019/03/men-1979261_1920-282x282.jpg",
+      img: "/inicio/img6.webp",
       text: "Responderemos todas tus inquietudes.",
     },
   ];
