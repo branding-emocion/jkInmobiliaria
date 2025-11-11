@@ -3,9 +3,9 @@
 import React, { useState, useEffect } from "react";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Carousel } from "react-responsive-carousel";
-import Title from "../Title";
+import Title from "../../Title";
+import { Modal } from "../../Modal";
 import { Button } from "@/components/ui/button";
-import { Modal } from "../Modal";
 import { Building, Star, ThumbsUp, User2, Loader2, AlertCircle } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
