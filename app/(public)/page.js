@@ -172,18 +172,6 @@ export default function HomePage() {
                 fill
                 style={{ objectFit: "cover" }}
               />
-              <div className="absolute inset-0 bg-black/40 flex flex-col justify-center items-center text-white text-center px-6">
-                {b.titulo && (
-                  <h2 className="text-3xl md:text-5xl font-bold mb-2">
-                    {b.titulo}
-                  </h2>
-                )}
-                {b.descripcion && (
-                  <p className="text-lg md:text-xl max-w-2xl">
-                    {b.descripcion}
-                  </p>
-                )}
-              </div>
             </div>
           ))}
         </Carousel>
