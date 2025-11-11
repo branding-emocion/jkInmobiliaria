@@ -27,7 +27,7 @@ async function getProyecto(id) {
 }
 
 export async function generateMetadata({ params }, parent) {
-  const { id } = await params; // 👈 se “espera” el params
+  const { id } = await params; 
   const parentMetadata = await parent;
   const previousImages = parentMetadata?.openGraph?.images || [];
 
@@ -86,7 +86,7 @@ export async function generateMetadata({ params }, parent) {
 }
 
 export default async function Proyecto({ params }) {
-  const { id } = await params; // 👈 necesario en Next 15
+  const { id } = await params;
   const info = await getProyecto(id);
 
   if (!info) {
