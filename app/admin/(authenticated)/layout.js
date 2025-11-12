@@ -6,7 +6,7 @@ import { auth } from "@/lib/firebase";
 import { Toaster } from "sonner";
 import Header from "./Header";
 
-export default function AuthenticatedLayout({ children }) {
+export default function Layout({ children }) {
   const router = useRouter();
   const pathname = usePathname();
   const [loading, setLoading] = useState(true);
@@ -19,12 +19,9 @@ export default function AuthenticatedLayout({ children }) {
         setLoading(false);
       }
     });
-
-    // Cleanup: cancelar suscripción cuando el componente se desmonte
     return () => unsubscribe();
   }, [router, pathname]);
 
-  // Mostrar loading mientras verifica la autenticación
   if (loading) {
     return (
       <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/30 to-gray-50 flex items-center justify-center">
@@ -34,9 +31,11 @@ export default function AuthenticatedLayout({ children }) {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/30 to-gray-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-blue-50/30 to-gray-50 flex flex-col">
+      <Header />
       <Toaster position="top-right" richColors closeButton />
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+
+      <main className="flex-1 w-full px-4 sm:px-6 lg:px-8 xl:px-12 2xl:px-24 py-6 mx-auto max-w-[1800px]">
         {children}
       </main>
     </div>

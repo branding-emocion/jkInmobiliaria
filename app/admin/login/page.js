@@ -50,10 +50,8 @@ export default function AdminLogin() {
 
   return (
     <div className="min-h-screen relative bg-gradient-to-br from-blue-600 via-blue-700 to-blue-900">
-      {/* Contenedor Principal */}
       <div className="min-h-screen flex items-center justify-center p-4">
         <Card className="w-full max-w-md p-8 shadow-2xl">
-          {/* Logo y Título */}
           <div className="flex flex-col items-center mb-8">
             <div className="relative w-20 h-20 rounded-xl overflow-hidden shadow-lg mb-4">
               <Image
@@ -76,7 +74,6 @@ export default function AdminLogin() {
             </div>
           </div>
 
-          {/* Formulario */}
           <form onSubmit={handleLogin} className="space-y-5">
             <div>
               <label htmlFor="email" className="block text-sm font-semibold mb-2 text-gray-700">
@@ -135,7 +132,6 @@ export default function AdminLogin() {
             </Button>
           </form>
 
-          {/* Link al sitio público */}
           <div className="mt-6 pt-6 border-t border-gray-200 text-center">
             <Link href="/" className="inline-flex items-center gap-2 text-sm text-gray-600 hover:text-blue-600 transition-colors font-medium group">
               <Globe className="w-4 h-4 group-hover:scale-110 transition-transform" />

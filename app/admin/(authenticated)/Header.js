@@ -3,7 +3,7 @@ import { useRouter } from "next/navigation";
 import { signOut } from "firebase/auth";
 import { auth } from "@/lib/firebase";
 import { Button } from "@/components/ui/button";
-import { LogOut, Globe, ExternalLink } from "lucide-react";
+import { LogOut, Globe, ExternalLink, Images, Building2 } from "lucide-react"; // 👈 nuevo icono para Proyectos
 import Image from "next/image";
 import Link from "next/link";
 import { toast } from "sonner";
@@ -25,7 +25,10 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link href="/admin/proyectos" className="flex items-center gap-3 group">
+          <Link
+            href="/admin/authenticated/proyectos"
+            className="flex items-center gap-3 group"
+          >
             <div className="relative w-10 h-10 rounded-lg overflow-hidden ring-2 ring-blue-100 group-hover:ring-blue-300 transition-all">
               <Image
                 src="/logo1.jpg"
@@ -45,6 +48,32 @@ export default function Header() {
 
           {/* Acciones */}
           <div className="flex items-center gap-2">
+            {/* 🔹 Botón Proyectos */}
+            <Link href="./proyectos">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="cursor-pointer gap-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 h-9"
+              >
+                <Building2 className="w-4 h-4" />
+                <span className="hidden sm:inline text-sm">Proyectos</span>
+              </Button>
+            </Link>
+
+            {/* 🔹 Botón Carrusel */}
+            <Link href="./carrousel">
+              <Button
+                variant="ghost"
+                size="sm"
+                className="cursor-pointer gap-2 text-gray-600 hover:text-blue-600 hover:bg-blue-50 h-9"
+              >
+                <Images className="w-4 h-4" />
+                <span className="hidden sm:inline text-sm">Carrusel</span>
+              </Button>
+            </Link>
+
+            <div className="h-6 w-px bg-gray-300 hidden sm:block"></div>
+
             <Link href="/" target="_blank">
               <Button
                 variant="ghost"
@@ -56,9 +85,9 @@ export default function Header() {
                 <ExternalLink className="w-3 h-3" />
               </Button>
             </Link>
-            
+
             <div className="h-6 w-px bg-gray-300 hidden sm:block"></div>
-            
+
             <Button
               onClick={handleLogout}
               variant="ghost"

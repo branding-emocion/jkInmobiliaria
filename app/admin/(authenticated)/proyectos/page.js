@@ -8,21 +8,29 @@ import DeleteButton from "./DeleteButton";
 
 async function getProyectos(filter) {
   try {
-    let query = adminDb
+    // Traer todos los proyectos ordenados por fecha
+    const snapshot = await adminDb
       .collection("proyectos")
       .orderBy("createdAt", "desc")
-      .limit(50);
+      .limit(50)
+      .get();
 
+    // Convertir a arreglo JS
+    let proyectos = snapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+
+    // ✅ Filtrado flexible (no sensible a mayúsculas/plurales)
     if (filter && filter !== "Todas") {
-      query = query.where("Status", "==", filter);
+      proyectos = proyectos.filter(
+        (p) =>
+          p.Status &&
+          p.Status.toString().toLowerCase().includes(filter.toLowerCase())
+      );
     }
 
-    const snapshot = await query.get();
-    
-    return snapshot.docs.map(doc => ({
-      id: doc.id,
-      ...doc.data()
-    }));
+    return proyectos;
   } catch (error) {
     console.error("Error:", error);
     return [];
@@ -110,76 +118,78 @@ export default async function AdminDashboard({ searchParams }) {
         </Card>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-{proyectos.map((proyecto) => (
-  <Card
-    key={proyecto.id}
-    className="overflow-hidden hover:shadow-xl transition-all duration-300 border-0 shadow-sm group"
-  >
-    <div className="relative h-40 overflow-hidden bg-gray-100">
-      {proyecto.Imagen ? (
-        <Image
-          src={proyecto.Imagen}
-          alt={proyecto.Name}
-          fill
-          sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-          className="object-cover group-hover:scale-105 transition-transform duration-500"
-        />
-      ) : (
-        <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
-          <Building className="w-10 h-10 text-gray-400" />
-        </div>
-      )}
-      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
-      <span
-        className={`absolute top-2 right-2 px-2 py-1 rounded-md text-xs font-bold backdrop-blur-sm shadow-md ${
-          proyecto.Status === "Disponible"
-            ? "bg-green-500/90 text-white"
-            : proyecto.Status === "Vendido"
-            ? "bg-purple-500/90 text-white"
-            : "bg-gray-700/90 text-white"
-        }`}
-      >
-        {proyecto.Status}
-      </span>
-    </div>
+          {proyectos.map((proyecto) => (
+            <Card
+              key={proyecto.id}
+              className="overflow-hidden hover:shadow-xl transition-all duration-300 border-0 shadow-sm group"
+            >
+              <div className="relative h-40 overflow-hidden bg-gray-100">
+                {proyecto.Imagen ? (
+                  <Image
+                    src={proyecto.Imagen}
+                    alt={proyecto.Name}
+                    fill
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
+                    <Building className="w-10 h-10 text-gray-400" />
+                  </div>
+                )}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+                <span
+                  className={`absolute top-2 right-2 px-2 py-1 rounded-md text-xs font-bold backdrop-blur-sm shadow-md ${
+                    proyecto.Status === "Disponible"
+                      ? "bg-green-500/90 text-white"
+                      : proyecto.Status === "Vendido"
+                      ? "bg-purple-500/90 text-white"
+                      : "bg-gray-700/90 text-white"
+                  }`}
+                >
+                  {proyecto.Status}
+                </span>
+              </div>
 
-    <div className="p-4">
-      <h3 className="font-bold text-base mb-1 text-gray-900 line-clamp-1">
-        {proyecto.Name}
-      </h3>
-      <p className="text-xs text-gray-600 font-medium mb-3">
-        {proyecto.Type}
-      </p>
+              <div className="p-4">
+                <h3 className="font-bold text-base mb-1 text-gray-900 line-clamp-1">
+                  {proyecto.Name}
+                </h3>
+                <p className="text-xs text-gray-600 font-medium mb-3">
+                  {proyecto.Type}
+                </p>
 
-      <div className="flex gap-1.5">
-        {/* ✅ Usar el ID real del proyecto */}
-        <Link href={`/Proyectos/${proyecto.id}`} className="flex-1">
-          <Button
-            variant="outline"
-            size="sm"
-            className="cursor-pointer w-full gap-1 text-xs h-8 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-300"
-          >
-            <Eye className="w-3.5 h-3.5" />
-            Ver
-          </Button>
-        </Link>
+                <div className="flex gap-1.5">
+                  {/* ✅ Usar el ID real del proyecto */}
+                  <Link href={`/Proyectos/${proyecto.id}`} className="flex-1">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="cursor-pointer w-full gap-1 text-xs h-8 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-300"
+                    >
+                      <Eye className="w-3.5 h-3.5" />
+                      Ver
+                    </Button>
+                  </Link>
 
-        <Link href={`/admin/proyectos/editar/${proyecto.id}`} className="flex-1">
-          <Button
-            size="sm"
-            className="cursor-pointer w-full gap-1 text-xs h-8 bg-blue-600 hover:bg-blue-700"
-          >
-            <Edit className="w-3.5 h-3.5" />
-            Editar
-          </Button>
-        </Link>
+                  <Link
+                    href={`/admin/proyectos/editar/${proyecto.id}`}
+                    className="flex-1"
+                  >
+                    <Button
+                      size="sm"
+                      className="cursor-pointer w-full gap-1 text-xs h-8 bg-blue-600 hover:bg-blue-700"
+                    >
+                      <Edit className="w-3.5 h-3.5" />
+                      Editar
+                    </Button>
+                  </Link>
 
-        <DeleteButton id={proyecto.id} nombre={proyecto.Name} />
-      </div>
-    </div>
-  </Card>
-))}
-
+                  <DeleteButton id={proyecto.id} nombre={proyecto.Name} />
+                </div>
+              </div>
+            </Card>
+          ))}
         </div>
       )}
     </>

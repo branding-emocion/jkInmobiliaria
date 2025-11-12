@@ -13,7 +13,7 @@ import {
   Trash2,
 } from "lucide-react";
 import Image from "next/image";
-
+import { toast } from "sonner";
 export default function CarrouselAdmin() {
   const [banners, setBanners] = useState([]);
   const [titulo, setTitulo] = useState("");
@@ -30,6 +30,7 @@ export default function CarrouselAdmin() {
       const data = await res.json();
       if (data.success) setBanners(data.banners);
     } catch (error) {
+      toast.error("Error al cargar los banners");
       console.error("Error al cargar banners:", error);
     } finally {
       setLoading(false);
@@ -43,7 +44,7 @@ export default function CarrouselAdmin() {
   // === Subir nuevo banner ===
   const handleUpload = async () => {
     if (!file || !titulo) {
-      alert("Por favor completa el título y selecciona una imagen");
+      toast.warning("Completa el título y selecciona una imagen");
       return;
     }
 
@@ -61,16 +62,16 @@ export default function CarrouselAdmin() {
       const result = await res.json();
 
       if (result.success) {
-        alert("✅ Banner agregado correctamente");
+        toast.success("✅ Banner agregado correctamente");
         setTitulo("");
         setDescripcion("");
         setFile(null);
         loadBanners();
       } else {
-        alert("❌ Error: " + result.error);
+        toast.error("❌ Error: " + result.error);
       }
     } catch (error) {
-      alert("❌ Error al subir: " + error.message);
+      toast.error("❌ Error al subir: " + error.message);
     } finally {
       setUploading(false);
     }
@@ -80,9 +81,17 @@ export default function CarrouselAdmin() {
   const handleDelete = async (id) => {
     if (!confirm("¿Deseas eliminar este banner?")) return;
     try {
-      await fetch(`/api/carrousel/${id}`, { method: "DELETE" });
-      loadBanners();
+      const res = await fetch(`/api/carrousel/${id}`, { method: "DELETE" });
+      const result = await res.json();
+
+      if (result.success) {
+        toast.success("🗑️ Banner eliminado correctamente");
+        loadBanners();
+      } else {
+        toast.error("❌ Error al eliminar el banner");
+      }
     } catch (error) {
+      toast.error("❌ Error de conexión al eliminar");
       console.error("Error al eliminar:", error);
     }
   };
@@ -90,13 +99,23 @@ export default function CarrouselAdmin() {
   // === Activar/Desactivar ===
   const toggleActivo = async (id, estado) => {
     try {
-      await fetch(`/api/carrousel/${id}`, {
+      const res = await fetch(`/api/carrousel/${id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ activo: !estado }),
       });
-      loadBanners();
+      const result = await res.json();
+
+      if (result.success) {
+        toast.success(
+          !estado ? "✅ Banner activado" : "🚫 Banner desactivado"
+        );
+        loadBanners();
+      } else {
+        toast.error("❌ Error al cambiar estado");
+      }
     } catch (error) {
+      toast.error("❌ Error al cambiar estado");
       console.error("Error al cambiar estado:", error);
     }
   };
