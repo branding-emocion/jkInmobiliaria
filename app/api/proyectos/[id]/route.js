@@ -4,9 +4,11 @@ import { adminDb } from "@/lib/firebase-admin";
 // =====================
 // GET - Obtener proyecto por ID
 // =====================
-export async function GET(request, { params }) {
+export async function GET(request, context) {
   try {
-    const { id } = params; // ✅ sin await
+    // ✅ En App Router, params debe esperarse
+    const { id } = await context.params;
+
     const docRef = adminDb.collection("proyectos").doc(id);
     const doc = await docRef.get();
 
@@ -22,7 +24,7 @@ export async function GET(request, { params }) {
       data: { id: doc.id, ...doc.data() },
     });
   } catch (error) {
-    console.error("Error en GET /proyectos/[id]:", error);
+    console.error("Error en GET /api/proyectos/[id]:", error);
     return NextResponse.json(
       { success: false, error: error.message },
       { status: 500 }
@@ -33,9 +35,9 @@ export async function GET(request, { params }) {
 // =====================
 // PUT - Actualizar proyecto
 // =====================
-export async function PUT(request, { params }) {
+export async function PUT(request, context) {
   try {
-    const { id } = params; // ✅ sin await
+    const { id } = await context.params;
     const data = await request.json();
 
     const docRef = adminDb.collection("proyectos").doc(id);
@@ -55,6 +57,7 @@ export async function PUT(request, { params }) {
       updatedAt: FieldValue.serverTimestamp(),
     };
 
+    // Evitamos sobreescribir createdAt accidentalmente
     delete updateData.createdAt;
 
     await docRef.update(updateData);
@@ -64,7 +67,7 @@ export async function PUT(request, { params }) {
       data: { id, ...updateData },
     });
   } catch (error) {
-    console.error("Error en PUT /proyectos/[id]:", error);
+    console.error("Error en PUT /api/proyectos/[id]:", error);
     return NextResponse.json(
       { success: false, error: error.message },
       { status: 500 }
@@ -75,9 +78,10 @@ export async function PUT(request, { params }) {
 // =====================
 // DELETE - Eliminar proyecto y sus archivos
 // =====================
-export async function DELETE(request, { params }) {
+export async function DELETE(request, context) {
   try {
-    const { id } = params; // ✅ sin await
+    const { id } = await context.params;
+
     const docRef = adminDb.collection("proyectos").doc(id);
     const doc = await docRef.get();
 
@@ -89,9 +93,12 @@ export async function DELETE(request, { params }) {
     }
 
     const proyectoData = doc.data();
+
+    // ✅ Cargar adminStorage de forma dinámica
     const { adminStorage } = await import("@/lib/firebase-admin");
     const bucket = adminStorage.bucket();
 
+    // Sanitizar nombre del proyecto para evitar errores de ruta
     const sanitizedProjectName = proyectoData.Name?.replace(/[^a-zA-Z0-9]/g, "-").toLowerCase();
     const projectFolder = `proyectos/${sanitizedProjectName}/`;
 
@@ -99,7 +106,15 @@ export async function DELETE(request, { params }) {
       const [files] = await bucket.getFiles({ prefix: projectFolder });
 
       if (files.length > 0) {
-        await Promise.all(files.map((file) => file.delete().catch(() => {})));
+        await Promise.all(
+          files.map(async (file) => {
+            try {
+              await file.delete();
+            } catch (err) {
+              console.warn("No se pudo eliminar un archivo:", file.name, err.message);
+            }
+          })
+        );
       }
     } catch (storageError) {
       console.warn("Error al eliminar archivos del Storage:", storageError);
@@ -112,7 +127,7 @@ export async function DELETE(request, { params }) {
       message: "Proyecto y archivos eliminados correctamente",
     });
   } catch (error) {
-    console.error("Error en DELETE /proyectos/[id]:", error);
+    console.error("Error en DELETE /api/proyectos/[id]:", error);
     return NextResponse.json(
       { success: false, error: error.message },
       { status: 500 }
