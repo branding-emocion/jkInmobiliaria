@@ -4,6 +4,7 @@ import Link from "next/link";
 
 async function getProyecto(id) {
   try {
+    // Detecta si está en el entorno de Vercel (producción)
     const baseUrl =
       process.env.NEXT_PUBLIC_APP_URL ||
       (process.env.VERCEL_URL
@@ -12,7 +13,16 @@ async function getProyecto(id) {
 
     const apiUrl = `${baseUrl}/api/proyectos/${id}`;
 
-    const res = await fetch(apiUrl, { cache: "no-store" });
+    console.log("🌐 Fetching proyecto desde:", apiUrl);
+
+    // 👇 Incluye el header Host para SSR en Vercel (clave)
+    const res = await fetch(apiUrl, {
+      cache: "no-store",
+      headers: {
+        "Content-Type": "application/json",
+        "x-vercel-proxy": "true",
+      },
+    });
 
     if (!res.ok) {
       console.error("❌ Error al obtener proyecto:", res.status, apiUrl);
