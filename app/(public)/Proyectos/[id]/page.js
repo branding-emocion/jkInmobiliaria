@@ -4,13 +4,18 @@ import Link from "next/link";
 
 async function getProyecto(id) {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
-    const res = await fetch(`${baseUrl}/api/proyectos/${id}`, {
-      cache: "no-store",
-    });
+    const baseUrl =
+      process.env.NEXT_PUBLIC_APP_URL ||
+      (process.env.VERCEL_URL
+        ? `https://${process.env.VERCEL_URL}`
+        : "http://localhost:3000");
+
+    const apiUrl = `${baseUrl}/api/proyectos/${id}`;
+
+    const res = await fetch(apiUrl, { cache: "no-store" });
 
     if (!res.ok) {
-      console.error("Error al obtener proyecto:", res.status);
+      console.error("❌ Error al obtener proyecto:", res.status, apiUrl);
       return null;
     }
 
@@ -19,12 +24,14 @@ async function getProyecto(id) {
       return data.data;
     }
 
+    console.warn("⚠️ Respuesta sin datos válidos:", data);
     return null;
   } catch (error) {
-    console.error("Error fetching proyecto:", error);
+    console.error("💥 Error fetching proyecto:", error);
     return null;
   }
 }
+
 
 export async function generateMetadata({ params }, parent) {
   const { id } = await params; 
