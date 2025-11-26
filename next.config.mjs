@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
+    unoptimized: true, // 🔥 Desactiva image optimization de Vercel (soluciona el 402)
     remotePatterns: [
       {
         protocol: "https",
@@ -9,6 +10,10 @@ const nextConfig = {
       {
         protocol: "https",
         hostname: "storage.googleapis.com",
+      },
+      {
+        protocol: "https",
+        hostname: "firebasestorage.googleapis.com",
       },
     ],
   },
