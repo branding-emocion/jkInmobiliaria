@@ -145,7 +145,7 @@ function ClientSideProyecto({ params: { id }, info }) {
                     )}
 
                     <a
-                      href={`https://api.whatsapp.com/send?phone=51981184611&text=Me%20gustar%C3%ADa%20recibir%20más%20informaci%C3%B3n%20acerca%20del%20proyecto%20${info.Name}%20`}
+                      href={`https://api.whatsapp.com/send?phone=${info.Whatsapp || '51981184611'}&text=Me%20gustar%C3%ADa%20recibir%20m%C3%A1s%20informaci%C3%B3n%20acerca%20del%20proyecto%20${info.Name}%20`}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="cursor-pointer"
