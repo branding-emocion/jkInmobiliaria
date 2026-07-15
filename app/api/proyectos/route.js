@@ -17,13 +17,11 @@ export async function GET(request) {
       query = query.where("Status", "==", status);
     }
 
-    // ⚙️ Intentamos aplicar orden solo si no hay filtro (para evitar el índice)
-    if (!status || status === "Todas") {
-      try {
-        query = query.orderBy("createdAt", "desc");
-      } catch {
-        console.warn("⚠️ Algunos proyectos no tienen createdAt");
-      }
+    // 📅 Ordenar por fecha de creación (más reciente primero)
+    try {
+      query = query.orderBy("createdAt", "desc");
+    } catch {
+      console.warn("⚠️ Algunos proyectos no tienen createdAt");
     }
 
     if (limit > 0) query = query.limit(limit);
