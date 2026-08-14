@@ -77,6 +77,44 @@ export async function PUT(request, context) {
 }
 
 // =====================
+// PATCH - Cambiar visibilidad (ocultar/mostrar)
+// =====================
+export async function PATCH(request, context) {
+  try {
+    const { id } = await context.params;
+    const data = await request.json();
+
+    const docRef = adminDb.collection("proyectos").doc(id);
+    const doc = await docRef.get();
+
+    if (!doc.exists) {
+      return NextResponse.json(
+        { success: false, error: "Proyecto no encontrado" },
+        { status: 404 }
+      );
+    }
+
+    const { FieldValue } = await import("firebase-admin/firestore");
+
+    await docRef.update({
+      visible: data.visible === true,
+      updatedAt: FieldValue.serverTimestamp(),
+    });
+
+    return NextResponse.json({
+      success: true,
+      data: { id, visible: data.visible === true },
+    });
+  } catch (error) {
+    console.error("Error en PATCH /api/proyectos/[id]:", error);
+    return NextResponse.json(
+      { success: false, error: error.message },
+      { status: 500 }
+    );
+  }
+}
+
+// =====================
 // DELETE - Eliminar proyecto y sus archivos
 // =====================
 export async function DELETE(request, context) {

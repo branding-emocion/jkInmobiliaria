@@ -84,6 +84,18 @@ const Proyectos = () => {
             >
               VENDIDO
             </Button>
+            <Button
+              onClick={(e) => {
+                e.preventDefault();
+                const info = allProyectos.filter(
+                  (proyecto) => proyecto.Status === "Próximamente"
+                );
+                setData(info);
+              }}
+              className="cursor-pointer focus:bg-white focus:text-black bg-[#001a56]"
+            >
+              PRÓXIMAMENTE
+            </Button>
           </div>
 
           {/* === Estado de carga === */}

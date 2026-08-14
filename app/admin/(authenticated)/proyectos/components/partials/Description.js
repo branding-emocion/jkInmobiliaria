@@ -4,6 +4,7 @@ import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Checkbox } from "@/components/ui/checkbox";
 import { Upload, X, Plus, CheckCircle2, AlertCircle, List, Info } from "lucide-react";
 import Image from "next/image";
 
@@ -64,6 +65,7 @@ export default function DescriptionTab({
                 <SelectContent>
                   <SelectItem value="Disponible">Disponible</SelectItem>
                   <SelectItem value="Vendido">Vendido</SelectItem>
+                  <SelectItem value="Próximamente">Próximamente</SelectItem>
                 </SelectContent>
               </Select>
             </div>
@@ -89,6 +91,19 @@ export default function DescriptionTab({
               placeholder="Dirección completa"
               className="mt-1.5 h-9 lg:h-10 text-sm"
             />
+          </div>
+
+          <div className="flex items-center gap-2 pt-1">
+            <Checkbox
+              id="visible"
+              checked={formData.visible !== false}
+              onCheckedChange={(checked) =>
+                handleInputChange({ target: { name: "visible", value: checked === true } })
+              }
+            />
+            <Label htmlFor="visible" className="text-xs lg:text-sm font-medium cursor-pointer">
+              Mostrar en el sitio público
+            </Label>
           </div>
         </div>
       </Card>

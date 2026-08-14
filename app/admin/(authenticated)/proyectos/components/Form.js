@@ -25,7 +25,7 @@ export default function Form({ mode = "create", projectId = null, onLoadingChang
   // State
   const [formData, setFormData] = useState({
     Name: "", Status: "Disponible", Type: "", Direction: "", Description: "",
-    Plantas: [], RecorridosVirtuales: []
+    Plantas: [], RecorridosVirtuales: [], visible: true
   });
   const [caracteristicas, setCaracteristicas] = useState([]);
   const [nuevaCaracteristica, setNuevaCaracteristica] = useState("");
@@ -44,6 +44,7 @@ export default function Form({ mode = "create", projectId = null, onLoadingChang
         setFormData({
           Name: p.Name || "", Status: p.Status || "Disponible", Type: p.Type || "",
           Direction: p.Direction || "", Description: p.Description || "",
+          visible: p.visible !== false,
           Plantas: Array.isArray(p.Plantas) ? p.Plantas.map(pl => ({ ...pl, imagePreview: pl.image || "" })) : [],
           RecorridosVirtuales: Array.isArray(p.RecorridosVirtuales) ? p.RecorridosVirtuales : []
         });

@@ -5,6 +5,7 @@ import { Building, Plus, Edit, Eye } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import DeleteButton from "./DeleteButton";
+import ToggleVisible from "./ToggleVisible";
 
 async function getProyectos(filter) {
   try {
@@ -46,6 +47,7 @@ export default async function AdminDashboard({ searchParams }) {
     { label: "Todas", value: "Todas", color: "blue" },
     { label: "Disponibles", value: "Disponible", color: "green" },
     { label: "Vendidos", value: "Vendido", color: "purple" },
+    { label: "Próximamente", value: "Próximamente", color: "amber" },
   ];
 
   return (
@@ -70,6 +72,8 @@ export default async function AdminDashboard({ searchParams }) {
                         ? "bg-green-600 hover:bg-green-700"
                         : f.color === "purple"
                         ? "bg-purple-600 hover:bg-purple-700"
+                        : f.color === "amber"
+                        ? "bg-amber-600 hover:bg-amber-700"
                         : f.color === "gray"
                         ? "bg-gray-600 hover:bg-gray-700"
                         : "bg-blue-600 hover:bg-blue-700"
@@ -144,6 +148,8 @@ export default async function AdminDashboard({ searchParams }) {
                       ? "bg-green-500/90 text-white"
                       : proyecto.Status === "Vendido"
                       ? "bg-purple-500/90 text-white"
+                      : proyecto.Status === "Próximamente"
+                      ? "bg-amber-500/90 text-white"
                       : "bg-gray-700/90 text-white"
                   }`}
                 >
@@ -159,33 +165,42 @@ export default async function AdminDashboard({ searchParams }) {
                   {proyecto.Type}
                 </p>
 
-                <div className="flex gap-1.5">
-                  {/* ✅ Usar el ID real del proyecto */}
-                  <Link href={`/Proyectos/${proyecto.id}`} className="flex-1">
-                    <Button
-                      variant="outline"
-                      size="sm"
-                      className="cursor-pointer w-full gap-1 text-xs h-8 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-300"
-                    >
-                      <Eye className="w-3.5 h-3.5" />
-                      Ver
-                    </Button>
-                  </Link>
+                <div className="flex flex-col gap-1.5">
+                  <div className="flex gap-1.5">
+                    {/* ✅ Usar el ID real del proyecto */}
+                    <Link href={`/Proyectos/${proyecto.id}`} className="flex-1">
+                      <Button
+                        variant="outline"
+                        size="sm"
+                        className="cursor-pointer w-full gap-1 text-xs h-8 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-300"
+                      >
+                        <Eye className="w-3.5 h-3.5" />
+                        Ver
+                      </Button>
+                    </Link>
 
-                  <Link
-                    href={`/admin/proyectos/editar/${proyecto.id}`}
-                    className="flex-1"
-                  >
-                    <Button
-                      size="sm"
-                      className="cursor-pointer w-full gap-1 text-xs h-8 bg-blue-600 hover:bg-blue-700"
+                    <Link
+                      href={`/admin/proyectos/editar/${proyecto.id}`}
+                      className="flex-1"
                     >
-                      <Edit className="w-3.5 h-3.5" />
-                      Editar
-                    </Button>
-                  </Link>
+                      <Button
+                        size="sm"
+                        className="cursor-pointer w-full gap-1 text-xs h-8 bg-blue-600 hover:bg-blue-700"
+                      >
+                        <Edit className="w-3.5 h-3.5" />
+                        Editar
+                      </Button>
+                    </Link>
+                  </div>
 
-                  <DeleteButton id={proyecto.id} nombre={proyecto.Name} />
+                  <div className="flex gap-1.5">
+                    <ToggleVisible
+                      id={proyecto.id}
+                      nombre={proyecto.Name}
+                      visible={proyecto.visible !== false}
+                    />
+                    <DeleteButton id={proyecto.id} nombre={proyecto.Name} />
+                  </div>
                 </div>
               </div>
             </Card>

@@ -9,6 +9,7 @@ export async function GET(request) {
     const { searchParams } = new URL(request.url);
     const status = searchParams.get("status");
     const limit = parseInt(searchParams.get("limit") || "50");
+    const includeHidden = searchParams.get("includeHidden") === "true";
 
     let query = adminDb.collection("proyectos");
 
@@ -27,10 +28,15 @@ export async function GET(request) {
     if (limit > 0) query = query.limit(limit);
 
     const snapshot = await query.get();
-    const proyectos = snapshot.docs.map((doc) => ({
+    let proyectos = snapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
     }));
+
+    // 🚫 Ocultos del sitio público (SEO sigue funcionando por URL directa)
+    if (!includeHidden) {
+      proyectos = proyectos.filter((p) => p.visible !== false);
+    }
 
     return NextResponse.json({
       success: true,
@@ -62,6 +68,7 @@ export async function POST(request) {
 
     const proyectoData = {
       ...data,
+      visible: data.visible !== false,
       createdAt: FieldValue.serverTimestamp(),
       updatedAt: FieldValue.serverTimestamp(),
     };
