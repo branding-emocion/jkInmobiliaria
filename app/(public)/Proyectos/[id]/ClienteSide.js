@@ -37,14 +37,6 @@ function ClientSideProyecto({ params: { id }, info }) {
 
       <Title title={`Proyecto ${info.Name}`} image={`${info?.Imagen}`} />
 
-      {info.Status === "Próximamente" && (
-        <div className="flex justify-center pt-4">
-          <span className="inline-flex items-center rounded-full bg-amber-500 px-5 py-1.5 text-sm font-semibold text-white uppercase shadow">
-            Próximamente
-          </span>
-        </div>
-      )}
-
       <div className="p-2 container space-y-4 mx-auto">
         {/* ==== Imagen principal del proyecto ==== */}
         <section
@@ -121,15 +113,17 @@ function ClientSideProyecto({ params: { id }, info }) {
             {/* ==== Tarjeta principal ==== */}
             <Card>
               <CardHeader>
-                <CardTitle className="uppercase flex flex-wrap items-center gap-2">
+                <CardTitle className="uppercase">
                   {(Navigation.Description && "Descripción") ||
                     (Navigation.PlantaBaja && "Plantas") ||
                     (Navigation.RecorridoVirtual && "Recorridos Virtuales")}{" "}
                   {info.Name}
                   {info.Status === "Próximamente" && (
-                    <span className="rounded-full bg-amber-500 px-2.5 py-0.5 text-xs font-semibold text-white uppercase">
-                      Próximamente
-                    </span>
+                    <div className="mt-2 flex">
+                      <span className="rounded-full bg-amber-500 px-2.5 py-0.5 text-xs font-semibold text-white uppercase">
+                        Próximamente
+                      </span>
+                    </div>
                   )}
                 </CardTitle>
                 <Separator />
