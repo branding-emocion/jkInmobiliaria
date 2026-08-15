@@ -35,7 +35,13 @@ function ClientSideProyecto({ params: { id }, info }) {
         <ModalImageSee setModalImage={setModalImage} ModalImage={ModalImage} />
       )}
 
-      <Title title={`Proyecto ${info.Name}`} image={`${info?.Imagen}`} />
+      <Title title={`Proyecto ${info.Name}`} image={`${info?.Imagen}`}>
+        {info.Status === "Próximamente" && (
+          <span className="inline-flex items-center rounded-full bg-amber-500 px-4 py-1 text-sm font-semibold text-white uppercase">
+            Próximamente
+          </span>
+        )}
+      </Title>
 
       <div className="p-2 container space-y-4 mx-auto">
         {/* ==== Imagen principal del proyecto ==== */}
@@ -118,13 +124,6 @@ function ClientSideProyecto({ params: { id }, info }) {
                     (Navigation.PlantaBaja && "Plantas") ||
                     (Navigation.RecorridoVirtual && "Recorridos Virtuales")}{" "}
                   {info.Name}
-                  {info.Status === "Próximamente" && (
-                    <div className="mt-2 flex">
-                      <span className="rounded-full bg-amber-500 px-2.5 py-0.5 text-xs font-semibold text-white uppercase">
-                        Próximamente
-                      </span>
-                    </div>
-                  )}
                 </CardTitle>
                 <Separator />
               </CardHeader>
