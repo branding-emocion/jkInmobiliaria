@@ -31,11 +31,15 @@ export default function HomePage() {
     const loadProyectos = async () => {
       setLoadingProyectos(true);
       try {
-        const res = await fetch("/api/proyectos?status=Disponible");
+        const res = await fetch("/api/proyectos");
         const data = await res.json();
 
         if (data.success) {
-          setData(data.data);
+          // Mostrar disponibles y próximamente en el inicio
+          const visibles = data.data.filter(
+            (p) => p.Status === "Disponible" || p.Status === "Próximamente"
+          );
+          setData(visibles);
           setError(null);
         } else {
           setError("Error al cargar proyectos");

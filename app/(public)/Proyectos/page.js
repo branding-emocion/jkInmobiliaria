@@ -157,13 +157,13 @@ const Proyectos = () => {
                         </div>
 
                         <div className="mt-4">
-                          <h1 className="text-primary mt-2 inline-block whitespace-nowrap rounded-xl font-semibold leading-tight">
+                          <h1 className="text-primary mt-2 rounded-xl font-semibold leading-tight block">
                             <span className="text-2xl">{proyecto.Name}</span>
                           </h1>
 
-                          {proyecto.Direction && <p>{proyecto.Direction}</p>}
+                          {proyecto.Direction && <p className="mt-1">{proyecto.Direction}</p>}
 
-                          <h2 className="text-primary mt-2 inline-block whitespace-nowrap rounded-xl font-semibold leading-tight text-xl">
+                          <h2 className="text-primary mt-1 rounded-xl font-semibold leading-tight text-xl block">
                             {proyecto.Type}
                           </h2>
                         </div>
