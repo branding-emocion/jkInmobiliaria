@@ -56,7 +56,7 @@ export default function DeleteButton({ id, nombre }) {
       variant="destructive"
       size="sm"
       onClick={handleDelete}
-      className="cursor-pointer h-8 px-2 hover:bg-red-600"
+      className="cursor-pointer h-8 px-2 hover:bg-red-600 shrink-0"
     >
       <Trash2 className="w-3.5 h-3.5" />
     </Button>

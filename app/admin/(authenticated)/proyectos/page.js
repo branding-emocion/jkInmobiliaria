@@ -194,11 +194,13 @@ export default async function AdminDashboard({ searchParams }) {
                   </div>
 
                   <div className="flex gap-1.5">
-                    <ToggleVisible
-                      id={proyecto.id}
-                      nombre={proyecto.Name}
-                      visible={proyecto.visible !== false}
-                    />
+                    <div className="flex-1 min-w-0">
+                      <ToggleVisible
+                        id={proyecto.id}
+                        nombre={proyecto.Name}
+                        visible={proyecto.visible !== false}
+                      />
+                    </div>
                     <DeleteButton id={proyecto.id} nombre={proyecto.Name} />
                   </div>
                 </div>

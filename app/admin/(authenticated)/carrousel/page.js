@@ -11,9 +11,13 @@ import {
   CheckCircle2,
   XCircle,
   Trash2,
+  ChevronUp,
+  ChevronDown,
+  GripVertical,
 } from "lucide-react";
 import Image from "next/image";
 import { toast } from "sonner";
+
 export default function CarrouselAdmin() {
   const [banners, setBanners] = useState([]);
   const [titulo, setTitulo] = useState("");
@@ -21,6 +25,9 @@ export default function CarrouselAdmin() {
   const [file, setFile] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [dragIndex, setDragIndex] = useState(null);
+  const [hoverIndex, setHoverIndex] = useState(null);
+  const [savingOrder, setSavingOrder] = useState(false);
 
   // === Cargar banners ===
   const loadBanners = async () => {
@@ -120,14 +127,82 @@ export default function CarrouselAdmin() {
     }
   };
 
+  // === Guardar el nuevo orden de los banners ===
+  const saveOrder = async (orderedBanners) => {
+    setSavingOrder(true);
+    try {
+      const res = await fetch("/api/carrousel/reorder", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ids: orderedBanners.map((b) => b.id) }),
+      });
+      const result = await res.json();
+
+      if (result.success) {
+        setBanners(orderedBanners);
+        toast.success("↕️ Orden guardado correctamente");
+      } else {
+        toast.error("❌ Error al guardar el orden");
+        loadBanners();
+      }
+    } catch (error) {
+      toast.error("❌ Error de conexión al guardar el orden");
+      console.error("Error al guardar el orden:", error);
+      loadBanners();
+    } finally {
+      setSavingOrder(false);
+    }
+  };
+
+  // === Mover con flechas (subir/bajar) ===
+  const moverBanner = (index, direccion) => {
+    const nuevo = [...banners];
+    const target = index + direccion;
+    if (target < 0 || target >= nuevo.length) return;
+    [nuevo[index], nuevo[target]] = [nuevo[target], nuevo[index]];
+    saveOrder(nuevo);
+  };
+
+  // === Drag & Drop (arrastrar y soltar) ===
+  const handleDragStart = (e, index) => {
+    setDragIndex(index);
+    e.dataTransfer.effectAllowed = "move";
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    e.dataTransfer.dropEffect = "move";
+  };
+
+  const handleDrop = (e, index) => {
+    e.preventDefault();
+    if (dragIndex === null || dragIndex === index) {
+      setDragIndex(null);
+      setHoverIndex(null);
+      return;
+    }
+    const nuevo = [...banners];
+    const [movido] = nuevo.splice(dragIndex, 1);
+    nuevo.splice(index, 0, movido);
+    saveOrder(nuevo);
+    setDragIndex(null);
+    setHoverIndex(null);
+  };
+
   return (
     <div className="space-y-8">
       {/* === ENCABEZADO === */}
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
-        <h1 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
-          <ImageIcon className="w-6 h-6 text-blue-600" />
-          Carrusel Principal
-        </h1>
+        <div>
+          <h1 className="text-2xl font-bold text-gray-800 flex items-center gap-2">
+            <ImageIcon className="w-6 h-6 text-blue-600" />
+            Carrusel Principal
+          </h1>
+          <p className="text-xs text-gray-500 mt-1">
+            Arrastra las tarjetas o usa las flechas ↑ ↓ para cambiar el orden en
+            que aparecen los banners en el sitio.
+          </p>
+        </div>
       </div>
 
       {/* === FORMULARIO === */}
@@ -191,11 +266,31 @@ export default function CarrouselAdmin() {
         </Card>
       ) : (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {banners.map((b) => (
+          {banners.map((b, index) => (
             <Card
               key={b.id}
-              className="overflow-hidden shadow-sm hover:shadow-md border-0 transition-all duration-300"
+              draggable
+              onDragStart={(e) => handleDragStart(e, index)}
+              onDragEnd={() => {
+                setDragIndex(null);
+                setHoverIndex(null);
+              }}
+              onDragOver={handleDragOver}
+              onDragEnter={() => setHoverIndex(index)}
+              onDrop={(e) => handleDrop(e, index)}
+              className={`relative overflow-hidden shadow-sm border-0 transition-all duration-200 cursor-grab active:cursor-grabbing ${
+                dragIndex === index ? "opacity-50 scale-95" : ""
+              } ${
+                dragIndex !== null && hoverIndex === index && dragIndex !== index
+                  ? "ring-2 ring-blue-400"
+                  : ""
+              }`}
             >
+              {/* Número de posición */}
+              <div className="absolute top-2 left-2 z-10 bg-blue-600/90 text-white text-xs font-bold w-6 h-6 rounded-full flex items-center justify-center shadow-md">
+                {index + 1}
+              </div>
+
               <div className="relative w-full h-48 bg-gray-100">
                 <Image
                   src={b.imagen}
@@ -237,7 +332,7 @@ export default function CarrouselAdmin() {
                 <p className="text-sm text-gray-500 line-clamp-2">
                   {b.descripcion || "Sin descripción"}
                 </p>
-                <div className="mt-3">
+                <div className="mt-3 flex items-center justify-between">
                   <span
                     className={`inline-flex px-2 py-1 rounded-full text-xs font-medium ${
                       b.activo
@@ -247,6 +342,34 @@ export default function CarrouselAdmin() {
                   >
                     {b.activo ? "Activo" : "Inactivo"}
                   </span>
+
+                  {/* Controles de orden */}
+                  <div className="flex items-center gap-0.5">
+                    {savingOrder && (
+                      <Loader2 className="w-3.5 h-3.5 animate-spin text-blue-500 mr-1" />
+                    )}
+                    <Button
+                      size="icon"
+                      variant="ghost"
+                      className="h-7 w-7 cursor-pointer"
+                      onClick={() => moverBanner(index, -1)}
+                      disabled={index === 0}
+                      title="Subir"
+                    >
+                      <ChevronUp className="w-4 h-4 text-gray-600" />
+                    </Button>
+                    <Button
+                      size="icon"
+                      variant="ghost"
+                      className="h-7 w-7 cursor-pointer"
+                      onClick={() => moverBanner(index, 1)}
+                      disabled={index === banners.length - 1}
+                      title="Bajar"
+                    >
+                      <ChevronDown className="w-4 h-4 text-gray-600" />
+                    </Button>
+                    <GripVertical className="w-4 h-4 text-gray-300" />
+                  </div>
                 </div>
               </div>
             </Card>
