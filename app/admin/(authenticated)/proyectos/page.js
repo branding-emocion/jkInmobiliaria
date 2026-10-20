@@ -1,11 +1,9 @@
 import { adminDb } from "@/lib/firebase-admin";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Building, Plus, Edit, Eye } from "lucide-react";
-import Image from "next/image";
+import { Building, Plus } from "lucide-react";
 import Link from "next/link";
-import DeleteButton from "./DeleteButton";
-import ToggleVisible from "./ToggleVisible";
+import ProjectsBoard from "./ProjectsBoard";
 
 async function getProyectos(filter) {
   try {
@@ -21,6 +19,13 @@ async function getProyectos(filter) {
       id: doc.id,
       ...doc.data(),
     }));
+
+    // ↕️ Respetar el orden manual (kanban); los sin "orden" van al final
+    proyectos.sort((a, b) => {
+      const oa = a.orden ?? Number.MAX_SAFE_INTEGER;
+      const ob = b.orden ?? Number.MAX_SAFE_INTEGER;
+      return oa - ob;
+    });
 
     // ✅ Filtrado flexible (no sensible a mayúsculas/plurales)
     if (filter && filter !== "Todas") {
@@ -49,6 +54,17 @@ export default async function AdminDashboard({ searchParams }) {
     { label: "Vendidos", value: "Vendido", color: "purple" },
     { label: "Próximamente", value: "Próximamente", color: "amber" },
   ];
+
+  // Datos "planos" seguros para pasar al componente cliente
+  // (sin objetos de Firestore como Timestamp)
+  const plainProyectos = proyectos.map((p) => ({
+    id: p.id,
+    Imagen: p.Imagen ?? "",
+    Name: p.Name ?? "",
+    Type: p.Type ?? "",
+    Status: p.Status ?? "",
+    visible: p.visible !== false,
+  }));
 
   return (
     <>
@@ -100,7 +116,7 @@ export default async function AdminDashboard({ searchParams }) {
         </Link>
       </div>
 
-      {/* Projects Grid */}
+      {/* Projects Grid (tablero kanban con orden manual) */}
       {proyectos.length === 0 ? (
         <Card className="p-12 text-center border-0 shadow-lg bg-white">
           <div className="bg-blue-50 w-20 h-20 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -121,93 +137,7 @@ export default async function AdminDashboard({ searchParams }) {
           </Link>
         </Card>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-          {proyectos.map((proyecto) => (
-            <Card
-              key={proyecto.id}
-              className="overflow-hidden hover:shadow-xl transition-all duration-300 border-0 shadow-sm group"
-            >
-              <div className="relative h-40 overflow-hidden bg-gray-100">
-                {proyecto.Imagen ? (
-                  <Image
-                    src={proyecto.Imagen}
-                    alt={proyecto.Name}
-                    fill
-                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                ) : (
-                  <div className="w-full h-full bg-gradient-to-br from-gray-100 to-gray-200 flex items-center justify-center">
-                    <Building className="w-10 h-10 text-gray-400" />
-                  </div>
-                )}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
-                <span
-                  className={`absolute top-2 right-2 px-2 py-1 rounded-md text-xs font-bold backdrop-blur-sm shadow-md ${
-                    proyecto.Status === "Disponible"
-                      ? "bg-green-500/90 text-white"
-                      : proyecto.Status === "Vendido"
-                      ? "bg-purple-500/90 text-white"
-                      : proyecto.Status === "Próximamente"
-                      ? "bg-amber-500/90 text-white"
-                      : "bg-gray-700/90 text-white"
-                  }`}
-                >
-                  {proyecto.Status}
-                </span>
-              </div>
-
-              <div className="p-4">
-                <h3 className="font-bold text-base mb-1 text-gray-900 line-clamp-1">
-                  {proyecto.Name}
-                </h3>
-                <p className="text-xs text-gray-600 font-medium mb-3">
-                  {proyecto.Type}
-                </p>
-
-                <div className="flex flex-col gap-1.5">
-                  <div className="flex gap-1.5">
-                    {/* ✅ Usar el ID real del proyecto */}
-                    <Link href={`/Proyectos/${proyecto.id}`} className="flex-1">
-                      <Button
-                        variant="outline"
-                        size="sm"
-                        className="cursor-pointer w-full gap-1 text-xs h-8 hover:bg-blue-50 hover:text-blue-700 hover:border-blue-300"
-                      >
-                        <Eye className="w-3.5 h-3.5" />
-                        Ver
-                      </Button>
-                    </Link>
-
-                    <Link
-                      href={`/admin/proyectos/editar/${proyecto.id}`}
-                      className="flex-1"
-                    >
-                      <Button
-                        size="sm"
-                        className="cursor-pointer w-full gap-1 text-xs h-8 bg-blue-600 hover:bg-blue-700"
-                      >
-                        <Edit className="w-3.5 h-3.5" />
-                        Editar
-                      </Button>
-                    </Link>
-                  </div>
-
-                  <div className="flex gap-1.5">
-                    <div className="flex-1 min-w-0">
-                      <ToggleVisible
-                        id={proyecto.id}
-                        nombre={proyecto.Name}
-                        visible={proyecto.visible !== false}
-                      />
-                    </div>
-                    <DeleteButton id={proyecto.id} nombre={proyecto.Name} />
-                  </div>
-                </div>
-              </div>
-            </Card>
-          ))}
-        </div>
+        <ProjectsBoard proyectos={plainProyectos} filter={filter} />
       )}
     </>
   );

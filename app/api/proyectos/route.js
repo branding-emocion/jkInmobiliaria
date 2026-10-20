@@ -33,6 +33,14 @@ export async function GET(request) {
       ...doc.data(),
     }));
 
+    // ↕️ Respetar el orden manual definido en el admin (campo "orden");
+    // los proyectos sin "orden" van al final (Array.sort es estable)
+    proyectos.sort((a, b) => {
+      const oa = a.orden ?? Number.MAX_SAFE_INTEGER;
+      const ob = b.orden ?? Number.MAX_SAFE_INTEGER;
+      return oa - ob;
+    });
+
     // 🚫 Ocultos del sitio público (SEO sigue funcionando por URL directa)
     if (!includeHidden) {
       proyectos = proyectos.filter((p) => p.visible !== false);

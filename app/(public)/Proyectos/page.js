@@ -18,10 +18,11 @@ const Proyectos = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
-          const ordenados = data.data.sort((a, b) => {
-            if (a.Status === "Disponible" && b.Status !== "Disponible") return -1;
-            if (a.Status !== "Disponible" && b.Status === "Disponible") return 1;
-            return 0;
+          // ↕️ Respetar el orden manual definido en el admin (kanban)
+          const ordenados = [...data.data].sort((a, b) => {
+            const oa = a.orden ?? Number.MAX_SAFE_INTEGER;
+            const ob = b.orden ?? Number.MAX_SAFE_INTEGER;
+            return oa - ob;
           });
 
           setAllProyectos(ordenados);

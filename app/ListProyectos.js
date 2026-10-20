@@ -18,7 +18,13 @@ const ListProyectos = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.success) {
-          setData(data.data);
+          // ↕️ Respetar el orden manual definido en el admin (kanban)
+          const ordenados = [...data.data].sort((a, b) => {
+            const oa = a.orden ?? Number.MAX_SAFE_INTEGER;
+            const ob = b.orden ?? Number.MAX_SAFE_INTEGER;
+            return oa - ob;
+          });
+          setData(ordenados);
         }
       })
       .catch((err) => {
