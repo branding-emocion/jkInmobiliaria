@@ -5,6 +5,9 @@ import { Building, Plus } from "lucide-react";
 import Link from "next/link";
 import ProjectsBoard from "./ProjectsBoard";
 
+// 🗂️ Modo kanban: las tarjetas se pueden arrastrar para reordenar;
+// ese orden es el que el sitio público respeta al mostrar los proyectos.
+
 async function getProyectos(filter) {
   try {
     // Traer todos los proyectos ordenados por fecha
